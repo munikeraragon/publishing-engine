@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LandingImage /> matches Progress card snapshot 1`] = `
+<div
+  className="flex flex-col justify-center "
+>
+  <img
+    alt="Image of a spaceship"
+    className="m-auto object-cover"
+    src="https://ethereum.org/static/5d3af9eb308978e7a078bf51022d8a5c/0dadc/merge.png"
+    style={
+      Object {
+        "maxHeight": "500px",
+      }
+    }
+  />
+</div>
+`;

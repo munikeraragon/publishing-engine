@@ -95,7 +95,7 @@ function classNames(...classes) {
 
 export const Navbar = () => {
     return (
-        <Popover className="absolute w-full bg-white">
+        <Popover className="fixed w-full bg-white">
             {({ open }) => (
                 <>
                     <div className="px-4 sm:px-6 border-b-2 border-gray-100">

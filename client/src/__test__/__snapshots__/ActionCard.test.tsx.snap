@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ActionCard /> matches Progress card snapshot 1`] = `
+<div
+  className="border border-gray-300 rounded-lg "
+>
+  <div
+    className="flex bg-blue-100 rounded-lg"
+  >
+    <img
+      className="mx-auto object-cover rounded-lg"
+      src=""
+    />
+  </div>
+  <div
+    className="m-3"
+  >
+    <div
+      className="flex"
+    >
+      <h2
+        className="text-lg mb-2"
+      >
+        Title
+      </h2>
+      <div
+        className="flex-grow"
+      />
+    </div>
+    <p
+      className="font-light font-mono text-sm text-gray-700 hover:text-gray-900 transition-all duration-200"
+    >
+      This a description
+    </p>
+  </div>
+</div>
+`;

@@ -21,8 +21,10 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
-  ],
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"  
+, "jest.setup.js"  ],
   "exclude": [
     "node_modules"
   ]

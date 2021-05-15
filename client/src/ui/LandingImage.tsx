@@ -1,10 +1,17 @@
-export const LandingImage = () => {
+
+export interface LandingImageProps {
+    className?: string
+    src?: string
+    alt?: string
+}
+
+export const LandingImage: React.FC<LandingImageProps> = ({ className="", ...props}) => {
   return (
-      <div className="flex flex-col justify-center">
+      <div className={`flex flex-col justify-center ${className}`}>
           <img
               className="m-auto object-cover"
-              src="https://ethereum.org/static/5d3af9eb308978e7a078bf51022d8a5c/0dadc/merge.png"
-              alt=""
+              src={props.src}
+              alt={props.alt}
               style={{ maxHeight: "500px" }}
           />
       </div>
