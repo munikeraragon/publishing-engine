@@ -1,0 +1,50 @@
+# Use root/example as user/password credentials
+version: '3.1'
+
+services:
+    client:
+        build:
+          context: ./client
+        ports:
+          - 3000:3000
+        container_name: client
+        restart: always
+        volumes:
+           - ./client:/usr/src/app
+           - /usr/src/app/node_modules
+        depends_on:
+          - server
+
+    server:
+        build:
+            context: ./server
+        ports:
+            - "5000:5000"
+        restart: always
+        container_name: server
+        volumes:
+            - ./server:/usr/src/app
+            - /usr/src/app/node_modules
+        
+    db:
+        image: mysql
+        restart: always
+        container_name: db
+        environment:
+            MYSQL_USER: "${MYSQL_ROOT_USER}"
+            MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+            MYSQL_DATABASE: "${MYSQL_DATABASE}"
+        volumes:
+            - db-config:/etc/mysql
+            - db-data:/var/lib/mysql
+            - ./db/backup/files/:/data_backup/data
+
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+        - 8080:8080
+
+volumes: 
+    db-config:
+    db-data:

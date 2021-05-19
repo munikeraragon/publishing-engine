@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "root",
+    "password": "SuperSecretPassword",
+    "database": "blog",
+    "host": "db",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "SuperSecretPassword",
+    "database": "blog",
+    "host": "db",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "SuperSecretPassword",
+    "database": "blog",
+    "host": "db",
+    "dialect": "mysql"
+  }
+}

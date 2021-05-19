@@ -1,23 +1,12 @@
 const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
+const { ApolloServer, gql } = require('apollo-server-express');
 const { readFileSync } = require('fs')
- 
-const typeDefs = readFileSync('./model/type-defs.graphql').toString('utf-8');
- 
-const resolvers = {
-  Query: {
-    hello: () => 'Hello world!',
-  },
-  Mutation: {
-    createContactMessage: async (_, { contactMessage }) => {
-      console.log(contactMessage)
-      return contactMessage
-    }
-  }
-};
+
+const resolvers = require('./graphql/resolvers');
+const typeDefs = gql(readFileSync('./graphql/types.graphql').toString('utf-8'));
  
 const server = new ApolloServer({ typeDefs, resolvers });
- 
+
 const app = express();
 server.applyMiddleware({ app });
  
