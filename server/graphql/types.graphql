@@ -1,10 +1,12 @@
 type Query {
     hello: String
+    getContactMessages: [ContactMessage]
 }
 
 type Mutation {
     createContactMessage(contactMessage: ContactMessageInput):  String
 }
+
 
 type ContactMessage {
   firstName: String!

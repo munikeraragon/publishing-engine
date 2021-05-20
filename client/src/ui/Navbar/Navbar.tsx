@@ -97,7 +97,7 @@ function classNames(...classes) {
 
 export const Navbar = () => {
     return (
-        <Popover className='fixed w-full bg-white'>
+        <Popover className='fixed w-full bg-white z-10'>
             {({ open }) => (
                 <NavbarRoot>
                     <div className='px-4 sm:px-6'>

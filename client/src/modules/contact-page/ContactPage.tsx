@@ -1,5 +1,12 @@
 import { useState } from 'react';
+import { gql, useMutation } from '@apollo/client';
 import { TextInput } from '../../ui/TextInput';
+
+const CREATE_CONTACT_MESSAGE = gql`
+    mutation CreateContactMessage($contactMessage: ContactMessageInput) {
+        createContactMessage(contactMessage: $contactMessage)
+    }
+`;
 
 export const ContactPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -8,6 +15,7 @@ export const ContactPage = () => {
     const [company, setCompany] = useState('');
     const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
+    const [createContactMessage] = useMutation(CREATE_CONTACT_MESSAGE);
 
     return (
         <div id='contact' className='pt-16 pb-4'>
@@ -129,9 +137,29 @@ export const ContactPage = () => {
                     </div>
 
                     <div className='m-auto col-span-2'>
-                        <span className='w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
+                        <button
+                            onClick={async () => {
+                                try {
+                                    const response = await createContactMessage({
+                                        variables: {
+                                            contactMessage: {
+                                                firstName: firstName,
+                                                lastName: lastName,
+                                                email: email,
+                                                company: company,
+                                                phone: phone,
+                                                message: message
+                                            }
+                                        }
+                                    });
+                                    console.log(response);
+                                } catch (error) {
+                                    console.log(error);
+                                }
+                            }}
+                            className='w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
                             Submit
-                        </span>
+                        </button>
                     </div>
                 </div>
             </div>
