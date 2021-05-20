@@ -1,12 +1,6 @@
 import { useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
+import { useCreateContactMessageMutation } from '../../generated/apolloComponents';
 import { TextInput } from '../../ui/TextInput';
-
-const CREATE_CONTACT_MESSAGE = gql`
-    mutation CreateContactMessage($contactMessage: ContactMessageInput) {
-        createContactMessage(contactMessage: $contactMessage)
-    }
-`;
 
 export const ContactPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -15,7 +9,7 @@ export const ContactPage = () => {
     const [company, setCompany] = useState('');
     const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
-    const [createContactMessage] = useMutation(CREATE_CONTACT_MESSAGE);
+    const [createContactMessage] = useCreateContactMessageMutation();
 
     return (
         <div id='contact' className='pt-16 pb-4'>
