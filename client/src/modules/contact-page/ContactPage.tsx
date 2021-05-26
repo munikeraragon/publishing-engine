@@ -21,13 +21,13 @@ export const ContactPage = () => {
                         </h1>
                     </div>
 
-                    <p className='text-lg font-medium text-gray-500'>
+                    <p className='text-lg font-medium text-gray-700'>
                         We can help you fullfill all of your consolting and project task. We can
                         help you decipher the most complex data obstacles into clean models and
                         visualizations that provide insigh to your bussiness and your company.
                     </p>
 
-                    <div className='flex text-md font-medium text-gray-500 py-4'>
+                    <div className='flex text-md font-medium text-gray-700 py-4'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             className='h-6 w-6'
@@ -44,7 +44,7 @@ export const ContactPage = () => {
                         <span>+1 (360) 980-9852</span>
                     </div>
 
-                    <div className='flex text-md font-medium text-gray-500'>
+                    <div className='flex text-md font-medium text-gray-700'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             className='h-6 w-6'

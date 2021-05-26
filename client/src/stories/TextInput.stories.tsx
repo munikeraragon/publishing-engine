@@ -10,14 +10,14 @@ export default {
 
 const Template: Story<TextInputProps> = (args) => <TextInput {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const Email = Template.bind({});
+Email.args = {
   label: "Email",
   name: "Email"
 }
 
-export const Secondary = Template.bind({});
-Secondary.args = {
+export const Name = Template.bind({});
+Name.args = {
   label: "Name",
   name: "Name",
   placeHolder: "Type Name"

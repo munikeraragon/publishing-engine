@@ -17,7 +17,6 @@ import {
 } from '@heroicons/react/outline';
 import { ChevronDownIcon } from '@heroicons/react/solid';
 import NavbarRoot from './NavbarRoot';
-import s from './Navbar.module.css';
 
 const solutions = [
     {
@@ -103,14 +102,13 @@ export const Navbar = () => {
                     <div className='px-4 sm:px-6'>
                         <div className='flex justify-between items-center py-4 md:justify-start md:space-x-10'>
                             <div className=''>
-                                <a href='#'>
-                                    <span className='sr-only'>Workflow</span>
+                                <Link href='/'>
                                     <img
                                         className='h-8 w-auto sm:h-10'
                                         src='https://ethereum.org/static/a110735dade3f354a46fc2446cd52476/1d713/eth-home-icon.png'
                                         alt=''
                                     />
-                                </a>
+                                </Link>
                             </div>
                             <div className='-mr-2 -my-2 md:hidden'>
                                 <Popover.Button className='bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500'>
