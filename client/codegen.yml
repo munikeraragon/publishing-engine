@@ -1,5 +1,5 @@
 overwrite: true
-schema: "http://35.203.190.230:5000/graphql"
+schema: "https://codegrow.org:5000/graphql"
 documents: "src/graphql/**/*.ts"
 generates:
   src/generated/apolloComponents.tsx:

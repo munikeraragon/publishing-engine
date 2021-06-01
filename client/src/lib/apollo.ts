@@ -9,25 +9,9 @@ export type ResolverContext = {
     res?: ServerResponse;
 };
 
-/*
-function createIsomorphLink(context: ResolverContext = {}) {
-    if (typeof window === 'undefined') {
-        const { SchemaLink } = require('@apollo/client/link/schema');
-        const { schema } = require('./schema');
-        return new SchemaLink({ schema, context });
-    } else {
-        const { HttpLink } = require('@apollo/client');
-        return new HttpLink({
-            uri: '/api/graphql',
-            credentials: 'same-origin'
-        });
-    }
-}
-*/
-
 function createApolloClient(context?: ResolverContext) {
     return new ApolloClient({
-        uri: "http://35.203.190.230:5000/graphql",
+        uri: 'https://codegrow.org:5000/graphql',
         cache: new InMemoryCache()
     });
 }
