@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes) {
   return sequelize.define('User', {
     firstName: {
       type: DataTypes.STRING(255),
-      allowNull: true
+      allowNull: false,
+      primaryKey: true
     },
     lastName: {
       type: DataTypes.STRING(255),
@@ -14,8 +15,16 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    phone: {
+    locale: {
       type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    provider: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    picture: {
+      type: DataTypes.STRING(1000),
       allowNull: true
     }
   }, {
@@ -29,6 +38,7 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "email" },
+          { name: "firstName" },
         ]
       },
     ]

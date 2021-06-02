@@ -1,17 +1,24 @@
+require('dotenv').config()
 const https = require('https');
 const express = require('express');
+const passport = require("passport");
 const { ApolloServer, gql } = require('apollo-server-express');
 const { readFileSync } = require('fs')
+const authRoutes = require('./routes/auth-routes');
 
-const dotenv = require('dotenv').config();
+const port = 5000;
+
 const resolvers = require('./graphql/resolvers');
 const typeDefs = gql(readFileSync('./graphql/types.graphql').toString('utf-8'));
 
 const server = new ApolloServer({ typeDefs, resolvers });
-
 const app = express();
-const port = 5000;
+
 server.applyMiddleware({ app });
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth', authRoutes);
 
 if (process.env.MODE === 'production') {
   const credentials = {

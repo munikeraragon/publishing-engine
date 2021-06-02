@@ -10,8 +10,8 @@ services:
           - ./data/certbot/conf:/etc/letsencrypt
           - ./data/certbot/www:/var/www/certbot
         ports:
-          - "80:80"
-          - "443:443"
+          - 80:80
+          - 443:443
         command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
 
     certbot:
@@ -37,7 +37,7 @@ services:
         build:
             context: ./server
         ports:
-            - "5000:5000"
+            - 5000:5000
         restart: always
         container_name: server
         volumes:
@@ -49,6 +49,8 @@ services:
         image: mysql
         restart: always
         container_name: db
+        ports:
+          - 3306:3306
         environment:
             MYSQL_USER: "${MYSQL_ROOT_USER}"
             MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
@@ -57,14 +59,12 @@ services:
             - db-config:/etc/mysql
             - db-data:/var/lib/mysql
             - ./db/backup/files/:/data_backup/data
-            - ./data/certbot/conf:/etc/letsencrypt
-            - ./data/certbot/www:/var/www/certbot
-
+ 
     adminer:
         image: adminer
         restart: always
         ports:
-        - 8080:8080
+          - 8080:8080
 
 volumes: 
     db-config:

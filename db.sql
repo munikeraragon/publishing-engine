@@ -1,9 +1,15 @@
+CREATE DATABASE blog;
+
+USE blog;
+
 CREATE TABLE IF NOT EXISTS `User` (
     `firstName` varchar(255),
     `lastName` varchar(255),
     `email` varchar(255),
-    `phone` varchar(255),
-    PRIMARY KEY (`email`)
+    `locale` varchar(255),
+    `provider` varchar(255),
+    `picture` varchar(1000),
+    PRIMARY KEY (`email`, `firstName`)
 );
 
 CREATE TABLE IF NOT EXISTS `ContactMessage` (
