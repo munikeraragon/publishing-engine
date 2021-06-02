@@ -1,6 +1,6 @@
 export const ArticlePage: React.FC = () => {
     return (
-        <div className='min-h-full bg-white pt-24 md:pt-20 pb-8'>
+        <div className='min-h-full bg-white pt-20 pb-8 px-2'>
             <div className='max-w-3xl bg-white m-auto'>
                 {/* Article Header  */}
                 <div className='my-8'>

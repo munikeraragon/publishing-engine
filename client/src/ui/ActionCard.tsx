@@ -17,7 +17,7 @@ export const ActionCard: React.FC<ActionCardProps> = ({
         <Link href='/article-page'>
             <div
                 className={`flex flex-col transition transform hover:-translate-y-1.5 shadow-md font-semibold
-                            hover:shadow-2xl duration-500 rounded-t-lg bg-white ${className} group`}>
+                            hover:shadow-2xl duration-500 rounded-t-lg bg-white ${className}`}>
                 <img
                     className='object-cover w-full block bg-cover bg-no-repeat bg-center'
                     src={src}
@@ -47,7 +47,7 @@ export const ActionCard: React.FC<ActionCardProps> = ({
 
                         <button
                             className='flex justify-center items-center ml-auto mb-2 mr-2 border rounded-md
-                         text-gray-800 border-gray-800 group-hover:border-indigo-600 group-hover:text-indigo-600 px-4 py-2'>
+                         text-gray-800 border-gray-800 hover:border-indigo-600 hover:text-indigo-600 px-4 py-2'>
                             View
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
