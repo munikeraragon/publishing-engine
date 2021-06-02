@@ -1,6 +1,6 @@
-CREATE DATABASE blog;
+CREATE DATABASE publishing_engine;
 
-USE blog;
+USE publishing_engine;
 
 CREATE TABLE IF NOT EXISTS `User` (
     `firstName` varchar(255),

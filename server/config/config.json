@@ -2,21 +2,21 @@
   "development": {
     "username": "root",
     "password": "SuperSecretPassword",
-    "database": "blog",
+    "database": "publishing_engine",
     "host": "db",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "SuperSecretPassword",
-    "database": "blog",
+    "database": "publishing_engine",
     "host": "db",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "SuperSecretPassword",
-    "database": "blog",
+    "database": "publishing_engine",
     "host": "db",
     "dialect": "mysql"
   }
