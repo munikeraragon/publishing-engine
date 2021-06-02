@@ -11,9 +11,9 @@ router.get(
 );
 router.get(
     '/google/callback',
-    passport.authenticate('google', { failureRedirect: 'https://codegrow.org' }),
+    passport.authenticate('google', { failureRedirect: 'http://localhost:3000' }),
     (req, res) => {
-        res.redirect('https://codegrow.org');
+        res.redirect('http://localhost:3000');
     }
 );
 
@@ -26,9 +26,9 @@ router.get(
 );
 router.get(
     '/github/callback',
-    passport.authenticate('github', { failureRedirect: 'https://codegrow.org' }),
+    passport.authenticate('github', { failureRedirect: 'http://localhost:3000' }),
     (req, res) => {
-        res.redirect('https://codegrow.org');
+        res.redirect('http://localhost:3000');
     }
 );
 
@@ -36,9 +36,9 @@ router.get(
 router.get('/facebook', passport.authenticate('facebook'));
 router.get(
     '/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: 'https://codegrow.org' }),
+    passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000' }),
     (req, res) => {
-        res.redirect('https://codegrow.org');
+        res.redirect('http://localhost:3000');
     }
 );
 
@@ -46,9 +46,9 @@ router.get(
 router.get('/discord', passport.authenticate('discord'));
 router.get(
     '/discord/callback',
-    passport.authenticate('discord', { failureRedirect: 'https://codegrow.org' }),
+    passport.authenticate('discord', { failureRedirect: 'http://localhost:3000' }),
     (req, res) => {
-        res.redirect('https://codegrow.org');
+        res.redirect('http://localhost:3000');
     }
 );
 

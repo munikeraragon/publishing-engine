@@ -24,5 +24,13 @@ npx sequelize-auto -o "./models" -d publishing_engine -h localhost -u root -p 33
 # create additional mysql tables to hold meta data about articles
 
 
+
+## Local Setup
+
+# Connecting to the database
+docker exec -it db bash
+
+mysql -u root -p
+
 ## Production Setup
 docker-compose -f production.yml up -d

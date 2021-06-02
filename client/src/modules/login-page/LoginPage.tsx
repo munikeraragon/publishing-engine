@@ -13,7 +13,7 @@ export const LoginPage = () => {
                 </div>
 
                 <div className='flex flex-col gap-5'>
-                    <a href='https://codegrow.org:5000/auth/google'>
+                    <a href='http://localhost:5000/auth/google'>
                         <div className='flex justify-center py-3 bg-indigo-500 hover:bg-gray-700 text-white rounded-md mt-2'>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -32,7 +32,7 @@ export const LoginPage = () => {
                         </div>
                     </a>
 
-                    <a href='https://codegrow.org:5000/auth/github'>
+                    <a href='http://localhost:5000/auth/github'>
                         <div className='flex justify-center py-3 bg-indigo-500 hover:bg-gray-700 text-white rounded-md mt-2'>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -47,7 +47,7 @@ export const LoginPage = () => {
                         </div>
                     </a>
 
-                    <a href='https://codegrow.org:5000/auth/facebook'>
+                    <a href='http://localhost:5000/auth/facebook'>
                         <div className='flex justify-center py-3 bg-indigo-500 hover:bg-gray-700 text-white rounded-md mt-2'>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
@@ -62,7 +62,7 @@ export const LoginPage = () => {
                         </div>
                     </a>
 
-                    <a href='https://codegrow.org:5000/auth/discord'>
+                    <a href='http://localhost:5000/auth/discord'>
                         <div className='flex justify-center py-3 bg-indigo-500 hover:bg-gray-700 text-white rounded-md mt-2'>
                             <svg
                                 width='24'
