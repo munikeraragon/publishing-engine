@@ -90,7 +90,7 @@ const recentPosts = [
     { id: 3, name: 'Improve your customer experience', href: '#' }
 ];
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');
 }
 
@@ -125,6 +125,7 @@ export const Navbar = () => {
                                                     open ? 'text-gray-900' : 'text-gray-700',
                                                     'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                                 )}>
+                                                
                                                 <span>Articles</span>
                                                 <ChevronDownIcon
                                                     className={classNames(

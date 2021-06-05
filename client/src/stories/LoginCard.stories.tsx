@@ -1,9 +1,14 @@
-import { LoginCard } from '../../ui/LoginCard';
-import { LoginFooter } from '../../ui/LoginFooter';
+import React from 'react';
+import { Story, Meta } from '@storybook/react';
 
-export interface LoginPageProps {
-    className?: string;
-}
+import { LoginCard, LoginCardProps } from '../ui/LoginCard';
+
+export default {
+    title: 'Example/LoginCard',
+    component: LoginCard
+} as Meta;
+
+const Template: Story<LoginCardProps> = (args) => <LoginCard {...args} />;
 
 const buttons = [
     {
@@ -70,17 +75,7 @@ const buttons = [
     }
 ];
 
-export const LoginPage: React.FC<LoginPageProps> = () => {
-    return (
-        <div className='grid w-full h-full bg-gray-100'>
-            <LoginCard buttons={buttons} privacyHref='' termsHref='' />
-
-            <LoginFooter
-                label='CodeGrow'
-                privacyHref='https://github.com/munikeraragon/blog'
-                reportHref=''
-                githubHref='https://github.com/munikeraragon/publishing-engine'
-            />
-        </div>
-    );
+export const Primary = Template.bind({});
+Primary.args = {
+    buttons: buttons
 };

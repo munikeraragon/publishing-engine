@@ -16,6 +16,7 @@ export const ActionCard: React.FC<ActionCardProps> = ({
     return (
         <Link href='/article-page'>
             <div
+                data-aos='fade-up'
                 className={`flex flex-col transition transform hover:-translate-y-1.5 shadow-md font-semibold
                             hover:shadow-2xl duration-500 rounded-t-lg bg-white ${className}`}>
                 <img

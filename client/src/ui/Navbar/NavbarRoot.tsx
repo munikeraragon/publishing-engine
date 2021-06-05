@@ -1,6 +1,5 @@
 import { FC, useState, useEffect } from 'react';
 import throttle from 'lodash.throttle';
-import cx from 'classnames';
 
 const NavbarRoot: FC = ({ children }) => {
     const [hasScrolled, setHasScrolled] = useState(false);
@@ -22,7 +21,7 @@ const NavbarRoot: FC = ({ children }) => {
         };
     }, [hasScrolled]);
 
-    return <div className={cx('transition-all duration-150', {'shadow-magical': hasScrolled })}>{children}</div>;
+    return <div className={`transition-all duration-150' ${hasScrolled ? 'shadow-magical': ''}`}>{children}</div>;
 };
 
 export default NavbarRoot;
