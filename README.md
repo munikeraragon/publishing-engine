@@ -15,6 +15,10 @@ npx sequelize init:models
 npx sequelize-auto -o "./models" -d publishing_engine -h localhost -u root -p 3306 -x SuperSecretPassword -e mysql
 
 
+## Change client grahpql
+update server graphql, and then run the below commad
+npx graphql-codegen --config codegen.yml
+
 ## Todo
 # Create storybooks for login page
 # Integrate front-end authentication
@@ -34,3 +38,4 @@ mysql -u root -p
 
 ## Production Setup
 docker-compose -f production.yml up -d
+
