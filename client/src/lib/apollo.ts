@@ -11,7 +11,7 @@ export type ResolverContext = {
 
 function createApolloClient(context?: ResolverContext) {
     return new ApolloClient({
-        uri: 'https://codegrow.org:5000/graphql',
+        uri: 'http://localhost:5000/graphql',
         cache: new InMemoryCache()
     });
 }

@@ -15,6 +15,7 @@ type ContactMessage {
   company: String!
   phone: String!
   message: String!
+  country: String!
 }
 
 input ContactMessageInput {
@@ -24,4 +25,5 @@ input ContactMessageInput {
     company: String!
     phone: String!
     message: String!
+    country: String!
 }

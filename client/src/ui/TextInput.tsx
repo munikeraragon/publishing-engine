@@ -4,7 +4,9 @@ export interface TextInputProps {
     value: string;
     onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     placeHolder?: string;
+    required?: boolean;
     area?: boolean;
+    className?: string;
 }
 
 export const TextInput: React.FC<TextInputProps> = ({
@@ -13,14 +15,17 @@ export const TextInput: React.FC<TextInputProps> = ({
     value,
     onChange,
     placeHolder = '',
-    area
+    required = false,
+    area = false,
+    className = ''
 }) => {
     return (
-        <div>
-            <label htmlFor={name} className='block text-sm font-medium text-gray-700'>
+        <div className={`${className}`}>
+            <label htmlFor={name} className='block text-sm font-medium text-gray-800'>
                 {label}
+                <span className='text-pink-500'>{required ? ' *' : ''}</span>
             </label>
-            <div className='mt-1 relative rounded-md shadow-sm'>
+            <div className='mt-2 relative rounded-md shadow-sm'>
                 <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
                     <span className='text-gray-500 sm:text-sm'></span>
                 </div>
@@ -30,7 +35,8 @@ export const TextInput: React.FC<TextInputProps> = ({
                         placeholder={placeHolder}
                         value={value}
                         onChange={onChange}
-                        className='mt-1 block w-full rounded-md border-gray-300 shadow-sm'
+                        required={required}
+                        className='mt-1 block w-full rounded-md border-gray-500 shadow-sm'
                     />
                 ) : (
                     <input
@@ -40,7 +46,9 @@ export const TextInput: React.FC<TextInputProps> = ({
                         placeholder={placeHolder}
                         value={value}
                         onChange={onChange}
-                        className='focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 pr-12 sm:text-sm border-gray-300 rounded-md'
+                        required={required}
+                        className='focus:ring-indigo-500 focus:border-indigo-500 block h-14
+                                     w-full pl-4 pr-12 sm:text-sm border-gray-500 rounded-md'
                     />
                 )}
             </div>

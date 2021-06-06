@@ -26,6 +26,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
+    country: {
+      type: DataTypes.STRING(255),
+      allowNull: false,
+      primaryKey: true
+    },
     message: {
       type: DataTypes.STRING(1000),
       allowNull: false,
@@ -34,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
     dateCreated: {
       type: DataTypes.DATE,
       allowNull: true,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+      defaultValue: Sequelize.Sequelize.fn('current_timestamp')
     }
   }, {
     sequelize,
@@ -50,6 +55,7 @@ module.exports = function(sequelize, DataTypes) {
           { name: "lastName", length: 50 },
           { name: "email", length: 50 },
           { name: "company", length: 50 },
+          { name: "country", length: 50 },
           { name: "phone", length: 50 },
           { name: "message", length: 100 },
         ]
