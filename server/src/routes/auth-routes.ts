@@ -1,6 +1,8 @@
-const passport = require('passport');
-const router = require('express').Router();
-const authStrategies = require('../strategies/strategies');
+import passport from 'passport';
+import { Router } from 'express';
+import '../strategies/strategies';
+
+const router = Router();
 
 /** Google authentication */
 router.get(
@@ -52,4 +54,4 @@ router.get(
     }
 );
 
-module.exports = router;
+export default router;

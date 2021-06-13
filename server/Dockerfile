@@ -21,4 +21,4 @@ USER nodeuser
 EXPOSE 5000
 
 # start app
-CMD ["node", "index"]
+CMD ["npm", "run", "start"]

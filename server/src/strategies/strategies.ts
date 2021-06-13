@@ -1,10 +1,15 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const GitHubStrategy = require('passport-github2').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
-const DiscordStrategy = require('passport-discord').Strategy;
+import passport from 'passport';
+import passportGoogle from 'passport-google-oauth20';
+import passportGithub from 'passport-github2';
+import passportFacebook from 'passport-facebook';
+import passportDiscord from 'passport-discord';
 
-const { User } = require('../models');
+import { User } from '../models/init-models';
+
+const GoogleStrategy = passportGoogle.Strategy;
+const GitHubStrategy = passportGithub.Strategy;
+const FacebookStrategy = passportFacebook.Strategy;
+const DiscordStrategy = passportDiscord.Strategy;
 
 // Configure Passport authenticated session persistence.
 //
@@ -15,23 +20,26 @@ const { User } = require('../models');
 // from the database when deserializing.  However, due to the fact that this
 // example does not have a database, the complete Facebook profile is serialized
 // and deserialized.
-passport.serializeUser(function (user, cb) {
-    cb(null, user);
-});
 
-passport.deserializeUser(function (obj, cb) {
-    cb(null, obj);
+passport.serializeUser<any, any>(
+    (req: any, user: Express.User, done: (err: any, id?: any) => void) => {
+        done(null, user);
+    }
+);
+
+passport.deserializeUser((obj: any, done: (err: any, id?: any) => void) => {
+    done(null, obj);
 });
 
 /** Google strategy */
 passport.use(
     new GoogleStrategy(
         {
-            clientID: process.env.GOOGLE_CLIENT_ID,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+            clientID: '724678825700-4k8phjm2jdhpkfnddi1lgum1jkls89bh.apps.googleusercontent.com',
+            clientSecret: '-Js8HLksgjV_2ntezf1x0s7l',
             callbackURL: '/auth/google/callback'
         },
-        (accessToken, refreshToken, profile, cb) => {
+        (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const selector = {
                 where: { email: profile._json.email, firstName: profile._json.given_name },
                 defaults: {
@@ -43,13 +51,15 @@ passport.use(
                     provider: 'google'
                 }
             };
+
+            console.log(selector);
             User.findOrCreate(selector)
-                .then((result) => {
-                    user = result[0].dataValues;
-                    return cb(null, profile);
+                .then((result: [User, boolean]) => {
+                    // user = result[0].dataValues;
+                    return done(null, profile);
                 })
                 .catch((err) => {
-                    return cb(err, profile);
+                    return done(err, profile);
                 });
         }
     )
@@ -59,11 +69,11 @@ passport.use(
 passport.use(
     new GitHubStrategy(
         {
-            clientID: process.env.GITHUB_CLIENT_ID,
-            clientSecret: process.env.GITHUB_CLIENT_SECRET,
+            clientID: 'cea4b5582b1ba69d1778',
+            clientSecret: 'ea82794f008d160658abba75d78141e3f22d674c',
             callbackURL: '/auth/github/callback'
         },
-        (accessToken, refreshToken, profile, done) => {
+        (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const selector = {
                 where: { email: profile._json.html_url, firstName: profile._json.login },
                 defaults: {
@@ -77,7 +87,7 @@ passport.use(
             };
             User.findOrCreate(selector)
                 .then((result) => {
-                    user = result[0].dataValues;
+                    // user = result[0].dataValues;
                     return done(null, profile);
                 })
                 .catch((err) => {
@@ -91,13 +101,13 @@ passport.use(
 passport.use(
     new FacebookStrategy(
         {
-            clientID: process.env.FACEBOOK_APP_ID,
-            clientSecret: process.env.FACEBOOK_APP_SECRET,
+            clientID: '462108525090226',
+            clientSecret: '3d459550ebe581c570feeaaee84bd4df',
             callbackURL: '/auth/facebook/callback',
-            scope: ['email'],
+            // scope: ['email'],
             profileFields: ['email', 'location', 'name', 'picture']
         },
-        (accessToken, refreshToken, profile, cb) => {
+        (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const selector = {
                 where: { email: profile._json.email, firstName: profile._json.first_name },
                 defaults: {
@@ -111,11 +121,11 @@ passport.use(
             };
             User.findOrCreate(selector)
                 .then((result) => {
-                    user = result[0];
-                    return cb(null, profile);
+                    // user = result[0];
+                    return done(null, profile);
                 })
                 .catch((err) => {
-                    return cb(err, profile);
+                    return done(err, profile);
                 });
         }
     )
@@ -125,12 +135,12 @@ passport.use(
 passport.use(
     new DiscordStrategy(
         {
-            clientID: process.env.DISCORD_CLIENT_ID,
-            clientSecret: process.env.DISCORD_CLIENT_SECRET,
+            clientID: '849478551106486332',
+            clientSecret: 'Z_IVrx4KbKD7AyTvmUh7gxLnanmT2XrS',
             callbackURL: '/auth/discord/callback',
             scope: ['identify', 'email']
         },
-        (accessToken, refreshToken, profile, cb) => {
+        (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const selector = {
                 where: { email: profile.email, firstName: profile.username },
                 defaults: {
@@ -144,12 +154,14 @@ passport.use(
             };
             User.findOrCreate(selector)
                 .then((result) => {
-                    user = result[0];
-                    return cb(null, profile);
+                    // user = result[0];
+                    return done(null, profile);
                 })
                 .catch((err) => {
-                    return cb(err, profile);
+                    return done(err, profile);
                 });
         }
     )
 );
+
+export default passport;

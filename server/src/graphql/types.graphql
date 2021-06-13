@@ -4,18 +4,17 @@ type Query {
 }
 
 type Mutation {
-    createContactMessage(contactMessage: ContactMessageInput):  String
+    createContactMessage(contactMessage: ContactMessageInput): String
 }
 
-
 type ContactMessage {
-  firstName: String!
-  lastName: String!
-  email: String!
-  company: String!
-  phone: String!
-  message: String!
-  country: String!
+    firstName: String!
+    lastName: String!
+    email: String!
+    company: String!
+    phone: String!
+    message: String!
+    country: String!
 }
 
 input ContactMessageInput {
