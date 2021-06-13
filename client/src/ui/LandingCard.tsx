@@ -16,22 +16,28 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
     return (
         <div className={`flex flex-col justify-center mx-4 ${className}`}>
             <div className='sm:text-center lg:text-left'>
-                <h1 data-aos="fade-right"  className='text-4xl tracking-tight font-bold text-gray-700'>
+                <h1
+                    data-aos='fade-right'
+                    className='text-4xl tracking-tight font-bold text-gray-700'>
                     {props.primaryHeader}
                 </h1>
 
                 {props.secondaryHeader && (
-                    <h1 data-aos="fade-right"  className='text-4xl font-bold text-indigo-600'>{props.secondaryHeader}</h1>
+                    <h1 data-aos='fade-right' className='text-4xl font-bold text-indigo-600'>
+                        {props.secondaryHeader}
+                    </h1>
                 )}
 
                 {props.description && (
-                    <p data-aos="fade-right"  className='mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
+                    <p
+                        data-aos='fade-right'
+                        className='mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
                         {props.description}
                     </p>
                 )}
                 <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
                     {props.linkLabel1 && (
-                        <div data-aos="fade-right" className='z-10 rounded-md shadow'>
+                        <div data-aos='fade-right' className='z-10 rounded-md shadow'>
                             <Link href={props.linkHref1 || ''}>
                                 <span className='w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
                                     {props.linkLabel1}
@@ -40,10 +46,10 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
                         </div>
                     )}
                     {props.linkLabel2 && (
-                        <div data-aos="fade-right" className='z-10 mt-3 sm:mt-0 sm:ml-3'>
+                        <div data-aos='fade-right' className='z-10 mt-3 sm:mt-0 sm:ml-3'>
                             <Link href={props.linkHref2 || 'link-2'}>
                                 <span className=' w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 hover:bg-blue-200 md:py-2 md:text-lg md:px-10'>
-                                {props.linkLabel2}
+                                    {props.linkLabel2}
                                 </span>
                             </Link>
                         </div>

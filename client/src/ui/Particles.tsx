@@ -3,8 +3,8 @@ import Particles from 'react-tsparticles';
 export const ReactParticles: React.FC = () => {
     return (
         <Particles
-            className="absolute top-0 w-full"
-            style={{minHeight: "100vh"}}
+            className='absolute top-0 w-full'
+            style={{ minHeight: '100vh' }}
             id='tsparticles'
             options={{
                 fpsLimit: 60,

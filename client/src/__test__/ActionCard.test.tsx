@@ -8,9 +8,8 @@ const renderActionCard = (props: Partial<ActionCardProps> = {}) => {
         src: 'https://ethereum.org/static/a44134e541c72364beb121234ab5864e/19ca5/infrastructure_transparent.png',
         title: 'Title',
         description: 'This a description',
-        github:'https://github.com/munikeraragon/json-compare',
-        live:'https://munikeraragon.github.io/json-compare/'
-
+        github: 'https://github.com/munikeraragon/json-compare',
+        live: 'https://munikeraragon.github.io/json-compare/'
     };
     return render(<ActionCard {...defaultProps} {...props} />);
 };
@@ -30,9 +29,15 @@ describe('<ActionCard />', () => {
 
     test('contains correct links', () => {
         const { getByTestId } = renderActionCard();
-        expect(getByTestId('github-link')).toHaveAttribute('href', 'https://github.com/munikeraragon/json-compare');
-        expect(getByTestId('live-link')).toHaveAttribute('href', 'https://munikeraragon.github.io/json-compare/');
-    })
+        expect(getByTestId('github-link')).toHaveAttribute(
+            'href',
+            'https://github.com/munikeraragon/json-compare'
+        );
+        expect(getByTestId('live-link')).toHaveAttribute(
+            'href',
+            'https://munikeraragon.github.io/json-compare/'
+        );
+    });
 
     test('matches Progress card snapshot', () => {
         const tree = renderer

@@ -4,79 +4,77 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
+    ID: string;
+    String: string;
+    Boolean: boolean;
+    Int: number;
+    Float: number;
+    /** The `Upload` scalar type represents a file upload. */
+    Upload: any;
 };
 
-
 export enum CacheControlScope {
-  Public = 'PUBLIC',
-  Private = 'PRIVATE'
+    Public = 'PUBLIC',
+    Private = 'PRIVATE'
 }
 
 export type ContactMessage = {
-  __typename?: 'ContactMessage';
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  company: Scalars['String'];
-  phone: Scalars['String'];
-  message: Scalars['String'];
-  country: Scalars['String'];
+    __typename?: 'ContactMessage';
+    firstName: Scalars['String'];
+    lastName: Scalars['String'];
+    email: Scalars['String'];
+    company: Scalars['String'];
+    phone: Scalars['String'];
+    message: Scalars['String'];
+    country: Scalars['String'];
 };
 
 export type ContactMessageInput = {
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  company: Scalars['String'];
-  phone: Scalars['String'];
-  message: Scalars['String'];
-  country: Scalars['String'];
+    firstName: Scalars['String'];
+    lastName: Scalars['String'];
+    email: Scalars['String'];
+    company: Scalars['String'];
+    phone: Scalars['String'];
+    message: Scalars['String'];
+    country: Scalars['String'];
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
-  createContactMessage?: Maybe<Scalars['String']>;
+    __typename?: 'Mutation';
+    createContactMessage?: Maybe<Scalars['String']>;
 };
 
-
 export type MutationCreateContactMessageArgs = {
-  contactMessage?: Maybe<ContactMessageInput>;
+    contactMessage?: Maybe<ContactMessageInput>;
 };
 
 export type Query = {
-  __typename?: 'Query';
-  hello?: Maybe<Scalars['String']>;
-  getContactMessages?: Maybe<Array<Maybe<ContactMessage>>>;
+    __typename?: 'Query';
+    hello?: Maybe<Scalars['String']>;
+    getContactMessages?: Maybe<Array<Maybe<ContactMessage>>>;
 };
 
-
 export type CreateContactMessageMutationVariables = Exact<{
-  contactMessage: ContactMessageInput;
+    contactMessage: ContactMessageInput;
 }>;
 
-
-export type CreateContactMessageMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'createContactMessage'>
-);
-
+export type CreateContactMessageMutation = { __typename?: 'Mutation' } & Pick<
+    Mutation,
+    'createContactMessage'
+>;
 
 export const CreateContactMessageDocument = gql`
     mutation CreateContactMessage($contactMessage: ContactMessageInput!) {
-  createContactMessage(contactMessage: $contactMessage)
-}
-    `;
-export type CreateContactMessageMutationFn = Apollo.MutationFunction<CreateContactMessageMutation, CreateContactMessageMutationVariables>;
+        createContactMessage(contactMessage: $contactMessage)
+    }
+`;
+export type CreateContactMessageMutationFn = Apollo.MutationFunction<
+    CreateContactMessageMutation,
+    CreateContactMessageMutationVariables
+>;
 
 /**
  * __useCreateContactMessageMutation__
@@ -95,10 +93,24 @@ export type CreateContactMessageMutationFn = Apollo.MutationFunction<CreateConta
  *   },
  * });
  */
-export function useCreateContactMessageMutation(baseOptions?: Apollo.MutationHookOptions<CreateContactMessageMutation, CreateContactMessageMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateContactMessageMutation, CreateContactMessageMutationVariables>(CreateContactMessageDocument, options);
-      }
-export type CreateContactMessageMutationHookResult = ReturnType<typeof useCreateContactMessageMutation>;
-export type CreateContactMessageMutationResult = Apollo.MutationResult<CreateContactMessageMutation>;
-export type CreateContactMessageMutationOptions = Apollo.BaseMutationOptions<CreateContactMessageMutation, CreateContactMessageMutationVariables>;
+export function useCreateContactMessageMutation(
+    baseOptions?: Apollo.MutationHookOptions<
+        CreateContactMessageMutation,
+        CreateContactMessageMutationVariables
+    >
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<CreateContactMessageMutation, CreateContactMessageMutationVariables>(
+        CreateContactMessageDocument,
+        options
+    );
+}
+export type CreateContactMessageMutationHookResult = ReturnType<
+    typeof useCreateContactMessageMutation
+>;
+export type CreateContactMessageMutationResult =
+    Apollo.MutationResult<CreateContactMessageMutation>;
+export type CreateContactMessageMutationOptions = Apollo.BaseMutationOptions<
+    CreateContactMessageMutation,
+    CreateContactMessageMutationVariables
+>;

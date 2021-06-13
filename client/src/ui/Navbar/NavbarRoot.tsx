@@ -21,7 +21,11 @@ const NavbarRoot: FC = ({ children }) => {
         };
     }, [hasScrolled]);
 
-    return <div className={`transition-all duration-150' ${hasScrolled ? 'shadow-magical': ''}`}>{children}</div>;
+    return (
+        <div className={`transition-all duration-150' ${hasScrolled ? 'shadow-magical' : ''}`}>
+            {children}
+        </div>
+    );
 };
 
 export default NavbarRoot;

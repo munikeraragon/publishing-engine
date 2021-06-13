@@ -2,7 +2,10 @@ import { ActionCard } from '../../ui/ActionCard';
 
 export const ArticlesPage: React.FC = () => {
     return (
-        <div id='projects' className='min-h-full pt-8 pb-8 mx-2' style={{background: 'rgb(43 49 77)'}}>
+        <div
+            id='projects'
+            className='min-h-full pt-8 pb-8 mx-2'
+            style={{ background: 'rgb(43 49 77)' }}>
             <div className='text-center pb-8'>
                 <h1 className='text-2xl md:text-3xl tracking-tight font-semibold text-white'>
                     Top Articles
@@ -10,15 +13,15 @@ export const ArticlesPage: React.FC = () => {
             </div>
 
             <div className='max-w-6xl m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                    <ActionCard
-                        src='https://www.educative.io/cdn-cgi/image/f=auto,fit=cover,w=620/v2api/collection/4581872065576960/4866501796429824/image/6233768386887680'
-                        title='Https security with
+                <ActionCard
+                    src='https://www.educative.io/cdn-cgi/image/f=auto,fit=cover,w=620/v2api/collection/4581872065576960/4866501796429824/image/6233768386887680'
+                    title='Https security with
                          Docker+LetsEncript+Nginx+React+ bExpress'
-                        description='Space, the final frontier. These are the voyages of the Starship
+                    description='Space, the final frontier. These are the voyages of the Starship
                     Enterprise. Its five-year mission: to explore strange new worlds.'
-                        className='mx-2'
-                    />
-    
+                    className='mx-2'
+                />
+
                 <ActionCard
                     src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLdfqrJ9u1tl2XxjuuA74mJ1tLLqtRzSrfG89MG-kTxSGkORbGm-F_fOf4EJLrO6XbR-M&usqp=CAU'
                     title='Testing React Componnets with Jest and React Testing Library'

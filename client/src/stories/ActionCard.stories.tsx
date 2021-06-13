@@ -16,5 +16,5 @@ Primary.args = {
     title: 'Integrate https security into your full-stack using Docker+LetsEncript+Nginx+React+Express',
     description:
         'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds.',
-    className: 'w-80 mx-2 border-2 border-gray-300',
+    className: 'w-80 mx-2 border-2 border-gray-300'
 };
