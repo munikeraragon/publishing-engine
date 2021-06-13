@@ -11,8 +11,8 @@ docker exec -i db sh -c 'exec mysql -uroot -p"SuperSecretPassword"' < db.sql
 ### Test database connection
 docker exec -it server node mysql.js
 
-npx sequelize init:models
-npx sequelize-auto -o "./models" -d publishing_engine -h localhost -u root -p 3306 -x SuperSecretPassword -e mysql
+
+npx sequelize-auto -o "./models" -d publishing_engine -h localhost -u root -p 3306 -x SuperSecretPassword -e mysql -l ts
 
 
 ## Change client grahpql
@@ -38,4 +38,8 @@ mysql -u root -p
 
 ## Production Setup
 docker-compose -f production.yml up -d
+
+
+## run code formatter
+npx prettier --write .
 

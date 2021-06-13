@@ -54,7 +54,7 @@ export type MutationCreateContactMessageArgs = {
 export type Query = {
     __typename?: 'Query';
     hello?: Maybe<Scalars['String']>;
-    getContactMessages?: Maybe<Array<Maybe<ContactMessage>>>;
+    getContactMessages?: Maybe<Maybe<ContactMessage>[]>;
 };
 
 export type CreateContactMessageMutationVariables = Exact<{

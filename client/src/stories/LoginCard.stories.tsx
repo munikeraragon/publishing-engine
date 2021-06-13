@@ -77,5 +77,5 @@ const buttons = [
 
 export const Primary = Template.bind({});
 Primary.args = {
-    buttons: buttons
+    buttons
 };

@@ -30,6 +30,9 @@ certbot
 # database
 db 
 
+# dist
+dist
+
 # local env files
 .env
 .env.local

@@ -1,4 +1,7 @@
 # Ignore artifacts:
-build
-coverage
-.next
+.cache
+next-env.d.ts
+node_modules
+package.json
+package-lock.json
+public

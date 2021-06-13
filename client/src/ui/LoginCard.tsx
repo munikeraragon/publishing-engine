@@ -20,7 +20,7 @@ export const LoginCard: React.FC<LoginCardProps> = ({
     return (
         <div
             data-aos='fade-up'
-            className={`${className} flex mx-4 my-20 md:m-auto flex-col bg-white p-10 
+            className={`${className} flex mx-4 my-20 md:m-auto flex-col bg-white p-10
                         gap-6 bg-primary-800 sm:rounded-md z-10 sm:max-w-sm shadow-lg`}>
             <div className='flex gap-2 flex-col'>
                 <span className='text-3xl font-bold'>Welcome</span>

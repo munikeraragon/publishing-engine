@@ -17,13 +17,13 @@ export const ContactPage = () => {
             const response = await createContactMessage({
                 variables: {
                     contactMessage: {
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        company: company,
-                        phone: phone,
-                        message: message,
-                        country: country
+                        firstName,
+                        lastName,
+                        email,
+                        company,
+                        phone,
+                        message,
+                        country
                     }
                 }
             });
