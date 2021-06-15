@@ -7,9 +7,7 @@ const renderActionCard = (props: Partial<ActionCardProps> = {}) => {
     const defaultProps: ActionCardProps = {
         src: 'https://ethereum.org/static/a44134e541c72364beb121234ab5864e/19ca5/infrastructure_transparent.png',
         title: 'Title',
-        description: 'This a description',
-        github: 'https://github.com/munikeraragon/json-compare',
-        live: 'https://munikeraragon.github.io/json-compare/'
+        description: 'This a description'
     };
     return render(<ActionCard {...defaultProps} {...props} />);
 };

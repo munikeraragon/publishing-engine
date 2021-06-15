@@ -4,7 +4,7 @@ import { Header } from './Header';
 import './page.css';
 
 export interface PageProps {
-    user?: {};
+    user?: Record<string, unknown>;
     onLogin: () => void;
     onLogout: () => void;
     onCreateAccount: () => void;
@@ -36,7 +36,7 @@ export const Page: React.FC<PageProps> = ({ user, onLogin, onLogout, onCreateAcc
             <ul>
                 <li>
                     Use a higher-level connected component. Storybook helps you compose such data
-                    from the "args" of child component stories
+                    from the targs of child component stories
                 </li>
                 <li>
                     Assemble data in the page component from your services. You can mock these

@@ -20,6 +20,7 @@ export const ActionCard: React.FC<ActionCardProps> = ({
                 className={`flex flex-col transition transform hover:-translate-y-1.5 shadow-md font-semibold
                             hover:shadow-2xl duration-500 rounded-t-lg bg-white ${className}`}>
                 <img
+                    alt=''
                     className='object-cover w-full block bg-cover bg-no-repeat bg-center'
                     src={src}
                 />

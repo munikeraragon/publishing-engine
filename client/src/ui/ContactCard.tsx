@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { TextInput } from './TextInput';
 import { SelectInput } from './SelectInput';
 import countries from '../constants/countries.json';
@@ -139,7 +138,8 @@ export const ContactCard: React.FC<ContactCardProps> = ({
 
             <div className='col-span-2'>
                 <p className='text-sm mb-2 text-gray-600'>
-                    By clicking "Submit," I acknowledge receipt of the CodeGrow Privacy Policy.
+                    By clicking &quot;Submit,&quot; I acknowledge receipt of the CodeGrow Privacy
+                    Policy.
                 </p>
 
                 <p className='text-sm my-2 text-pink-600'>

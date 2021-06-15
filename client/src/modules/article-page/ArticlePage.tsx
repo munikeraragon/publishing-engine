@@ -24,6 +24,7 @@ export const ArticlePage: React.FC = () => {
                 </div>
 
                 <img
+                    alt=''
                     className='object-cover w-full block bg-cover bg-no-repeat bg-center rounded-md'
                     src='https://www.educative.io/cdn-cgi/image/f=auto,fit=cover,w=620/v2api/collection/4581872065576960/4866501796429824/image/6233768386887680'
                 />
@@ -41,7 +42,7 @@ export const ArticlePage: React.FC = () => {
                     face any issues, however when running the static build on a production server
                     you will most likely face some issues. E.g. If you use React Router with a route
                     for /todo/42 your webserver will be looking for a file called /build/todo/42
-                    which can't be found. Therefore we will need to direct our webserver to the
+                    which can&apos;t be found. Therefore we will need to direct our webserver to the
                     index.html.
                 </p>
                 <p className='py-4 text-xl'>
