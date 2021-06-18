@@ -28,6 +28,7 @@ services:
           - 3000:3000
         container_name: client
         restart: always
+        command: npm run start
         volumes:
            - ./client:/usr/src/app
            - /usr/src/app/node_modules

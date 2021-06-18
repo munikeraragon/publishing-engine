@@ -8,10 +8,11 @@ services:
           - 3000:3000
         container_name: client
         restart: always
+        command: npm run dev
         volumes:
            - ./client:/usr/src/app
            - /usr/src/app/node_modules
-
+           
     server:
         build:
             context: ./server
