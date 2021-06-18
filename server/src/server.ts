@@ -1,4 +1,6 @@
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import https from 'https';
 import express from 'express';
 import passport from 'passport';
@@ -15,8 +17,6 @@ const typeDefs = gql(readFileSync('src/graphql/types.graphql').toString('utf-8')
 const port = 5000;
 
 export const server = async () => {
-    dotenv.config();
-
     const apolloServer = new ApolloServer({ typeDefs, resolvers });
     const app = express();
     const config = dbConfig();

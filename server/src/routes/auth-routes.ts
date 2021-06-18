@@ -4,6 +4,14 @@ import '../strategies/strategies';
 
 const router = Router();
 
+const getClientAddress = () => {
+    if (process.env.MODE === 'production') {
+        return 'https://codegrow.org';
+    } else {
+        return 'http://localhost:3000';
+    }
+};
+
 /** Google authentication */
 router.get(
     '/google',
@@ -13,9 +21,9 @@ router.get(
 );
 router.get(
     '/google/callback',
-    passport.authenticate('google', { failureRedirect: 'http://localhost:3000' }),
+    passport.authenticate('google', { failureRedirect: getClientAddress() }),
     (req, res) => {
-        res.redirect('http://localhost:3000');
+        res.redirect(getClientAddress());
     }
 );
 
@@ -28,9 +36,9 @@ router.get(
 );
 router.get(
     '/github/callback',
-    passport.authenticate('github', { failureRedirect: 'http://localhost:3000' }),
+    passport.authenticate('github', { failureRedirect: getClientAddress() }),
     (req, res) => {
-        res.redirect('http://localhost:3000');
+        res.redirect(getClientAddress());
     }
 );
 
@@ -38,9 +46,9 @@ router.get(
 router.get('/facebook', passport.authenticate('facebook'));
 router.get(
     '/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: 'http://localhost:3000' }),
+    passport.authenticate('facebook', { failureRedirect: getClientAddress() }),
     (req, res) => {
-        res.redirect('http://localhost:3000');
+        res.redirect(getClientAddress());
     }
 );
 
@@ -48,9 +56,9 @@ router.get(
 router.get('/discord', passport.authenticate('discord'));
 router.get(
     '/discord/callback',
-    passport.authenticate('discord', { failureRedirect: 'http://localhost:3000' }),
+    passport.authenticate('discord', { failureRedirect: getClientAddress() }),
     (req, res) => {
-        res.redirect('http://localhost:3000');
+        res.redirect(getClientAddress());
     }
 );
 

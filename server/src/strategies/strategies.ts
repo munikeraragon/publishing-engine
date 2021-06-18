@@ -35,8 +35,8 @@ passport.deserializeUser((obj: any, done: (err: any, id?: any) => void) => {
 passport.use(
     new GoogleStrategy(
         {
-            clientID: '724678825700-4k8phjm2jdhpkfnddi1lgum1jkls89bh.apps.googleusercontent.com',
-            clientSecret: '-Js8HLksgjV_2ntezf1x0s7l',
+            clientID: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             callbackURL: '/auth/google/callback'
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
@@ -69,8 +69,8 @@ passport.use(
 passport.use(
     new GitHubStrategy(
         {
-            clientID: 'cea4b5582b1ba69d1778',
-            clientSecret: 'ea82794f008d160658abba75d78141e3f22d674c',
+            clientID: process.env.GITHUB_CLIENT_ID,
+            clientSecret: process.env.GITHUB_CLIENT_SECRET,
             callbackURL: '/auth/github/callback'
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
@@ -101,8 +101,8 @@ passport.use(
 passport.use(
     new FacebookStrategy(
         {
-            clientID: '462108525090226',
-            clientSecret: '3d459550ebe581c570feeaaee84bd4df',
+            clientID: process.env.FACEBOOK_APP_ID,
+            clientSecret: process.env.FACEBOOK_APP_SECRET,
             callbackURL: '/auth/facebook/callback',
             // scope: ['email'],
             profileFields: ['email', 'location', 'name', 'picture']
@@ -135,8 +135,8 @@ passport.use(
 passport.use(
     new DiscordStrategy(
         {
-            clientID: '849478551106486332',
-            clientSecret: 'Z_IVrx4KbKD7AyTvmUh7gxLnanmT2XrS',
+            clientID: process.env.DISCORD_CLIENT_ID,
+            clientSecret: process.env.DISCORD_CLIENT_SECRET,
             callbackURL: '/auth/discord/callback',
             scope: ['identify', 'email']
         },
