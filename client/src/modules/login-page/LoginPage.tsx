@@ -5,9 +5,17 @@ export interface LoginPageProps {
     className?: string;
 }
 
+const getServerAddress = () => {
+    if (window.location.hostname === 'localhost') {
+        return 'http://localhost:5000';
+    } else {
+        return 'https://codegrow.org:5000';
+    }
+};
+
 const buttons = [
     {
-        href: 'http://localhost:5000/auth/google',
+        href: getServerAddress + '/auth/google',
         label: 'Log in with Google',
         icon: (
             <svg
@@ -26,7 +34,7 @@ const buttons = [
         )
     },
     {
-        href: 'http://localhost:5000/auth/github',
+        href: getServerAddress + '/auth/github',
         label: 'Log in with GitHub',
         icon: (
             <svg
@@ -40,7 +48,7 @@ const buttons = [
         )
     },
     {
-        href: 'http://localhost:5000/auth/facebook',
+        href: getServerAddress + '/auth/facebook',
         label: 'Log in with Facebook',
         icon: (
             <svg
@@ -54,7 +62,7 @@ const buttons = [
         )
     },
     {
-        href: 'http://localhost:5000/auth/discord',
+        href: getServerAddress + '/auth/discord',
         label: 'Log in with Discord',
         icon: (
             <svg

@@ -27,7 +27,7 @@ npx graphql-codegen --config codegen.yml
 # Integrate AWS S3 bucker to store files and images
 # create additional mysql tables to hold meta data about articles
 
-
+cd .. && npx husky install
 
 ## Local Setup
 
