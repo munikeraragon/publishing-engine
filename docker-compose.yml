@@ -25,16 +25,16 @@ services:
             - /usr/src/app/node_modules
         
     db:
-        image: mariadb
-        restart: always
-        container_name: db
-        ports:
-          - 3306:3306
-        environment:
-            MYSQL_USER: "${MYSQL_ROOT_USER}"
-            MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
-        volumes:
-            - ./db:/bitnami/mariadb
+      image: mariadb
+      restart: always
+      container_name: db
+      ports:
+        - 3306:3306
+      environment:
+          MYSQL_ROOT_USER: "SuperAdmin"
+          MYSQL_ROOT_PASSWORD: "SuperSecretPassword"
+      volumes:
+          - ./db:/bitnami/mariadb
  
     adminer:
         image: adminer

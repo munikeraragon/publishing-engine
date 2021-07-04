@@ -1,6 +1,9 @@
 import passport from 'passport';
+import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 import '../logic/auth/strategies';
+
+const JWT_KEY = 'something_private_and_long_enough_to_secure';
 
 const router = Router();
 
@@ -22,8 +25,12 @@ router.get(
 router.get(
     '/google/callback',
     passport.authenticate('google', { failureRedirect: getClientAddress() }),
-    (req, res) => {
-        res.redirect(getClientAddress() + '/user');
+    (req, res, next) => {
+        const token = jwt.sign({ id: req.user }, JWT_KEY, { expiresIn: 60 * 60 * 24 * 1000 });
+        req.logIn(req.user, function (err) {
+            if (err) return next(err);
+            res.redirect(getClientAddress() + `/user?accessToken=${token}&refreshToken=${token}`);
+        });
     }
 );
 
