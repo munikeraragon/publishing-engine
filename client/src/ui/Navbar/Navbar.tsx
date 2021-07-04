@@ -94,7 +94,7 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');
 }
 
-export const Navbar = () => {
+export const Navbar: React.FC = () => {
     return (
         <Popover className='fixed w-full bg-white z-10'>
             {({ open }) => (
@@ -298,7 +298,7 @@ export const Navbar = () => {
                                 </Popover>
                             </Popover.Group>
                             <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
-                                <Link href='/login-page'>
+                                <Link href='/login'>
                                     <span
                                         className='ml-8 whitespace-nowrap inline-flex items-center justify-center
                                         px-4 py-2 border border-transparent rounded-md shadow-sm text-base

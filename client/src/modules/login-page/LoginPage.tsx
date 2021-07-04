@@ -1,5 +1,9 @@
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { LoginCard } from '../../ui/LoginCard';
 import { LoginFooter } from '../../ui/LoginFooter';
+import { useSaveTokensFromQuery } from '../auth/useSaveTokensFromQuery';
+import { useTokenStore } from '../auth/useTokenStore';
 import useServerAddress from '../../hooks/useServerAddress';
 
 export interface LoginPageProps {
@@ -7,6 +11,11 @@ export interface LoginPageProps {
 }
 
 export const LoginPage: React.FC<LoginPageProps> = () => {
+    useSaveTokensFromQuery();
+    const { push } = useRouter();
+    const hasTokens = useTokenStore((s) => !!(s.accessToken && s.refreshToken));
+    const [tokensChecked, setTokensChecked] = useState(false);
+
     const serverAddress = useServerAddress();
     const buttons = [
         {
@@ -72,6 +81,16 @@ export const LoginPage: React.FC<LoginPageProps> = () => {
             )
         }
     ];
+
+    useEffect(() => {
+        if (hasTokens) {
+            push('/user');
+        } else {
+            setTokensChecked(true);
+        }
+    }, [hasTokens, push]);
+
+    if (!tokensChecked) return null;
 
     return (
         <div className='grid w-full h-full bg-gray-100'>

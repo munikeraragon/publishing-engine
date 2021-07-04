@@ -2,7 +2,7 @@ import { ContactPage } from '../modules/contact-page/ContactPage';
 import { LandingPage } from '../modules/landing-page/LandinPage';
 import { ArticlesPage } from '../modules/articles-page/ArticlesPage';
 
-export default function App() {
+const App: React.FC = () => {
     return (
         <>
             <LandingPage />
@@ -10,4 +10,6 @@ export default function App() {
             <ContactPage />
         </>
     );
-}
+};
+
+export default App;

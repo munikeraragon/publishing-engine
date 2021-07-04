@@ -1,12 +1,26 @@
 module.exports = {
-    root: true,
     env: {
-        node: true,
-        es6: true
+        browser: true,
+        es2021: true,
+        jest: true
     },
-    parserOptions: { ecmaVersion: 8, sourceType: 'module' }, // to enable features such as async/await
-    ignorePatterns: ['node_modules/*', '.next/*', '.out/*', '!.prettierrc.js'], // We don't want to lint generated files nor node_modules, but we want to lint .prettierrc.js (ignored by default by eslint)
-    extends: ['eslint:recommended'],
+    ignorePatterns: ['node_modules/*', '.next/*', '.out/*', '!.prettierrc.js'],
+    extends: ['plugin:react/recommended', 'standard', 'prettier'],
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true
+        },
+        ecmaVersion: 12,
+        sourceType: 'module'
+    },
+    plugins: ['react', '@typescript-eslint'],
+    rules: {
+        'react/react-in-jsx-scope': 'off',
+        'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+        'no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': ['error']
+    },
     overrides: [
         // This configuration will apply only to TypeScript files
         {
