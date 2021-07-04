@@ -1,4 +1,4 @@
-import { ContactMessage } from '../models/init-models';
+import { ContactMessage } from '../../sql-dal/ContactMessage';
 import { IResolvers } from 'graphql-tools';
 
 export const resolvers: IResolvers = {
@@ -16,7 +16,7 @@ export const resolvers: IResolvers = {
         createContactMessage: async (_, { contactMessage }) => {
             try {
                 (await ContactMessage) &&
-                    ContactMessage.create({
+                    ContactMessage.findOrCreate({
                         ...contactMessage
                     });
                 return 'Contact message has been saved';

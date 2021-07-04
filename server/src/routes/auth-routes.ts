@@ -1,6 +1,6 @@
 import passport from 'passport';
 import { Router } from 'express';
-import '../strategies/strategies';
+import '../logic/auth/strategies';
 
 const router = Router();
 
@@ -23,7 +23,7 @@ router.get(
     '/google/callback',
     passport.authenticate('google', { failureRedirect: getClientAddress() }),
     (req, res) => {
-        res.redirect(getClientAddress());
+        res.redirect(getClientAddress() + '/user');
     }
 );
 
@@ -38,7 +38,7 @@ router.get(
     '/github/callback',
     passport.authenticate('github', { failureRedirect: getClientAddress() }),
     (req, res) => {
-        res.redirect(getClientAddress());
+        res.redirect(getClientAddress() + '/user');
     }
 );
 
@@ -48,7 +48,7 @@ router.get(
     '/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: getClientAddress() }),
     (req, res) => {
-        res.redirect(getClientAddress());
+        res.redirect(getClientAddress() + '/user');
     }
 );
 
@@ -58,7 +58,7 @@ router.get(
     '/discord/callback',
     passport.authenticate('discord', { failureRedirect: getClientAddress() }),
     (req, res) => {
-        res.redirect(getClientAddress());
+        res.redirect(getClientAddress() + '/user');
     }
 );
 

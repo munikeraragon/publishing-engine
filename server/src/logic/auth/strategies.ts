@@ -4,7 +4,7 @@ import passportGithub from 'passport-github2';
 import passportFacebook from 'passport-facebook';
 import passportDiscord from 'passport-discord';
 
-import { User } from '../models/init-models';
+import { User, UserAttributes } from '../../sql-dal/User';
 
 const GoogleStrategy = passportGoogle.Strategy;
 const GitHubStrategy = passportGithub.Strategy;
@@ -21,11 +21,9 @@ const DiscordStrategy = passportDiscord.Strategy;
 // example does not have a database, the complete Facebook profile is serialized
 // and deserialized.
 
-passport.serializeUser<any, any>(
-    (req: any, user: Express.User, done: (err: any, id?: any) => void) => {
-        done(null, user);
-    }
-);
+passport.serializeUser<any, any>((req: any, user: any, done: (err: any, id?: any) => void) => {
+    done(null, user);
+});
 
 passport.deserializeUser((obj: any, done: (err: any, id?: any) => void) => {
     done(null, obj);
@@ -40,25 +38,20 @@ passport.use(
             callbackURL: '/auth/google/callback'
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
-            const selector = {
-                where: { email: profile._json.email, firstName: profile._json.given_name },
-                defaults: {
-                    firstName: profile._json.given_name,
-                    lastName: profile._json.family_name,
-                    picture: profile._json.picture,
-                    email: profile._json.email,
-                    locale: profile._json.locale,
-                    provider: 'google'
-                }
+            const user = {
+                firstName: profile._json.given_name,
+                lastName: profile._json.family_name,
+                picture: profile._json.picture,
+                email: profile._json.email,
+                locale: profile._json.locale,
+                provider: 'google'
             };
-
-            console.log(selector);
-            User.findOrCreate(selector)
-                .then((result: [User, boolean]) => {
-                    // user = result[0].dataValues;
+            User.findOrCreate(user)
+                .then((result: UserAttributes) => {
+                    console.log(result);
                     return done(null, profile);
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     return done(err, profile);
                 });
         }
@@ -74,23 +67,20 @@ passport.use(
             callbackURL: '/auth/github/callback'
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
-            const selector = {
-                where: { email: profile._json.html_url, firstName: profile._json.login },
-                defaults: {
-                    firstName: profile._json.login,
-                    lastName: profile._json.login,
-                    picture: profile._json.avatar_url,
-                    email: profile._json.html_url,
-                    locale: profile._json.location,
-                    provider: 'github'
-                }
+            const user = {
+                firstName: profile._json.login,
+                lastName: profile._json.login,
+                picture: profile._json.avatar_url,
+                email: profile._json.html_url,
+                locale: profile._json.location,
+                provider: 'github'
             };
-            User.findOrCreate(selector)
-                .then((result) => {
-                    // user = result[0].dataValues;
+            User.findOrCreate(user)
+                .then((result: UserAttributes) => {
+                    console.log(result);
                     return done(null, profile);
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     return done(err, profile);
                 });
         }
@@ -108,23 +98,20 @@ passport.use(
             profileFields: ['email', 'location', 'name', 'picture']
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
-            const selector = {
-                where: { email: profile._json.email, firstName: profile._json.first_name },
-                defaults: {
-                    firstName: profile._json.first_name,
-                    lastName: profile._json.last_name,
-                    picture: profile._json.picture.data.url,
-                    email: profile._json.email,
-                    locale: profile._json.location ? profile._json.location : null,
-                    provider: 'facebook'
-                }
+            const user = {
+                firstName: profile._json.first_name,
+                lastName: profile._json.last_name,
+                picture: profile._json.picture.data.url,
+                email: profile._json.email,
+                locale: profile._json.location ? profile._json.location : null,
+                provider: 'facebook'
             };
-            User.findOrCreate(selector)
-                .then((result) => {
-                    // user = result[0];
+            User.findOrCreate(user)
+                .then((result: UserAttributes) => {
+                    console.log(result);
                     return done(null, profile);
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     return done(err, profile);
                 });
         }
@@ -141,23 +128,20 @@ passport.use(
             scope: ['identify', 'email']
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
-            const selector = {
-                where: { email: profile.email, firstName: profile.username },
-                defaults: {
-                    firstName: profile.username,
-                    lastName: profile.username,
-                    picture: profile.avatar,
-                    email: profile.email,
-                    locale: profile.locale,
-                    provider: 'discord'
-                }
+            const user = {
+                firstName: profile.username,
+                lastName: profile.username,
+                picture: profile.avatar,
+                email: profile.email,
+                locale: profile.locale,
+                provider: 'discord'
             };
-            User.findOrCreate(selector)
-                .then((result) => {
-                    // user = result[0];
+            User.findOrCreate(user)
+                .then((result: UserAttributes) => {
+                    console.log(result);
                     return done(null, profile);
                 })
-                .catch((err) => {
+                .catch((err: any) => {
                     return done(err, profile);
                 });
         }
