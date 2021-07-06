@@ -17,33 +17,46 @@ git clone https://github.com/munikeraragon/publishing-engine.git
 cd publishing-engine
 ```
 
+3) Create a .env file inside server folder that contains the following fields.
+```
+MODE=development
+MYSQL_ROOT_USER=SuperAdmin
+MYSQL_ROOT_PASSWORD=SuperSecretPassword
+MYSQL_DATABASE=blog
+
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+GITHUB_CLIENT_ID= 
+GITHUB_CLIENT_SECRET=
+
+FACEBOOK_APP_ID=
+FACEBOOK_APP_SECRET=
+
+DISCORD_CLIENT_ID=
+DISCORD_CLIENT_SECRET=
+
+JWT_SERVER_SECRET=TypeGraphQL
+``
+
+
 3) Run Docker environmnet
 ``` bash
 docker-compose up -d
 ```
 
-4) Create database
+4) Run database migrations (You may need to create database if not exist)
 ``` bash
-docker exec -i db sh -c 'exec mysql -uroot -p"SuperSecretPassword"' < db.sql
+docker exec server npx knex migrate:latest
 ```
-
 
 
 ## OTHER
- To create server models
-``` bash
-npx sequelize-auto -o "./models" -d publishing_engine -h localhost -u root -p 3306 -x SuperSecretPassword -e mysql -l ts
-```
 
 Running graphql-codege
 ``` bash
-update server graphql, and then run the below commad
+# update server graphql, and then run the below commad
 npx graphql-codegen --config codegen.yml
-```
-
-Initialize husky
-``` bash
-cd .. && npx husky install
 ```
 
 Connect to the database

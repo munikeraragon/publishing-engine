@@ -1,12 +1,15 @@
-import { useSaveTokensFromQuery } from '../auth/useSaveTokensFromQuery';
+import { useGetUserQuery } from '../../generated/apolloComponents';
 import { WaitForAuth } from '../auth/WaitForAuth';
 
 export const UserPage: React.FC = () => {
-    useSaveTokensFromQuery();
-
+    const { data, loading, error } = useGetUserQuery()
+    
     return (
         <WaitForAuth>
-            <div className='pt-20'>user</div>
+            {loading && 'Loading'}
+            <div className='pt-20'>{JSON.stringify(data)}</div>
         </WaitForAuth>
     );
 };
+
+  

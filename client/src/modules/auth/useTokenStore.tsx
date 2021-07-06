@@ -1,8 +1,8 @@
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 
-const accessTokenKey = '@toum/token';
-const refreshTokenKey = '@toum/refresh-token';
+const accessTokenKey = 'token';
+const refreshTokenKey = 'token';
 
 const getDefaultValues = () => {
     try {

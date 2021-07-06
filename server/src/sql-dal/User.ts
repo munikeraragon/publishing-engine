@@ -1,4 +1,5 @@
 import { Knex } from 'knex';
+import { User } from '../graphql/entities/User';
 import { getKnex } from './utils';
 
 export interface UserAttributes {
@@ -9,15 +10,16 @@ export interface UserAttributes {
     locale?: string;
     provider?: string;
     picture?: string;
+    role?: string;
     dateCreated?: Date;
 }
 
 const knex: Knex = getKnex();
 
-export class User {
-    static async findOrCreate(user: UserAttributes): Promise<UserAttributes | null> {
-        try {
-            knex.transaction(async function (trx) {
+export class UserService {
+    static async findOrCreate(user: UserAttributes): Promise<User> {
+        return knex.transaction(async (trx) => {
+            try {
                 let res = await trx('User').where({
                     email: user.email,
                     firstName: user.firstName
@@ -30,7 +32,8 @@ export class User {
                         email: user.email,
                         locale: user.locale,
                         provider: user.provider,
-                        picture: user.picture
+                        picture: user.picture,
+                        role: user.role
                     });
                     res = await trx('User').where({
                         email: user.email,
@@ -38,15 +41,25 @@ export class User {
                     });
                 }
 
-                return res;
-            });
-        } catch (err) {
-            console.log(err);
-            return null;
-        }
+                return res[0];
+            } catch (err) {
+                console.log(err);
+                return null;
+            }
+        });
     }
 
-    static async findById() {
-        return knex('User');
+    static async findById(userId: number): Promise<User> {
+        return knex.transaction(async (trx) => {
+            try {
+                const res = await trx('User').where({
+                    id: userId
+                });
+                return res[0];
+            } catch (err) {
+                console.log(err);
+                return null;
+            }
+        });
     }
 }

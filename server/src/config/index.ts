@@ -1,33 +1,11 @@
+import knexConfig from '../../knexfile';
+
 export const dbConfig = () => {
-    if (process.env.MODE === 'production') {
-        return {
-            client: 'mysql2',
-            connection: {
-                host: 'db',
-                user: 'root',
-                password: 'SuperSecretPassword',
-                database: 'publishing_engine'
-            }
-        };
+    if (process.env.MODE === 'development') {
+        return knexConfig.development;
+    } else if (process.env.MODE === 'staging') {
+        return knexConfig.staging;
     } else if (process.env.MODE === 'production') {
-        return {
-            client: 'mysql2',
-            connection: {
-                host: 'db',
-                user: 'root',
-                password: 'SuperSecretPassword',
-                database: 'publishing_engine'
-            }
-        };
-    } else {
-        return {
-            client: 'mysql2',
-            connection: {
-                host: 'db',
-                user: 'root',
-                password: 'SuperSecretPassword',
-                database: 'publishing_engine'
-            }
-        };
+        return knexConfig.production;
     }
 };

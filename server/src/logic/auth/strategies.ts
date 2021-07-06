@@ -4,7 +4,8 @@ import passportGithub from 'passport-github2';
 import passportFacebook from 'passport-facebook';
 import passportDiscord from 'passport-discord';
 
-import { User, UserAttributes } from '../../sql-dal/User';
+import { UserService } from '../../sql-dal/User';
+import { User } from '../../graphql/entities/User';
 
 const GoogleStrategy = passportGoogle.Strategy;
 const GitHubStrategy = passportGithub.Strategy;
@@ -44,12 +45,13 @@ passport.use(
                 picture: profile._json.picture,
                 email: profile._json.email,
                 locale: profile._json.locale,
+                role: 'user',
                 provider: 'google'
             };
-            User.findOrCreate(user)
-                .then((result: UserAttributes) => {
+            UserService.findOrCreate(user)
+                .then((result: User) => {
                     console.log(result);
-                    return done(null, profile);
+                    return done(null, result.id);
                 })
                 .catch((err: any) => {
                     return done(err, profile);
@@ -75,10 +77,10 @@ passport.use(
                 locale: profile._json.location,
                 provider: 'github'
             };
-            User.findOrCreate(user)
-                .then((result: UserAttributes) => {
+            UserService.findOrCreate(user)
+                .then((result: User) => {
                     console.log(result);
-                    return done(null, profile);
+                    return done(null, user);
                 })
                 .catch((err: any) => {
                     return done(err, profile);
@@ -106,10 +108,10 @@ passport.use(
                 locale: profile._json.location ? profile._json.location : null,
                 provider: 'facebook'
             };
-            User.findOrCreate(user)
-                .then((result: UserAttributes) => {
+            UserService.findOrCreate(user)
+                .then((result: User) => {
                     console.log(result);
-                    return done(null, profile);
+                    return done(null, user);
                 })
                 .catch((err: any) => {
                     return done(err, profile);
@@ -136,10 +138,10 @@ passport.use(
                 locale: profile.locale,
                 provider: 'discord'
             };
-            User.findOrCreate(user)
-                .then((result: UserAttributes) => {
+            UserService.findOrCreate(user)
+                .then((result: User) => {
                     console.log(result);
-                    return done(null, profile);
+                    return done(null, user);
                 })
                 .catch((err: any) => {
                     return done(err, profile);

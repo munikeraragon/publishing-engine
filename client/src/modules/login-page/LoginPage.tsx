@@ -84,7 +84,7 @@ export const LoginPage: React.FC<LoginPageProps> = () => {
 
     useEffect(() => {
         if (hasTokens) {
-            push('/user');
+            push('/dashboard');
         } else {
             setTokensChecked(true);
         }

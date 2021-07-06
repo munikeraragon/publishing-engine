@@ -3,8 +3,6 @@ import jwt from 'jsonwebtoken';
 import { Router } from 'express';
 import '../logic/auth/strategies';
 
-const JWT_KEY = 'something_private_and_long_enough_to_secure';
-
 const router = Router();
 
 const getClientAddress = () => {
@@ -26,10 +24,14 @@ router.get(
     '/google/callback',
     passport.authenticate('google', { failureRedirect: getClientAddress() }),
     (req, res, next) => {
-        const token = jwt.sign({ id: req.user }, JWT_KEY, { expiresIn: 60 * 60 * 24 * 1000 });
+        const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
+            expiresIn: 60 * 15
+        });
         req.logIn(req.user, function (err) {
             if (err) return next(err);
-            res.redirect(getClientAddress() + `/user?accessToken=${token}&refreshToken=${token}`);
+            res.redirect(
+                getClientAddress() + `/dashboard?accessToken=${token}&refreshToken=${token}`
+            );
         });
     }
 );
@@ -44,8 +46,16 @@ router.get(
 router.get(
     '/github/callback',
     passport.authenticate('github', { failureRedirect: getClientAddress() }),
-    (req, res) => {
-        res.redirect(getClientAddress() + '/user');
+    (req, res, next) => {
+        const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
+            expiresIn: 60 * 15
+        });
+        req.logIn(req.user, function (err) {
+            if (err) return next(err);
+            res.redirect(
+                getClientAddress() + `/dashboard?accessToken=${token}&refreshToken=${token}`
+            );
+        });
     }
 );
 
@@ -54,8 +64,16 @@ router.get('/facebook', passport.authenticate('facebook'));
 router.get(
     '/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: getClientAddress() }),
-    (req, res) => {
-        res.redirect(getClientAddress() + '/user');
+    (req, res, next) => {
+        const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
+            expiresIn: 60 * 15
+        });
+        req.logIn(req.user, function (err) {
+            if (err) return next(err);
+            res.redirect(
+                getClientAddress() + `/dashboard?accessToken=${token}&refreshToken=${token}`
+            );
+        });
     }
 );
 
@@ -64,8 +82,16 @@ router.get('/discord', passport.authenticate('discord'));
 router.get(
     '/discord/callback',
     passport.authenticate('discord', { failureRedirect: getClientAddress() }),
-    (req, res) => {
-        res.redirect(getClientAddress() + '/user');
+    (req, res, next) => {
+        const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
+            expiresIn: 60 * 15
+        });
+        req.logIn(req.user, function (err) {
+            if (err) return next(err);
+            res.redirect(
+                getClientAddress() + `/dashboard?accessToken=${token}&refreshToken=${token}`
+            );
+        });
     }
 );
 

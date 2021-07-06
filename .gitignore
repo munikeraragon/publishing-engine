@@ -27,8 +27,6 @@ yarn-error.log*
 # certbot certificates
 certbot
 
-# database
-db 
 
 # dist
 dist

@@ -1,26 +1,46 @@
-/* eslint-disable import/first */
+import 'reflect-metadata';
 import * as dotenv from 'dotenv';
+/* eslint-disable import/first */
 dotenv.config();
 
 import https from 'https';
 import express from 'express';
+import jwt from 'express-jwt';
 import passport from 'passport';
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import { readFileSync } from 'fs';
 
+import buildSchema from './graphql';
 import authRoutes from './routes/auth-routes';
-import { resolvers } from './graphql/resolvers/resolvers';
 
-const typeDefs = gql(readFileSync('src/graphql/entities/types.graphql').toString('utf-8'));
 const port = 5000;
 
 export const server = async () => {
-    const apolloServer = new ApolloServer({ typeDefs, resolvers });
+    const schema = await buildSchema();
     const app = express();
+    const apolloServer = new ApolloServer({
+        schema,
+        context: ({ req }) => {
+            const context = {
+                req,
+                user: req.user // `req.user` comes from `express-jwt`
+            };
+            return context;
+        }
+    });
 
-    apolloServer.applyMiddleware({ app });
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(
+        '/graphql',
+        jwt({
+            secret: process.env.JWT_SERVER_SECRET,
+            credentialsRequired: false,
+            algorithms: ['HS256']
+        })
+    );
+
+    apolloServer.applyMiddleware({ app });
 
     app.use('/auth', authRoutes);
 
