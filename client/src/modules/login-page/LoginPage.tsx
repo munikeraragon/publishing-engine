@@ -4,7 +4,6 @@ import { LoginCard } from '../../ui/LoginCard';
 import { LoginFooter } from '../../ui/LoginFooter';
 import { useSaveTokensFromQuery } from '../auth/useSaveTokensFromQuery';
 import { useTokenStore } from '../auth/useTokenStore';
-import useServerAddress from '../../hooks/useServerAddress';
 
 export interface LoginPageProps {
     className?: string;
@@ -16,7 +15,7 @@ export const LoginPage: React.FC<LoginPageProps> = () => {
     const hasTokens = useTokenStore((s) => !!(s.accessToken && s.refreshToken));
     const [tokensChecked, setTokensChecked] = useState(false);
 
-    const serverAddress = useServerAddress();
+    const serverAddress = process.env.NEXT_PUBLIC_SERVER_ADDRESS;
     const buttons = [
         {
             href: serverAddress + '/auth/google',

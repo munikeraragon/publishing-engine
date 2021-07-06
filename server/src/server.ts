@@ -13,10 +13,10 @@ import { readFileSync } from 'fs';
 import buildSchema from './graphql';
 import authRoutes from './routes/auth-routes';
 
-const port = 5000;
-
 export const server = async () => {
+    const port = process.env.PORT || 4000;
     const schema = await buildSchema();
+
     const app = express();
     const apolloServer = new ApolloServer({
         schema,
@@ -29,8 +29,15 @@ export const server = async () => {
         }
     });
 
+    const cors = {
+        credentials: true,
+        origin: process.env.MODE === 'development' ? '*' : 'https://codegrow',
+        optionsSuccessStatus: 200
+    };
+
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use('/auth', authRoutes);
     app.use(
         '/graphql',
         jwt({
@@ -39,10 +46,7 @@ export const server = async () => {
             algorithms: ['HS256']
         })
     );
-
-    apolloServer.applyMiddleware({ app });
-
-    app.use('/auth', authRoutes);
+    apolloServer.applyMiddleware({ app, cors });
 
     if (process.env.MODE === 'production') {
         // create https server when running in production mode

@@ -11,7 +11,7 @@ export type ResolverContext = {
 };
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:5000/graphql'
+    uri: process.env.NEXT_PUBLIC_SERVER_ADDRESS + '/graphql'
 });
 
 const authLink = setContext((_, { headers }) => {

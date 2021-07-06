@@ -18,7 +18,7 @@ RUN addgroup --gid 1024 nodecert
 RUN adduser --disabled-password --gecos "" --force-badname --ingroup nodecert nodeuser
 USER nodeuser
 
-EXPOSE 5000
+EXPOSE 4000
 
 # start app
 CMD ["npm", "run", "start"]
