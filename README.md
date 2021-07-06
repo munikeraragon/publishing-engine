@@ -47,7 +47,11 @@ docker-compose up -d
 
 4) Run database migrations (You may need to create database if not exist)
 ``` bash
+# if in development
 docker exec server npx knex migrate:latest
+
+# if in production
+docker exec server npx knex migrate:latest --env production
 ```
 
 
@@ -62,6 +66,13 @@ npx graphql-codegen --config codegen.yml
 Connect to the database
 ``` bash
 docker exec -it db bash
-mysql -u root -p
+
+mysql -uroot -pSuperSecretPassword
+
+CREATE DATABASE publishing_engine_dev;
+
+CREATE DATABASE publishing_engine_stage;
+
+CREATE DATABASE publishing_engine_prod;
 ```
 

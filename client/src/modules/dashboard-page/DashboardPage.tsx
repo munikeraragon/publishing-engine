@@ -16,16 +16,16 @@ type ComponentOptions =
     | 'messages';
 
 const componentStore = {
-    'dashboard': <UserPage />,
-    'customers': <UserPage />,
-    'orders': <UserPage />,
-    'campaigns': <UserPage />,
-    'team': <UserPage />,
-    'tasks': <UserPage />,
-    'applications': <UserPage />,
-    'settings': <UserPage />,
-    'messages': <UserPage />
-}
+    dashboard: <UserPage />,
+    customers: <UserPage />,
+    orders: <UserPage />,
+    campaigns: <UserPage />,
+    team: <UserPage />,
+    tasks: <UserPage />,
+    applications: <UserPage />,
+    settings: <UserPage />,
+    messages: <UserPage />
+};
 
 export const DashboardPage = () => {
     useSaveTokensFromQuery();

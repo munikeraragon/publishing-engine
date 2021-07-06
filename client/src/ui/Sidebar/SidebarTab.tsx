@@ -2,11 +2,17 @@ export interface SidebarTabProps {
     onClick: () => void;
     onKeyDown: () => void;
     component: string;
-    label: string
-    icon: React.ReactElement
+    label: string;
+    icon: React.ReactElement;
 }
 
-export const SidebarTab: React.FC<SidebarTabProps> = ({ onClick, onKeyDown, component, icon, label }) => {
+export const SidebarTab: React.FC<SidebarTabProps> = ({
+    onClick,
+    onKeyDown,
+    component,
+    icon,
+    label
+}) => {
     return (
         <button
             onClick={onClick}

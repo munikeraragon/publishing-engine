@@ -4,99 +4,93 @@ export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
-  Boolean: boolean;
-  Int: number;
-  Float: number;
-  /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
-  DateTime: any;
+    ID: string;
+    String: string;
+    Boolean: boolean;
+    Int: number;
+    Float: number;
+    /** The javascript `Date` as string. Type represents date and time as the ISO Date string. */
+    DateTime: any;
 };
 
 export type ContactMessage = {
-  __typename?: 'ContactMessage';
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  company: Scalars['String'];
-  phone: Scalars['String'];
-  message: Scalars['String'];
-  country: Scalars['String'];
-  creationDate: Scalars['DateTime'];
+    __typename?: 'ContactMessage';
+    firstName: Scalars['String'];
+    lastName: Scalars['String'];
+    email: Scalars['String'];
+    company: Scalars['String'];
+    phone: Scalars['String'];
+    message: Scalars['String'];
+    country: Scalars['String'];
+    creationDate: Scalars['DateTime'];
 };
 
 export type ContactMessageInput = {
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  company: Scalars['String'];
-  phone: Scalars['String'];
-  message: Scalars['String'];
-  country: Scalars['String'];
+    firstName: Scalars['String'];
+    lastName: Scalars['String'];
+    email: Scalars['String'];
+    company: Scalars['String'];
+    phone: Scalars['String'];
+    message: Scalars['String'];
+    country: Scalars['String'];
 };
-
 
 export type Mutation = {
-  __typename?: 'Mutation';
-  createContactMessage: Scalars['String'];
+    __typename?: 'Mutation';
+    createContactMessage: Scalars['String'];
 };
 
-
 export type MutationCreateContactMessageArgs = {
-  contactMessageInput: ContactMessageInput;
+    contactMessageInput: ContactMessageInput;
 };
 
 export type Query = {
-  __typename?: 'Query';
-  getContactMessages: Array<ContactMessage>;
-  getUser: User;
+    __typename?: 'Query';
+    getContactMessages: Array<ContactMessage>;
+    getUser: User;
 };
 
 export type User = {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  email: Scalars['String'];
-  locale: Scalars['String'];
-  provider: Scalars['String'];
-  picture: Scalars['String'];
-  country: Scalars['String'];
-  roles: Array<Scalars['String']>;
-  creationDate: Scalars['DateTime'];
+    __typename?: 'User';
+    id: Scalars['ID'];
+    firstName: Scalars['String'];
+    lastName: Scalars['String'];
+    email: Scalars['String'];
+    locale: Scalars['String'];
+    provider: Scalars['String'];
+    picture: Scalars['String'];
+    country: Scalars['String'];
+    roles: Array<Scalars['String']>;
+    creationDate: Scalars['DateTime'];
 };
 
 export type CreateContactMessageMutationVariables = Exact<{
-  contactMessage: ContactMessageInput;
+    contactMessage: ContactMessageInput;
 }>;
 
+export type CreateContactMessageMutation = { __typename?: 'Mutation' } & Pick<
+    Mutation,
+    'createContactMessage'
+>;
 
-export type CreateContactMessageMutation = (
-  { __typename?: 'Mutation' }
-  & Pick<Mutation, 'createContactMessage'>
-);
+export type GetUserQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetUserQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUserQuery = (
-  { __typename?: 'Query' }
-  & { getUser: (
-    { __typename?: 'User' }
-    & Pick<User, 'firstName' | 'email'>
-  ) }
-);
-
+export type GetUserQuery = { __typename?: 'Query' } & {
+    getUser: { __typename?: 'User' } & Pick<User, 'firstName' | 'email'>;
+};
 
 export const CreateContactMessageDocument = gql`
     mutation CreateContactMessage($contactMessage: ContactMessageInput!) {
-  createContactMessage(contactMessageInput: $contactMessage)
-}
-    `;
-export type CreateContactMessageMutationFn = Apollo.MutationFunction<CreateContactMessageMutation, CreateContactMessageMutationVariables>;
+        createContactMessage(contactMessageInput: $contactMessage)
+    }
+`;
+export type CreateContactMessageMutationFn = Apollo.MutationFunction<
+    CreateContactMessageMutation,
+    CreateContactMessageMutationVariables
+>;
 
 /**
  * __useCreateContactMessageMutation__
@@ -115,21 +109,35 @@ export type CreateContactMessageMutationFn = Apollo.MutationFunction<CreateConta
  *   },
  * });
  */
-export function useCreateContactMessageMutation(baseOptions?: Apollo.MutationHookOptions<CreateContactMessageMutation, CreateContactMessageMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateContactMessageMutation, CreateContactMessageMutationVariables>(CreateContactMessageDocument, options);
-      }
-export type CreateContactMessageMutationHookResult = ReturnType<typeof useCreateContactMessageMutation>;
-export type CreateContactMessageMutationResult = Apollo.MutationResult<CreateContactMessageMutation>;
-export type CreateContactMessageMutationOptions = Apollo.BaseMutationOptions<CreateContactMessageMutation, CreateContactMessageMutationVariables>;
+export function useCreateContactMessageMutation(
+    baseOptions?: Apollo.MutationHookOptions<
+        CreateContactMessageMutation,
+        CreateContactMessageMutationVariables
+    >
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<CreateContactMessageMutation, CreateContactMessageMutationVariables>(
+        CreateContactMessageDocument,
+        options
+    );
+}
+export type CreateContactMessageMutationHookResult = ReturnType<
+    typeof useCreateContactMessageMutation
+>;
+export type CreateContactMessageMutationResult =
+    Apollo.MutationResult<CreateContactMessageMutation>;
+export type CreateContactMessageMutationOptions = Apollo.BaseMutationOptions<
+    CreateContactMessageMutation,
+    CreateContactMessageMutationVariables
+>;
 export const GetUserDocument = gql`
     query GetUser {
-  getUser {
-    firstName
-    email
-  }
-}
-    `;
+        getUser {
+            firstName
+            email
+        }
+    }
+`;
 
 /**
  * __useGetUserQuery__
@@ -146,14 +154,18 @@ export const GetUserDocument = gql`
  *   },
  * });
  */
-export function useGetUserQuery(baseOptions?: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-      }
-export function useGetUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
-        }
+export function useGetUserQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetUserQuery, GetUserQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
+}
+export function useGetUserLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<GetUserQuery, GetUserQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetUserQuery, GetUserQueryVariables>(GetUserDocument, options);
+}
 export type GetUserQueryHookResult = ReturnType<typeof useGetUserQuery>;
 export type GetUserLazyQueryHookResult = ReturnType<typeof useGetUserLazyQuery>;
 export type GetUserQueryResult = Apollo.QueryResult<GetUserQuery, GetUserQueryVariables>;
