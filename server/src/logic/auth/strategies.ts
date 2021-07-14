@@ -12,16 +12,6 @@ const GitHubStrategy = passportGithub.Strategy;
 const FacebookStrategy = passportFacebook.Strategy;
 const DiscordStrategy = passportDiscord.Strategy;
 
-// Configure Passport authenticated session persistence.
-//
-// In order to restore authentication state across HTTP requests, Passport needs
-// to serialize users into and deserialize users out of the session.  In a
-// production-quality application, this would typically be as simple as
-// supplying the user ID when serializing, and querying the user record by ID
-// from the database when deserializing.  However, due to the fact that this
-// example does not have a database, the complete Facebook profile is serialized
-// and deserialized.
-
 passport.serializeUser<any, any>((req: any, user: any, done: (err: any, id?: any) => void) => {
     done(null, user);
 });
@@ -40,11 +30,12 @@ passport.use(
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const user = {
-                firstName: profile._json.given_name,
-                lastName: profile._json.family_name,
-                picture: profile._json.picture,
-                email: profile._json.email,
-                locale: profile._json.locale,
+                firstName: String(profile._json.given_name),
+                lastName: String(profile._json.family_name),
+                picture: String(profile._json.picture),
+                userName: String(profile._json.email).replace(/@.*$/, ''),
+                email: String(profile._json.email),
+                locale: String(profile._json.locale),
                 role: 'user',
                 provider: 'google'
             };
@@ -70,11 +61,13 @@ passport.use(
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const user = {
-                firstName: profile._json.login,
-                lastName: profile._json.login,
-                picture: profile._json.avatar_url,
-                email: profile._json.html_url,
-                locale: profile._json.location,
+                firstName: String(profile._json.login),
+                lastName: String(profile._json.login),
+                userName: String(profile._json.login),
+                picture: String(profile._json.avatar_url),
+                email: String(profile._json.html_url),
+                locale: String(profile._json.location),
+                role: 'user',
                 provider: 'github'
             };
             UserService.findOrCreate(user)
@@ -101,11 +94,13 @@ passport.use(
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const user = {
-                firstName: profile._json.first_name,
-                lastName: profile._json.last_name,
-                picture: profile._json.picture.data.url,
-                email: profile._json.email,
-                locale: profile._json.location ? profile._json.location : null,
+                firstName: String(profile._json.first_name),
+                lastName: String(profile._json.last_name),
+                picture: String(profile._json.picture.data.url),
+                email: String(profile._json.email),
+                userName: String(profile._json.email).replace(/@.*$/, ''),
+                locale: String(profile._json.location),
+                role: 'user',
                 provider: 'facebook'
             };
             UserService.findOrCreate(user)
@@ -131,11 +126,13 @@ passport.use(
         },
         (accessToken: any, refreshToken: any, profile: any, done: (err: any, id?: any) => void) => {
             const user = {
-                firstName: profile.username,
-                lastName: profile.username,
-                picture: profile.avatar,
-                email: profile.email,
-                locale: profile.locale,
+                firstName: String(profile.username),
+                lastName: String(profile.username),
+                userName: String(profile.username),
+                picture: String(profile.avatar),
+                email: String(profile.email),
+                locale: String(profile.locale),
+                role: 'user',
                 provider: 'discord'
             };
             UserService.findOrCreate(user)

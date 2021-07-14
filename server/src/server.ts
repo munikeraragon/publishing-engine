@@ -13,9 +13,14 @@ import { readFileSync } from 'fs';
 import buildSchema from './graphql';
 import authRoutes from './routes/auth-routes';
 
+import { listBuckets } from './s3-dal/list_buckets';
+
 export const server = async () => {
     const port = process.env.PORT || 4000;
     const schema = await buildSchema();
+
+    const data = await listBuckets();
+    console.log(data);
 
     const app = express();
     const apolloServer = new ApolloServer({
@@ -31,7 +36,7 @@ export const server = async () => {
 
     const cors = {
         credentials: true,
-        origin: process.env.MODE === 'development' ? '*' : 'https://codegrow',
+        origin: process.env.MODE === 'development' ? '*' : 'https://codegrow.org',
         optionsSuccessStatus: 200
     };
 
@@ -58,7 +63,7 @@ export const server = async () => {
         };
 
         https.createServer(credentials, app).listen(port, () => {
-            console.log(`Now browse to https://codegrow:${port}` + apolloServer.graphqlPath);
+            console.log(`Now browse to https://codegrow.org:${port}` + apolloServer.graphqlPath);
         });
     } else {
         // create http server when running in development mode

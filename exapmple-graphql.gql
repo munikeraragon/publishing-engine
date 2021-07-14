@@ -1,0 +1,45 @@
+query {
+  getUser {
+    firstName
+  }
+}
+
+query {
+  getContactMessages {
+    firstName
+  }
+}
+
+mutation {
+  createContactMessage(contactMessageInput: {
+    firstName: "m",
+    lastName: "m",
+    email: "m",
+    company: "m",
+    phone: "m",
+    message: "m",
+    country: "m"
+  })
+}
+
+mutation {
+  createArticle(articleInput: {
+  	title: "example title"
+    imagesNumber: 10,
+    imagesLabels: ["label1", "label2"],
+    paragraphsNumber: 2,
+    wordsNumber: 323,
+    readingTime: 32
+  }) {
+    id
+    title
+    presignedUrl
+    imagesPresignedUrl {
+      label, presignedUrl
+    }
+    imagesNumber
+    paragraphsNumber
+    wordsNumber
+    readingTime
+  }
+}

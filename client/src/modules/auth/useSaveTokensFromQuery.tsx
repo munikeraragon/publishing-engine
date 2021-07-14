@@ -20,7 +20,7 @@ export const useSaveTokensFromQuery = () => {
                 accessToken: params.accessToken,
                 refreshToken: params.refreshToken
             });
-            let nextPath = '/dashboard';
+            let nextPath = '/dash/home';
             try {
                 const possibleNextPath = localStorage.getItem(loginNextPathKey);
                 if (possibleNextPath && possibleNextPath.startsWith('/')) {

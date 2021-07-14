@@ -39,10 +39,13 @@ DISCORD_CLIENT_SECRET=
 JWT_SERVER_SECRET=TypeGraphQL
 ``
 
-
 3) Run Docker environmnet
 ``` bash
+# dev
 docker-compose up -d
+
+# prod
+docker-compose -f production.yml up -d
 ```
 
 4) Run database migrations (You may need to create database if not exist)
@@ -76,3 +79,18 @@ CREATE DATABASE publishing_engine_stage;
 CREATE DATABASE publishing_engine_prod;
 ```
 
+Rollback migration
+``` bash
+docker exec server npx knex migrate:rollback
+```
+
+Notes:
+Basic goals:
+
+I want to use this site to post articles and post projects.
+I want to be able to subscribe to other people.
+I want to be able to have a profile/portfolio page that people can
+see.
+
+Strech goals:
+Platform to learn about coding as well as the best platform to participate in opwn source projetcs. People will be able to learn about the project and post things related to the project.

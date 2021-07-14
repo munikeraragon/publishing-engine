@@ -25,12 +25,12 @@ router.get(
     passport.authenticate('google', { failureRedirect: getClientAddress() }),
     (req, res, next) => {
         const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
-            expiresIn: 60 * 15
+            expiresIn: 60 * 60 * 60
         });
         req.logIn(req.user, function (err) {
             if (err) return next(err);
             res.redirect(
-                getClientAddress() + `/dashboard?accessToken=${token}&refreshToken=${token}`
+                getClientAddress() + `/dash/home?accessToken=${token}&refreshToken=${token}`
             );
         });
     }
@@ -53,7 +53,7 @@ router.get(
         req.logIn(req.user, function (err) {
             if (err) return next(err);
             res.redirect(
-                getClientAddress() + `/dashboard?accessToken=${token}&refreshToken=${token}`
+                getClientAddress() + `/dash/home?accessToken=${token}&refreshToken=${token}`
             );
         });
     }
@@ -71,7 +71,7 @@ router.get(
         req.logIn(req.user, function (err) {
             if (err) return next(err);
             res.redirect(
-                getClientAddress() + `/dashboard?accessToken=${token}&refreshToken=${token}`
+                getClientAddress() + `/dash/home?accessToken=${token}&refreshToken=${token}`
             );
         });
     }
@@ -89,7 +89,7 @@ router.get(
         req.logIn(req.user, function (err) {
             if (err) return next(err);
             res.redirect(
-                getClientAddress() + `/dashboard?accessToken=${token}&refreshToken=${token}`
+                getClientAddress() + `/dash/home?accessToken=${token}&refreshToken=${token}`
             );
         });
     }

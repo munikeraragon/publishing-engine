@@ -1,34 +1,28 @@
+import Link from 'next/link';
+
 export interface SidebarTabProps {
-    onClick: () => void;
-    onKeyDown: () => void;
-    component: string;
+    path: string;
     label: string;
     icon: React.ReactElement;
 }
 
-export const SidebarTab: React.FC<SidebarTabProps> = ({
-    onClick,
-    onKeyDown,
-    component,
-    icon,
-    label
-}) => {
+export const SidebarTab: React.FC<SidebarTabProps> = ({ path, icon, label }) => {
     return (
-        <button
-            onClick={onClick}
-            onKeyDown={onKeyDown}
-            className={`w-full px-3 py-2 rounded-sm mb-0.5 last:mb-0 hover:bg-gray-200 ${
-                component === label && 'bg-gray-200'
-            }`}>
-            <div
-                className={`block text-gray-600 transition duration-150 ${
-                    component === label && 'text-indigo-500'
+        <Link href={`/dash/${label.replace(/\s+/g, '')}`}>
+            <button
+                className={`w-full px-3 py-2 rounded-lg mb-2 last:mb-0 hover:bg-gray-200 ${
+                    '/dash/' + label.replace(/\s+/g, '') === path && 'bg-gray-200'
                 }`}>
-                <div className='flex flex-grow'>
-                    {icon}
-                    <span className='text-sm font-medium'>{label}</span>
+                <div
+                    className={`block text-gray-600 transition duration-150 ${
+                        '/dash/' + label.replace(/\s+/g, '') === path && 'text-indigo-600'
+                    }`}>
+                    <div className='flex flex-grow'>
+                        {icon}
+                        <span className='text-sm font-medium'>{label}</span>
+                    </div>
                 </div>
-            </div>
-        </button>
+            </button>
+        </Link>
     );
 };

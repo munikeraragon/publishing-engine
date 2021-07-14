@@ -12,6 +12,9 @@ export class User {
     lastName!: string;
 
     @Field({ nullable: false })
+    userName!: string;
+
+    @Field({ nullable: false })
     email!: string;
 
     @Field({ nullable: false })
@@ -23,12 +26,36 @@ export class User {
     @Field({ nullable: false })
     picture!: string;
 
-    @Field({ nullable: false })
-    country!: string;
-
     @Field((type) => [String])
     roles!: string[];
 
     @Field()
     creationDate: Date;
+}
+
+@ObjectType()
+export class UserInput {
+    @Field({ nullable: false })
+    firstName!: string;
+
+    @Field({ nullable: false })
+    lastName!: string;
+
+    @Field({ nullable: false })
+    userName!: string;
+
+    @Field({ nullable: false })
+    email!: string;
+
+    @Field({ nullable: false })
+    locale!: string;
+
+    @Field({ nullable: false })
+    provider!: string;
+
+    @Field({ nullable: false })
+    picture!: string;
+
+    @Field((type) => [String])
+    role: string;
 }

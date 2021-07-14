@@ -1,13 +1,15 @@
-import { ContactPage } from '../modules/contact-page/ContactPage';
+import { LandingContactPage } from '../modules/landing-contact-page/LandingContactPage';
 import { LandingPage } from '../modules/landing-page/LandinPage';
-import { ArticlesPage } from '../modules/articles-page/ArticlesPage';
+import { LandingPostsPage } from '../modules/landing-posts-page/LandingPostsPage';
+import { Navbar } from '../ui/navbar/Navbar';
 
 const App: React.FC = () => {
     return (
         <>
+            <Navbar />
             <LandingPage />
-            <ArticlesPage />
-            <ContactPage />
+            <LandingPostsPage />
+            <LandingContactPage />
         </>
     );
 };

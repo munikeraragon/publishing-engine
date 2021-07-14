@@ -33,8 +33,6 @@ services:
       environment:
           MYSQL_ROOT_USER: "SuperAdmin"
           MYSQL_ROOT_PASSWORD: "SuperSecretPassword"
-      volumes:
-          - ./db:/bitnami/mariadb
  
     adminer:
         image: adminer

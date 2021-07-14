@@ -31,7 +31,8 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
                 {props.description && (
                     <p
                         data-aos='fade-right'
-                        className='mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
+                        className='mt-3 whitespace-pre-wrap text-gray-500 sm:mt-5
+                        sm:text-6xl sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
                         {props.description}
                     </p>
                 )}

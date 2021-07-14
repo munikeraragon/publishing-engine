@@ -2,15 +2,16 @@ import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../lib/apollo';
-import { Navbar } from '../ui/Navbar/Navbar';
 import AOS from 'aos';
 
 import 'aos/dist/aos.css';
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: any) {
     const apolloClient = useApollo(pageProps.initialApolloState);
+
+    const Layout = Component.layout || (({ children }: any) => <>{children}</>);
 
     useEffect(() => {
         AOS.init({
@@ -23,8 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     return (
         <ApolloProvider client={apolloClient}>
-            <Navbar />
-            <Component {...pageProps} />
+            <Layout>
+                <Component {...pageProps} />
+            </Layout>
         </ApolloProvider>
     );
 }
