@@ -45,7 +45,9 @@ const ImageUploader: React.FC = ({ children }) => {
 };
 
 const MainImage = () => {
-    const { imageId, setUploadImage, setMainImage } = useFormStore((state) => state);
+    const { imageId, setUploadImage, setMainImage, setMainImageUrl, mainImageUrl } = useFormStore(
+        (state) => state
+    );
     if (!imageId) return null;
 
     const { downloadMetadata } = useS3ImageDownload(imageId);
@@ -54,10 +56,17 @@ const MainImage = () => {
         setMainImage(imageId);
     }, []);
 
+    useEffect(() => {
+        if (downloadMetadata.imageUrl) {
+            setMainImageUrl(downloadMetadata.imageUrl);
+        }
+    }, [downloadMetadata]);
+
     return (
         <div className='flex items-center'>
+            {console.log(mainImageUrl)}
             <img
-                src={downloadMetadata?.imageUrl}
+                src={mainImageUrl}
                 className='object-cover mr-8'
                 style={{ width: 250, height: 105 }}
                 alt='Post cover image'

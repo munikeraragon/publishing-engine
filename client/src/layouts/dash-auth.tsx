@@ -11,7 +11,7 @@ export const DashboardLayout: React.FC = ({ children }) => {
 
     return (
         <WaitForAuth>
-            <div className='flex h-screen bg-gray-50 overflow-hidden'>
+            <div className='flex h-screen overflow-hidden'>
                 <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
                 <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
                     <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />

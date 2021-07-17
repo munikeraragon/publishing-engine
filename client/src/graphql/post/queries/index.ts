@@ -7,6 +7,7 @@ export const GetUserPosts = gql`
             title
             prettyTitle
             userName
+            userPicture
             description
             mainImageId
             wordsNumber
@@ -24,6 +25,7 @@ export const GetPostByUserNameAndTitle = gql`
             title
             prettyTitle
             userName
+            userPicture
             mainImageId
             imagesNumber
             paragraphsNumber

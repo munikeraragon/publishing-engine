@@ -5,6 +5,10 @@ export const CreatePost = gql`
         createPost(postInput: $postInput) {
             id
             title
+            userName
+            mainImageId
+            userPicture
+            prettyTitle
             imagesNumber
             paragraphsNumber
             wordsNumber
@@ -14,6 +18,7 @@ export const CreatePost = gql`
             }
             readingTime
             presignedUrl
+            creationDate
         }
     }
 `;

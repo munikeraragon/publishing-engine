@@ -21,3 +21,21 @@ a {
 * {
     box-sizing: border-box;
 }
+
+.wmde-markdown {
+    font-size: 1.25rem !important;
+    line-height: 1.75rem !important;
+}
+
+.w-md-editor-content {
+    height: 100% !important;
+}
+
+.w-md-editor {
+    box-shadow: none !important;
+    border: 0 !important;
+}
+
+.w-md-editor-text {
+    font-size: 1.2rem !important;
+}

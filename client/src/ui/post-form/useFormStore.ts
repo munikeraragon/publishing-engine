@@ -12,6 +12,8 @@ export interface FormState {
     setImageId: (_: number | null) => void;
     imagesIds: Set<number>;
     setImagesIds: (_: Set<number>) => void;
+    mainImageUrl: string
+    setMainImageUrl: (_:string) => void
     mainImage: number | null;
     setMainImage: (_: number | null) => void;
     uploadImage: boolean;
@@ -23,7 +25,7 @@ export interface FormState {
     description: string;
     setDescription: (_: string) => void;
 
-    mainBody: string;
+    mainBody: string ;
     setMainBody: (_: string) => void;
 }
 
@@ -35,6 +37,8 @@ export const useFormStore = create<FormState>((set) => ({
     setImageId: (arg: number | null) => set((state) => ({ imageId: arg })),
     mainImage: null,
     setMainImage: (arg: number | null) => set((state) => ({ mainImage: arg })),
+    mainImageUrl: '',
+    setMainImageUrl: (arg: string) => set((state) => ({ mainImageUrl: arg })),
     uploadImage: true,
     setUploadImage: (arg: boolean) => set((state) => ({ uploadImage: arg })),
     imagesIds: new Set(),

@@ -18,6 +18,9 @@ export class SignedPost {
     userName!: string;
 
     @Field({ nullable: false })
+    userPicture!: string;    
+
+    @Field({ nullable: false })
     title!: string;
 
     @Field({ nullable: false })
@@ -55,6 +58,9 @@ export class Post {
 
     @Field({ nullable: false })
     userName!: string;
+
+    @Field({ nullable: false })
+    userPicture!: string; 
 
     @Field({ nullable: false })
     title!: string;

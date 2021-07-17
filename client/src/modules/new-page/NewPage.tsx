@@ -1,8 +1,12 @@
-import { DashboardLayout } from '../../layouts/dash-auth';
+import { SingleAuthLayout } from '../../layouts/single-auth';
 import { PostForm } from '../../ui/post-form/PostForm';
 
 export const NewPostPage: React.FC = () => {
-    return <PostForm />;
+    return (
+        <div className='flex max-w-6xl mx-auto'>
+            <PostForm />
+        </div>
+    );
 };
 
-(NewPostPage as any).layout = DashboardLayout;
+(NewPostPage as any).layout = SingleAuthLayout;

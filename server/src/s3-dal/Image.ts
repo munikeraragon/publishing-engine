@@ -9,7 +9,7 @@ export class S3ImageService {
             Key: imageKey
         });
         const signedUrl = await getSignedUrl(s3Client, command, {
-            expiresIn: 100
+            expiresIn: 60 * 60 * 24
         });
         return signedUrl;
     }
@@ -20,7 +20,7 @@ export class S3ImageService {
             Key: imageKey
         });
         const signedUrl = await getSignedUrl(s3Client, command, {
-            expiresIn: 100
+            expiresIn: 60 * 60 * 24
         });
         return signedUrl;
     }

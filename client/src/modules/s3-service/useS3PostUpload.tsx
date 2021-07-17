@@ -47,6 +47,7 @@ export interface UploadPost {
     publish: boolean;
     mainImage: number;
     mainBody: string;
+    creationDate: string;
 }
 
 export const useS3PostUpload = () => {

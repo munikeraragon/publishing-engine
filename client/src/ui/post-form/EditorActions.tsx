@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { useS3PostUpload } from '../../modules/s3-service/useS3PostUpload';
 import { useFormStore } from './useFormStore';
 
@@ -12,6 +13,7 @@ export interface UploadPost {
     publish: boolean;
     mainImage: number;
     mainBody: string;
+    creationDate: string
 }
 
 const validData = (post: UploadPost) => {
@@ -28,12 +30,13 @@ export const EditorActions = () => {
             description: description,
             imagesNumber: imagesIds.size,
             imagesIds: [...imagesIds],
-            paragraphsNumber: 2,
-            wordsNumber: 323,
-            readingTime: 32,
+            paragraphsNumber: 0,
+            wordsNumber: title.length + mainBody.length,
+            readingTime: Math.round((title.length + mainBody.length) / 200),
             publish: false,
             mainImage: Number(mainImage),
-            mainBody: mainBody
+            mainBody: mainBody,
+            creationDate: moment().format("MMMM Do YYYY"),
         };
 
         if (validData(post)) {
@@ -48,7 +51,8 @@ export const EditorActions = () => {
                 readingTime: post.readingTime,
                 publish: post.publish,
                 mainImage: post.mainImage,
-                mainBody: post.mainBody
+                mainBody: post.mainBody,
+                creationDate: post.creationDate
             });
         }
     };

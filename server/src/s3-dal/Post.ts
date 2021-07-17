@@ -2,16 +2,6 @@ import { GetObjectCommand, CreateBucketCommand, PutObjectCommand } from '@aws-sd
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { s3Client } from './utils';
 
-/*
-const example_payload = {
-    title: '',
-    imagesNumber: 2,
-    imagesLabels: ['image1', 'Image2'],
-    paragraphsNumber: 5,
-    wordsNumber: 3211,
-    readingTime: 10
-};
-*/
 
 export class S3PostService {
     static async createUploadUrl(postKey: string) {
@@ -31,7 +21,7 @@ export class S3PostService {
             Key: postKey
         });
         const signedUrl = await getSignedUrl(s3Client, command, {
-            expiresIn: 100
+            expiresIn: 60 * 60 * 24
         });
         return signedUrl;
     }

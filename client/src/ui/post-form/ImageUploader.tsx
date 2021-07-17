@@ -14,8 +14,8 @@ const ImageIcon = () => (
 
 export const ImageUploader = () => {
     return (
-        <div className='bg-gray-100'>
-            <button className='flex hover:bg-gray-200 text-gray-800 font-semibold py-3 px-4 rounded'>
+        <div className=''>
+            <button className='flex hover:bg-gray-100 text-gray-800  rounded py-2 px-2'>
                 <ImageIcon />
                 Upload Image
             </button>

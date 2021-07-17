@@ -3,9 +3,13 @@ import { Preview } from './Preview';
 import { Form } from './Form';
 import { useFormStore } from './useFormStore';
 import { EditorActions } from './EditorActions';
+import { NewPreview } from './NewPreview';
+import { ActionCard } from '../ActionCard';
+import { useEffect } from 'react';
 
 export const PostForm: React.FC = () => {
-    const previewShowing = useFormStore((state) => state.previewShowing);
+    const { previewShowing, description, title, mainImageUrl } = useFormStore((state) => state);
+    
     return (
         <div className='py-2 flex flex-col px-8'>
             <div className='grid grid-cols-8'>
@@ -14,16 +18,53 @@ export const PostForm: React.FC = () => {
                 </div>
             </div>
 
-            <div className='flex-1 grid grid-cols-8 gap-x-8'>
-                <div className='col-span-5 flex flex-col'>
-                    {previewShowing ? <Preview /> : <Form />}
+            <div className='flex-1 grid grid-cols-12 gap-x-8'>
+                <div className='col-span-8 flex flex-col bg-white'>
+                    {previewShowing ? <NewPreview /> : <Form />}
                 </div>
 
-                <div className='col-span-3 flex'>
-                    Writing a Great Post Title Think of your post title as a super short (but
-                    compelling!) description — like an overview of the actual post in one short
-                    sentence. Use keywords where appropriate to help ensure people can find your
-                    post by search.
+                <div className='col-span-4 flex justify-center'>
+                    {previewShowing ? (
+                        <ActionCard
+                            className='h-96 w-80'
+                            src={mainImageUrl}
+                            title={title}
+                            description={description}
+                        />
+                    ) : (
+                        <div className=''>
+                            <h3>Editor Basics</h3>
+
+                            <p> Use Markdown to write and format posts.</p>
+                            <p> Commonly used syntax </p>
+
+                            <h2>Headers</h2>
+                            {'# This is an <h1> tag'}
+                            {'## This is an <h2> tag'}
+                            {'###### This is an <h6> tag'}
+
+                            <h2>Emphasis</h2>
+                            <h3>unorder</h3>
+                            {'* Item 1'}
+                            {'* Item 2'}
+                            {'* Item 2a'}
+                            {'* Item 2b'}
+                            <h3>order</h3>
+                            {'1. Item 1'}
+                            {'1. Item 3'}
+                            {'1. Item 3a'}
+                            {'1. Item 3b'}
+
+                            <h2>Images</h2>
+                            {'![GitHub Logo](/images/logo.png)'}
+                            {'Format: ![Alt Text](url)'}
+
+                            <h2>Links</h2>
+
+                            {'http://github.com - automatic!'}
+                            {'[GitHub](http://github.com)'}
+                        </div>
+                    )}
                 </div>
             </div>
 

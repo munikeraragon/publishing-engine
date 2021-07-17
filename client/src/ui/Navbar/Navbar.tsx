@@ -105,7 +105,7 @@ export const Navbar: React.FC = () => {
                                 <Link href='/'>
                                     <img
                                         className='h-8 w-auto sm:h-10'
-                                        src='https://ethereum.org/static/a110735dade3f354a46fc2446cd52476/1d713/eth-home-icon.png'
+                                        src='LogoSample.jpeg'
                                         alt=''
                                     />
                                 </Link>

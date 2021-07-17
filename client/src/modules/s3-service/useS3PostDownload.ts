@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useGetPostByUserNameAndTitleQuery } from '../../generated/apolloComponents';
+import { Post, useGetPostByUserNameAndTitleQuery } from '../../generated/apolloComponents';
 
 export interface DownloadMetadata {
-    data: string;
+    data: any;
     status: string;
     message: string;
 }
 
 export const useS3PostDownload = (userName: string, title: string) => {
-    const [downloadMetadata, setMetadata] = useState<DownloadMetadata | null>(null);
+    const [downloadMetadata, setMetadata] = useState<DownloadMetadata>({
+        data: null,
+        status: 'start',
+        message: ''
+    });
+
     const { data, loading, error } = useGetPostByUserNameAndTitleQuery({
         variables: {
             userName,
@@ -23,7 +28,7 @@ export const useS3PostDownload = (userName: string, title: string) => {
             })
                 .then(async (response) => {
                     const data = await response.json();
-                    setMetadata({ status: 'complete', data: data, message: '' });
+                    setMetadata({ status: 'complete', data: data, message: '' })
                 })
                 .catch((err) => {
                     console.log(err);

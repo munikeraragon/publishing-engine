@@ -86,6 +86,7 @@ export class PostService {
             .select({
                 id: 'Post.id',
                 userName: 'User.userName',
+                userPicture: 'User.picture',
                 title: 'Post.title',
                 description: 'Post.description',
                 prettyTitle: 'Post.prettyTitle',
@@ -111,6 +112,7 @@ export class PostService {
         return {
             id: postId,
             userName: postAndImages[0].userName,
+            userPicture: postAndImages[0].userPicture,
             title: postAndImages[0].title,
             description: postAndImages[0].description,
             prettyTitle: postAndImages[0].prettyTitle,
