@@ -1,6 +1,7 @@
 import { Knex } from 'knex';
 import { PostInput } from '../graphql/entities/Post';
 import { getKnex } from './utils';
+import { TagService } from './Tag';
 import _ from 'lodash';
 const knex: Knex = getKnex();
 
@@ -10,6 +11,7 @@ export class PostService {
             try {
                 const postId = await this._insertMetadata(trx, userId, objectKey, postInput);
                 await this._insertImagesIds(trx, postId, postInput.imagesIds);
+                await this._insertTags(trx, postId, postInput.tags);
                 return await this._findById(trx, postId);
             } catch (err) {
                 console.log(err);
@@ -68,8 +70,6 @@ export class PostService {
             .where({ 'User.id': userId })
             .select('Post.id');
 
-        console.log(postsIds);
-
         return await Promise.all(
             _.map(postsIds, async (post) => {
                 return await this._findById(trx, post.id);
@@ -78,9 +78,12 @@ export class PostService {
     }
 
     static async _findById(trx: Knex.Transaction, postId: number) {
+        console.log('finding');
         const postAndImages = await trx('Post')
             .leftJoin('PostImage', 'Post.id', 'PostImage.postId')
             .leftJoin('Image', 'Image.id', 'PostImage.imageId')
+            .leftJoin('PostTag', 'Post.id', 'PostTag.postId')
+            .leftJoin('Tag', 'Tag.id', 'PostTag.tagId')
             .leftJoin('User', 'User.id', 'Post.userId')
             .where({ 'Post.id': postId })
             .select({
@@ -88,6 +91,7 @@ export class PostService {
                 userName: 'User.userName',
                 userPicture: 'User.picture',
                 title: 'Post.title',
+                tagName: 'Tag.name',
                 description: 'Post.description',
                 prettyTitle: 'Post.prettyTitle',
                 mainImageId: 'Post.mainImageId',
@@ -102,10 +106,19 @@ export class PostService {
                 label: 'Image.label'
             });
 
+        console.log(postAndImages);
+
         const images = _.map(
             _.filter(postAndImages, (elem) => elem.imageId && elem.label),
             (elem: any) => {
                 return { id: elem.imageId, label: elem.label };
+            }
+        );
+
+        const tags = _.map(
+            _.filter(postAndImages, (elem) => elem.tagName),
+            (elem: any) => {
+                return elem.tagName;
             }
         );
 
@@ -124,7 +137,8 @@ export class PostService {
             likesNumber: postAndImages[0].likesNumber,
             creationDate: postAndImages[0].creationDate,
             objectKey: postAndImages[0].objectKey,
-            images: images
+            images: images,
+            tags: tags
         };
     }
 
@@ -157,5 +171,18 @@ export class PostService {
             imageId: id
         }));
         await trx('PostImage').insert(imagesToInsert);
+    }
+
+    static async _insertTags(trx: Knex.Transaction, postId: number, tags: string[]) {
+        if (tags.length === 0) return;
+
+        await Promise.all(
+            _.map(tags, async (name) => {
+                await trx('PostTag').insert({
+                    postId: postId,
+                    tagId: (await TagService.findOrCreate(name)).id
+                });
+            })
+        );
     }
 }

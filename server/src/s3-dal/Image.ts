@@ -25,6 +25,33 @@ export class S3ImageService {
         return signedUrl;
     }
 
+    static async uploadUserIcon(data: string, key: string) {
+        const command = new PutObjectCommand({
+            Bucket: 'aws-user-icon-uploads',
+            Key: key,
+            Body: 'data:image/svg+xml;base64,' + data
+        });
+        return s3Client.send(command);
+    }
+
+    static async downloadUserIcon(imageKey: string) {
+        const streamToString = (stream: any): any =>
+            new Promise((resolve, reject) => {
+                const chunks: any = [];
+                stream.on('data', (chunk: any) => chunks.push(chunk));
+                stream.on('error', reject);
+                stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')));
+            });
+
+        const command = new GetObjectCommand({
+            Bucket: 'aws-user-icon-uploads',
+            Key: imageKey
+        });
+        const data = await s3Client.send(command);
+        const bodyContents = await streamToString(data.Body);
+        return bodyContents;
+    }
+
     static async createBucket() {
         try {
             const articleImagesBucket = await s3Client.send(

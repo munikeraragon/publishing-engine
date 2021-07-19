@@ -84,13 +84,32 @@ Rollback migration
 docker exec server npx knex migrate:rollback
 ```
 
+Todo:
+Create Tags table
+Create Tags input
+Allow users the ability to add tags
+Create Loading Button when publishink article
+    - Redirect to article
+Create Loading Button when saving draft article
+Ability to delete article
+
+
+Create Follows table
+Allow uses to follow other users
+
+
+Refactor S3 services
+
+
+Create Home notification page
+
+
 Notes:
 Basic goals:
 
 I want to use this site to post articles and post projects.
 I want to be able to subscribe to other people.
-I want to be able to have a profile/portfolio page that people can
-see.
+I want to be able to have a profile/portfolio page that people can see.
 
 Strech goals:
-Platform to learn about coding as well as the best platform to participate in opwn source projetcs. People will be able to learn about the project and post things related to the project.
+Platform to learn about coding as well as the best platform to participate in open source projetcs. People will be able to learn about the project and post things related to the project.

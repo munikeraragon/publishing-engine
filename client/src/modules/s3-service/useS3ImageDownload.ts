@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useGetImageByIdQuery, useGetImageByIdLazyQuery } from '../../generated/apolloComponents';
+import { useGetImageByIdLazyQuery } from '../../generated/apolloComponents';
 
 export interface DownloadMetadata {
     imageUrl: string | null;

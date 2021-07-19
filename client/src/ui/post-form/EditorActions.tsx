@@ -13,7 +13,8 @@ export interface UploadPost {
     publish: boolean;
     mainImage: number;
     mainBody: string;
-    creationDate: string
+    tags: string[];
+    creationDate: string;
 }
 
 const validData = (post: UploadPost) => {
@@ -22,7 +23,9 @@ const validData = (post: UploadPost) => {
 
 export const EditorActions = () => {
     const { uploadPost } = useS3PostUpload();
-    const { mainImage, imagesIds, title, description, mainBody } = useFormStore((state) => state);
+    const { mainImage, imagesIds, title, description, mainBody, tagsString } = useFormStore(
+        (state) => state
+    );
 
     const handlePublish = async () => {
         const post = {
@@ -36,7 +39,11 @@ export const EditorActions = () => {
             publish: false,
             mainImage: Number(mainImage),
             mainBody: mainBody,
-            creationDate: moment().format("MMMM Do YYYY"),
+            tags: tagsString
+                .split(',')
+                .map((tag) => tag.trim())
+                .filter((tag) => tag),
+            creationDate: moment().format('MMMM Do YYYY')
         };
 
         if (validData(post)) {
@@ -52,6 +59,7 @@ export const EditorActions = () => {
                 publish: post.publish,
                 mainImage: post.mainImage,
                 mainBody: post.mainBody,
+                tags: post.tags,
                 creationDate: post.creationDate
             });
         }
@@ -59,6 +67,7 @@ export const EditorActions = () => {
 
     return (
         <div className='flex my-4'>
+            {console.log(tagsString)}
             <button
                 onClick={handlePublish}
                 className='bg-indigo-600 hover:bg-indigo-700 text-white

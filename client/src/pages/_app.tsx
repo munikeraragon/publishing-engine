@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import type { AppProps } from 'next/app';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../lib/apollo';
 import AOS from 'aos';

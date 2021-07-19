@@ -1,6 +1,9 @@
 import { Knex } from 'knex';
 import { User, UserInput } from '../graphql/entities/User';
 import { getKnex } from './utils';
+import { S3ImageService } from '../s3-dal/Image';
+import Identicon from 'identicon.js';
+import sha256 from 'crypto-js/sha256';
 
 const knex: Knex = getKnex();
 
@@ -14,6 +17,11 @@ export class UserService {
                 });
 
                 if (res.length === 0) {
+                    const hash = sha256(user.userName).toString();
+                    console.log(hash);
+                    const data = new Identicon(hash, { format: 'svg' }).toString();
+                    const result = await S3ImageService.uploadUserIcon(data, hash);
+                    console.log(result);
                     await trx('User').insert({
                         firstName: user.firstName,
                         lastName: user.lastName,

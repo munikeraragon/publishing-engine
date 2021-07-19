@@ -12,6 +12,7 @@ export interface SimplePost {
 }
 
 export const ContentPage: React.FC = () => {
+    const [showSkeleton, setShowSkeleton] = useState(true);
     const { data, loading, error } = useGetUserPostsQuery();
     const [posts, setPosts] = useState<SimplePost[]>([]);
 
@@ -31,6 +32,10 @@ export const ContentPage: React.FC = () => {
         }
     }, [loading, error]);
 
+    useEffect(() => {
+        setTimeout(() => setShowSkeleton(false), 1000);
+    }, []);
+
     return (
         <div className='min-h-full mx-8 my-4 w-full'>
             <div className='pb-8'>
@@ -41,11 +46,13 @@ export const ContentPage: React.FC = () => {
                 {posts.map((post, index) => (
                     <ActionCardWrapper
                         key={index}
-                        userName={post.userName}
                         imageId={post.imageId}
+                        userName={post.userName}
                         title={post.title}
                         prettyTitle={post.prettyTitle}
                         description={post.description}
+                        completed={0}
+                        showEskeleton={showSkeleton}
                     />
                 ))}
             </div>

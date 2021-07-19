@@ -16,10 +16,10 @@ module.exports = {
     },
     plugins: ['react', '@typescript-eslint'],
     rules: {
+        'no-use-before-define': [0],
+        '@typescript-eslint/no-use-before-define': [1],
         'react/react-in-jsx-scope': 'off',
-        'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-        'no-use-before-define': 'off',
-        '@typescript-eslint/no-use-before-define': ['error']
+        'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }]
     },
     overrides: [
         // This configuration will apply only to TypeScript files
@@ -41,6 +41,9 @@ module.exports = {
                 'plugin:prettier/recommended' // Prettier plugin
             ],
             rules: {
+                'no-use-before-define': [0],
+                '@typescript-eslint/no-use-before-define': [1],
+
                 // We will use TypeScript's types for component props instead
                 'react/prop-types': 'off',
 

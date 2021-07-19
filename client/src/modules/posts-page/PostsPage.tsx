@@ -1,5 +1,5 @@
 import { DashboardLayout } from '../../layouts/dash-auth';
-import { ActionCard } from '../../ui/ActionCard';
+import { ActionCard } from '../../ui/action-card/ActionCard';
 
 export const PostsPage: React.FC = () => {
     return (
@@ -14,6 +14,7 @@ export const PostsPage: React.FC = () => {
                     title='Https security with
                      Docker+LetsEncript+Nginx+React+ bExpress'
                     description=''
+                    completed={0}
                     className='mx-2'
                 />
 
@@ -21,12 +22,14 @@ export const PostsPage: React.FC = () => {
                     src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLdfqrJ9u1tl2XxjuuA74mJ1tLLqtRzSrfG89MG-kTxSGkORbGm-F_fOf4EJLrO6XbR-M&usqp=CAU'
                     title='Testing React Componnets with Jest and React Testing Library'
                     description=''
+                    completed={0}
                     className='mx-2'
                 />
                 <ActionCard
                     src='https://www.educative.io/cdn-cgi/image/f=auto,fit=cover,w=620/v2api/collection/10370001/6445473125629952/image/5769023684870144'
                     title='React Profiling'
                     description=''
+                    completed={0}
                     className='mx-2'
                 />
 
@@ -35,6 +38,7 @@ export const PostsPage: React.FC = () => {
                     title='React tailwind components'
                     description='Space, the final frontier. These are the voyages of the Starship
                 Enterprise. Its five-year mission: to explore strange new worlds.'
+                    completed={0}
                     className='mx-2'
                 />
                 <ActionCard
@@ -42,6 +46,7 @@ export const PostsPage: React.FC = () => {
                     title='Golang and Neo4j example'
                     description='Space, the final frontier. These are the voyages of the Starship
                 Enterprise. Its five-year mission: to explore strange new worlds.'
+                    completed={0}
                     className='mx-2'
                 />
                 <ActionCard
@@ -49,6 +54,7 @@ export const PostsPage: React.FC = () => {
                     title='Golang Profiling'
                     description='Space, the final frontier. These are the voyages of the Starship
                 Enterprise. Its five-year mission: to explore strange new worlds.'
+                    completed={0}
                     className='mx-2'
                 />
                 <ActionCard
@@ -56,6 +62,7 @@ export const PostsPage: React.FC = () => {
                     title='Google, Facebook, and Linkedin Authentication with React+Oauth+Express+Passport'
                     description='Space, the final frontier. These are the voyages of the Starship
                 Enterprise. Its five-year mission: to explore strange new worlds.'
+                    completed={0}
                     className='mx-2'
                 />
             </div>

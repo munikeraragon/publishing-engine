@@ -72,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
                     />
                     <path
                         className={`fill-current text-gray-400 ${
-                            router.pathname == '/dash/subscriptions' && 'text-indigo-300'
+                            router.pathname === '/dash/subscriptions' && 'text-indigo-300'
                         }`}
                         d='M12 6a3 3 0 110-6 3 3 0 010 6zm2 18h-4a1 1 0 01-1-1v-6H6v-6a3 3 0 013-3h6a3 3 0 013 3v6h-3v6a1 1 0 01-1 1z'
                     />
@@ -264,8 +264,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
                         components
                     </h3>
                     <ul className='mt-3'>
-                        {tabs.map((element: any) => (
+                        {tabs.map((element: any, index) => (
                             <SidebarTab
+                                key={index}
                                 label={element.label}
                                 icon={element.icon}
                                 path={router.pathname}

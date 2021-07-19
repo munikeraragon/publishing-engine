@@ -1,7 +1,7 @@
 import React from 'react';
 import { Story, Meta } from '@storybook/react';
 
-import { ActionCard, ActionCardProps } from '../ui/ActionCard';
+import { ActionCard, ActionCardProps } from '../ui/action-card/ActionCard';
 
 export default {
     title: 'Example/ActionCard',

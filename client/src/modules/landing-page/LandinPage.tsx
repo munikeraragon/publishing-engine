@@ -11,7 +11,6 @@ export interface LandingCardProps {
     hrefLink2?: string;
 }
 
-
 export const LandingPage: React.FC = () => {
     return (
         <div className='h-full'>

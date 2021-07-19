@@ -1,5 +1,5 @@
 export interface TagsProps {
-    tags: Tag[] | null;
+    tags: string[] | null;
     className?: string;
 }
 
@@ -12,16 +12,17 @@ export interface EskeletonProps {
     className?: string;
 }
 
+const colors = ['green', 'red', 'blue', 'indigo', 'gray'];
 export const Tags: React.FC<TagsProps> = ({ tags, className = '' }) => {
     if (!tags) return <TagsEskeleton className={className} />;
 
     return (
         <div className={`${className} flex`}>
-            {tags.map(({ label, color }, index) => (
+            {tags.map((tag, index) => (
                 <button
                     key={index}
-                    className={`text-sm mr-1 bg-${color}-300 py-0.5 px-2 font-medium rounded-md text-gray-800 align-middle`}>
-                    {label}
+                    className={`text-sm mr-1 bg-${colors[index]}-300 py-0.5 px-2 font-medium rounded-md text-gray-800 align-middle`}>
+                    {tag}
                 </button>
             ))}
         </div>

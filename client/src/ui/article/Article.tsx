@@ -1,8 +1,8 @@
-import { ArticleBody } from './ArticleBody';
+import { Body } from './Body';
 import { CoverImage } from './CoverImage';
 import { Metadata } from './Metadata';
 import { Title } from './Title';
-import { Tags, Tag } from './Tags';
+import { Tags } from './Tags';
 
 export interface ArticleProps {
     title: string | undefined;
@@ -13,7 +13,7 @@ export interface ArticleProps {
     readingTime: number | undefined;
     wordsNumber: number | undefined;
     articleBody: string | undefined;
-    tags: Tag[];
+    tags: string[];
     className?: string;
 }
 
@@ -42,7 +42,7 @@ export const Article: React.FC<ArticleProps> = ({
             />
             <Tags className='mt-3 mb-8' tags={tags} />
             <CoverImage alt='' src={coverImage} />
-            <ArticleBody articleBody={articleBody} className='my-4' />
+            <Body articleBody={articleBody} className='my-4' />
         </div>
     );
 };

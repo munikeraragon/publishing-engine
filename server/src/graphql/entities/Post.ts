@@ -12,22 +12,25 @@ export class ImageMapping {
 @ObjectType()
 export class SignedPost {
     @Field((type) => ID)
-    id: number;
+    id!: number;
 
     @Field({ nullable: false })
     userName!: string;
 
     @Field({ nullable: false })
-    userPicture!: string;    
+    userPicture!: string;
 
     @Field({ nullable: false })
     title!: string;
+
+    @Field((type) => [String])
+    tags!: string[];
 
     @Field({ nullable: false })
     prettyTitle!: string;
 
     @Field({ nullable: false })
-    mainImageId: number;
+    mainImageId!: number;
 
     @Field({ nullable: false })
     imagesNumber!: number;
@@ -54,16 +57,19 @@ export class SignedPost {
 @ObjectType()
 export class Post {
     @Field((type) => ID)
-    id: number;
+    id!: number;
 
     @Field({ nullable: false })
     userName!: string;
 
     @Field({ nullable: false })
-    userPicture!: string; 
+    userPicture!: string;
 
     @Field({ nullable: false })
     title!: string;
+
+    @Field((type) => [String])
+    tags!: string[];
 
     @Field({ nullable: false })
     prettyTitle!: string;
@@ -109,6 +115,9 @@ export class PostInput {
 
     @Field((type) => [Number])
     imagesIds!: number[];
+
+    @Field((type) => [String])
+    tags!: string[];
 
     @Field({ nullable: false })
     paragraphsNumber!: number;

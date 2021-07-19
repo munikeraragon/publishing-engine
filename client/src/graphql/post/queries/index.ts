@@ -25,6 +25,7 @@ export const GetPostByUserNameAndTitle = gql`
             title
             prettyTitle
             userName
+            tags
             userPicture
             mainImageId
             imagesNumber

@@ -2,7 +2,6 @@ import { GetObjectCommand, CreateBucketCommand, PutObjectCommand } from '@aws-sd
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { s3Client } from './utils';
 
-
 export class S3PostService {
     static async createUploadUrl(postKey: string) {
         const command = new PutObjectCommand({

@@ -3,6 +3,7 @@ import { Notifications } from './Notifications';
 import { Help } from './Help';
 import { UserMenu } from './UserMenu';
 import Link from 'next/link';
+import { useGetUserQuery } from '../../generated/apolloComponents';
 
 export interface HeaderProps {
     sidebarOpen: boolean;
@@ -10,6 +11,8 @@ export interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) => {
+    const { data } = useGetUserQuery();
+
     return (
         <header
             className='sticky top-0 border-b bg-white border-gray-200 z-10'
@@ -48,7 +51,7 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
                         <Help />
                         {/*  Divider */}
                         <hr className='w-px h-6 bg-gray-200 mx-3' />
-                        <UserMenu />
+                        <UserMenu userIcon={data?.getUser.userIcon} />
                     </div>
                 </div>
             </div>

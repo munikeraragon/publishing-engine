@@ -1,7 +1,11 @@
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 
-export const UserMenu: React.FC = () => {
+export interface UserMenuProps {
+    userIcon: string | undefined;
+}
+
+export const UserMenu: React.FC<UserMenuProps> = ({ userIcon }) => {
     return (
         <Popover className='relative inline-flex ml-3'>
             {({ open }) => (
@@ -9,7 +13,7 @@ export const UserMenu: React.FC = () => {
                     <Popover.Button className='inline-flex justify-center items-center group'>
                         <img
                             className='w-8 h-8 rounded-full'
-                            src='https://res.cloudinary.com/practicaldev/image/fetch/s--kbxWp7Zz--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/663339/3c72868d-d81d-44dc-b9e3-0a7b6ef74102.png'
+                            src={userIcon}
                             width='32'
                             height='32'
                             alt='User'

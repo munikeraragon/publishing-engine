@@ -3,13 +3,11 @@ import { Preview } from './Preview';
 import { Form } from './Form';
 import { useFormStore } from './useFormStore';
 import { EditorActions } from './EditorActions';
-import { NewPreview } from './NewPreview';
-import { ActionCard } from '../ActionCard';
-import { useEffect } from 'react';
+import { ActionCard } from '../action-card/ActionCard';
 
 export const PostForm: React.FC = () => {
     const { previewShowing, description, title, mainImageUrl } = useFormStore((state) => state);
-    
+
     return (
         <div className='py-2 flex flex-col px-8'>
             <div className='grid grid-cols-8'>
@@ -20,16 +18,17 @@ export const PostForm: React.FC = () => {
 
             <div className='flex-1 grid grid-cols-12 gap-x-8'>
                 <div className='col-span-8 flex flex-col bg-white'>
-                    {previewShowing ? <NewPreview /> : <Form />}
+                    {previewShowing ? <Preview /> : <Form />}
                 </div>
 
                 <div className='col-span-4 flex justify-center'>
                     {previewShowing ? (
                         <ActionCard
-                            className='h-96 w-80'
+                            className='h-96 w-80 mx-8'
                             src={mainImageUrl}
                             title={title}
                             description={description}
+                            completed={0}
                         />
                     ) : (
                         <div className=''>

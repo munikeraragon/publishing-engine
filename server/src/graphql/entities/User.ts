@@ -26,6 +26,9 @@ export class User {
     @Field({ nullable: false })
     picture!: string;
 
+    @Field({ nullable: false })
+    userIcon!: string;
+
     @Field((type) => [String])
     roles!: string[];
 

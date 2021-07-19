@@ -47,6 +47,7 @@ export interface UploadPost {
     publish: boolean;
     mainImage: number;
     mainBody: string;
+    tags: string[];
     creationDate: string;
 }
 
@@ -65,7 +66,8 @@ export const useS3PostUpload = () => {
                 paragraphsNumber: postInput.paragraphsNumber,
                 wordsNumber: postInput.wordsNumber,
                 readingTime: postInput.readingTime,
-                publish: postInput.publish
+                publish: postInput.publish,
+                tags: postInput.tags
             },
             createPost
         );

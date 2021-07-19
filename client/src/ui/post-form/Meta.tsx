@@ -1,15 +1,15 @@
 import { CoverImage } from './CoverImage';
-import { TagsField } from './TagsField';
 import { Title } from './Title';
 import { Description } from './Description';
+import { Tags } from './Tags';
 
 export const Meta = () => {
     return (
-        <div className=''>
+        <div>
             <CoverImage />
             <Title />
             <Description />
-            <TagsField />
+            <Tags />
         </div>
     );
 };

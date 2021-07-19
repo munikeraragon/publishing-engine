@@ -6,13 +6,13 @@ export interface EskeletonProps {
     className?: string;
 }
 
-export interface ArticleBodyProps {
+export interface BodyProps {
     articleBody: string | undefined;
     className?: string;
 }
 
-export const ArticleBody: React.FC<ArticleBodyProps> = ({ articleBody, className = '' }) => {
-    if (!articleBody) return <ArticleBodyEskeleton />;
+export const Body: React.FC<BodyProps> = ({ articleBody, className = '' }) => {
+    if (!articleBody) return <BodyEskeleton />;
 
     return (
         <div className={className}>
@@ -21,7 +21,7 @@ export const ArticleBody: React.FC<ArticleBodyProps> = ({ articleBody, className
     );
 };
 
-export const ArticleBodyEskeleton: React.FC<EskeletonProps> = ({ className = '' }) => {
+export const BodyEskeleton: React.FC<EskeletonProps> = ({ className = '' }) => {
     return (
         <div className={className}>
             <div className='border border-gray-200 shadow rounded-md p-4 mx-auto my-6 '>

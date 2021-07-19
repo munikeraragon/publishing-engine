@@ -16,7 +16,6 @@ export const AutoCompleteTextArea = () => {
                 onChange={(event) => {
                     setMainBody(event.target.value);
                 }}
-                autoFocus={true}
             />
         </div>
     );

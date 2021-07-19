@@ -1,7 +1,7 @@
 import { render, cleanup } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 
-import { ActionCard, ActionCardProps } from '../ui/ActionCard';
+import { ActionCard, ActionCardProps } from '../ui/action-card/ActionCard';
 
 const renderActionCard = (props: Partial<ActionCardProps> = {}) => {
     const defaultProps: ActionCardProps = {

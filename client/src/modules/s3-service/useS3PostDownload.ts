@@ -1,11 +1,22 @@
 import { useEffect, useState } from 'react';
-import { Post, useGetPostByUserNameAndTitleQuery } from '../../generated/apolloComponents';
+import { useGetPostByUserNameAndTitleQuery } from '../../generated/apolloComponents';
 
 export interface DownloadMetadata {
     data: any;
     status: string;
     message: string;
 }
+
+const mergeObjects = (primary: any, secondary: any) => {
+    console.log(primary);
+    console.log(secondary);
+    Object.keys(secondary).forEach((key) => {
+        if (!(key in primary)) {
+            primary[key] = secondary[key];
+        }
+    });
+    return primary;
+};
 
 export const useS3PostDownload = (userName: string, title: string) => {
     const [downloadMetadata, setMetadata] = useState<DownloadMetadata>({
@@ -23,12 +34,17 @@ export const useS3PostDownload = (userName: string, title: string) => {
 
     useEffect(() => {
         if (!loading && !error && data?.getPostByUserNameAndTitle) {
+            console.log(data.getPostByUserNameAndTitle);
             fetch(data.getPostByUserNameAndTitle.presignedUrl, {
                 method: 'GET'
             })
                 .then(async (response) => {
-                    const data = await response.json();
-                    setMetadata({ status: 'complete', data: data, message: '' })
+                    const post = await response.json();
+                    setMetadata({
+                        status: 'complete',
+                        data: mergeObjects(post, data.getPostByUserNameAndTitle),
+                        message: ''
+                    });
                 })
                 .catch((err) => {
                     console.log(err);

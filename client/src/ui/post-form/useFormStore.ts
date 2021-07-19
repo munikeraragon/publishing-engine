@@ -1,9 +1,11 @@
 import create from 'zustand';
+import { Tag } from '../article/Tags';
 
 export interface MainImage {
     id: number;
     presignedUrl: string;
 }
+
 export interface FormState {
     previewShowing: boolean;
     setPreviewShowing: (_: boolean) => void;
@@ -12,8 +14,8 @@ export interface FormState {
     setImageId: (_: number | null) => void;
     imagesIds: Set<number>;
     setImagesIds: (_: Set<number>) => void;
-    mainImageUrl: string
-    setMainImageUrl: (_:string) => void
+    mainImageUrl: string;
+    setMainImageUrl: (_: string) => void;
     mainImage: number | null;
     setMainImage: (_: number | null) => void;
     uploadImage: boolean;
@@ -22,34 +24,45 @@ export interface FormState {
     title: string;
     setTitle: (_: string) => void;
 
+    tagsString: string;
+    setTagsString: (_: string) => void;
+
+    tags: Tag[];
+    setTags: (_: Tag[]) => void;
+
     description: string;
     setDescription: (_: string) => void;
 
-    mainBody: string ;
+    mainBody: string;
     setMainBody: (_: string) => void;
 }
 
 export const useFormStore = create<FormState>((set) => ({
     previewShowing: false,
-    setPreviewShowing: (arg: boolean) => set((state) => ({ previewShowing: arg })),
+    setPreviewShowing: (arg: boolean) => set(() => ({ previewShowing: arg })),
 
     imageId: null,
-    setImageId: (arg: number | null) => set((state) => ({ imageId: arg })),
+    setImageId: (arg: number | null) => set(() => ({ imageId: arg })),
     mainImage: null,
-    setMainImage: (arg: number | null) => set((state) => ({ mainImage: arg })),
+    setMainImage: (arg: number | null) => set(() => ({ mainImage: arg })),
     mainImageUrl: '',
-    setMainImageUrl: (arg: string) => set((state) => ({ mainImageUrl: arg })),
+    setMainImageUrl: (arg: string) => set(() => ({ mainImageUrl: arg })),
     uploadImage: true,
-    setUploadImage: (arg: boolean) => set((state) => ({ uploadImage: arg })),
+    setUploadImage: (arg: boolean) => set(() => ({ uploadImage: arg })),
     imagesIds: new Set(),
-    setImagesIds: (arg: Set<number>) => set((state) => ({ imagesIds: arg })),
+    setImagesIds: (arg: Set<number>) => set(() => ({ imagesIds: arg })),
 
     title: '',
-    setTitle: (arg: string) => set((state) => ({ title: arg })),
+    setTitle: (arg: string) => set(() => ({ title: arg })),
+
+    tags: [],
+    setTags: (arg: Tag[]) => set(() => ({ tags: arg })),
+    tagsString: '',
+    setTagsString: (arg: string) => set(() => ({ tagsString: arg })),
 
     description: '',
-    setDescription: (arg: string) => set((state) => ({ description: arg })),
+    setDescription: (arg: string) => set(() => ({ description: arg })),
 
     mainBody: '',
-    setMainBody: (arg: string) => set((state) => ({ mainBody: arg }))
+    setMainBody: (arg: string) => set(() => ({ mainBody: arg }))
 }));
