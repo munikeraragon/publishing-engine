@@ -11,6 +11,7 @@ export async function up(knex: Knex): Promise<void> {
         t.string('provider', 255);
         t.string('picture', 255);
         t.string('role', 255);
+        t.string('userIcon', 1000);
         t.unique(['email', 'firstName']);
         t.timestamp('creationDate').defaultTo(knex.fn.now());
     });

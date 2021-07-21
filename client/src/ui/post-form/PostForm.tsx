@@ -3,13 +3,18 @@ import { Preview } from './Preview';
 import { Form } from './Form';
 import { useFormStore } from './useFormStore';
 import { EditorActions } from './EditorActions';
-import { ActionCard } from '../action-card/ActionCard';
+import { PostCard } from '../post-card/PostCard';
+import { useGetUserQuery } from '../../generated/apolloComponents';
+import moment from 'moment';
 
 export const PostForm: React.FC = () => {
-    const { previewShowing, description, title, mainImageUrl } = useFormStore((state) => state);
+    const { previewShowing, description, title, mainImageUrl, tagsString, mainBody } = useFormStore(
+        (state) => state
+    );
+    const user = useGetUserQuery().data?.getUser;
 
     return (
-        <div className='py-2 flex flex-col px-8'>
+        <div className='py-2 flex flex-col px-8 '>
             <div className='grid grid-cols-8'>
                 <div className='col-span-5'>
                     <Header />
@@ -17,18 +22,25 @@ export const PostForm: React.FC = () => {
             </div>
 
             <div className='flex-1 grid grid-cols-12 gap-x-8'>
-                <div className='col-span-8 flex flex-col bg-white'>
+                <div className='col-span-12 lg:col-span-8 flex flex-col bg-white '>
                     {previewShowing ? <Preview /> : <Form />}
                 </div>
 
-                <div className='col-span-4 flex justify-center'>
+                <div className='hidden col-span-4 lg:flex justify-center'>
                     {previewShowing ? (
-                        <ActionCard
-                            className='h-96 w-80 mx-8'
+                        <PostCard
+                            className='w-80 mx-8'
                             src={mainImageUrl}
                             title={title}
                             description={description}
-                            completed={0}
+                            userName={user?.userName}
+                            userIcon={user?.userIcon}
+                            tags={tagsString
+                                .split(',')
+                                .map((tag) => tag.trim())
+                                .filter((tag) => tag)}
+                            creationDate={moment().format('MMMM Do YYYY')}
+                            readingTime={Math.round(mainBody.split(' ').length / 250)}
                         />
                     ) : (
                         <div className=''>

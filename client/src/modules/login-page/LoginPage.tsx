@@ -92,7 +92,7 @@ export const LoginPage: React.FC<LoginPageProps> = () => {
     if (!tokensChecked) return null;
 
     return (
-        <div className='grid w-full h-full bg-gray-100'>
+        <div className='grid w-full h-full bg-gray-50'>
             <LoginCard buttons={buttons} privacyHref='' termsHref='' />
 
             <LoginFooter

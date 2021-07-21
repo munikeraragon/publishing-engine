@@ -10,7 +10,10 @@ import { UserService } from '../../sql-dal/User';
 export class PostResolver {
     @Authorized()
     @Query((returns) => SignedPost)
-    async getPostById(@Arg('postId') postId: number): Promise<SignedPost> {
+    async getPostById(
+        @CurrentUser() userId: number,
+        @Arg('postId') postId: number
+    ): Promise<SignedPost> {
         const post = await PostService.findById(postId);
         const presignedUrl = await S3PostService.createDownloadUrl(post.objectKey);
         return { ...post, presignedUrl };
@@ -46,12 +49,12 @@ export class PostResolver {
         @CurrentUser() userId: number,
         @Arg('postInput') postInput: PostInput
     ): Promise<SignedPost> {
-        const userName = (await UserService.findById(userId)).userName;
+        const { userName } = await UserService.findById(userId);
         const prettyTitle = postInput.title.toLowerCase().replace(/ /g, '-');
         const objectKey = `${userName}-${prettyTitle}`;
         const post = await PostService.findOrCreate(userId, postInput, objectKey);
-        const presignedUrl = await S3PostService.createUploadUrl(objectKey);
-        return { ...post, presignedUrl };
+        const presignedUrl = await S3PostService.createUploadUrl(objectKey);;
+        return { ...post, userName, presignedUrl};
     }
 
     @Query((returns) => SignedPost)

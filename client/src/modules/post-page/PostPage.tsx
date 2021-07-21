@@ -5,19 +5,17 @@ import { useS3PostDownload } from '../s3-service/useS3PostDownload';
 import { Article } from '../../ui/article/Article';
 import { Sidebar } from '../../ui/article/Sidebar';
 import { useS3ImageDownload } from '../s3-service/useS3ImageDownload';
-import { useGetUserQuery } from '../../generated/apolloComponents';
 import { ProfileCard } from '../../ui/LightProfileCard';
 
 export interface ValidPageProps {
     userName: string;
     title: string;
 }
+
 export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
     const [showSkeleton, setShowSkeleton] = useState(true);
     const postMetadata = useS3PostDownload(userName, title).downloadMetadata;
     const imageMetadata = useS3ImageDownload(postMetadata.data?.mainImageId).downloadMetadata;
-
-    const { data } = useGetUserQuery();
 
     useEffect(() => {
         setTimeout(() => setShowSkeleton(false), 1000);
@@ -25,24 +23,27 @@ export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
 
     return (
         <div className='flex max-w-7xl m-auto'>
-            <Sidebar />
+            <div className={'hidden md-flex'}>
+                <Sidebar />
+            </div>
+
             <div className='grid grid-cols-12 gap-4 flex-1'>
                 <Article
-                    title={showSkeleton ? undefined : postMetadata.data?.title}
-                    userIcon={showSkeleton ? undefined : data?.getUser.userIcon}
                     coverImage={showSkeleton ? null : imageMetadata.imageUrl}
-                    userName={showSkeleton ? undefined : data?.getUser.userName}
-                    creationDate={showSkeleton ? undefined : postMetadata.data?.creationDate}
-                    readingTime={showSkeleton ? undefined : postMetadata.data?.readingTime}
-                    wordsNumber={showSkeleton ? undefined : postMetadata.data?.wordsNumber}
-                    articleBody={showSkeleton ? undefined : postMetadata.data?.mainBody}
-                    tags={showSkeleton ? undefined : postMetadata.data?.tags}
-                    className='w-full col-span-8 max-w-3xl mt-8'
+                    title={showSkeleton ? undefined : postMetadata.data.title}
+                    userIcon={showSkeleton ? null : postMetadata.data.userIcon}
+                    userName={showSkeleton ? undefined : postMetadata.data.userName}
+                    creationDate={showSkeleton ? undefined : postMetadata.data.creationDate}
+                    readingTime={showSkeleton ? undefined : postMetadata.data.readingTime}
+                    wordsNumber={showSkeleton ? undefined : postMetadata.data.wordsNumber}
+                    articleBody={showSkeleton ? undefined : postMetadata.data.mainBody}
+                    tags={showSkeleton ? undefined : postMetadata.data.tags}
+                    className='w-full col-span-12 lg:col-span-8 max-w-3xl mt-8'
                 />
-                <div className='col-span-4'>
+                <div className='col-span-4 invisible lg:visible'>
                     <ProfileCard
-                        userName={showSkeleton ? undefined : data?.getUser.userName}
-                        userIcon={showSkeleton ? undefined : data?.getUser.userIcon}
+                        userName={showSkeleton ? undefined : postMetadata.data.userName}
+                        userIcon={showSkeleton ? undefined : postMetadata.data.userIcon}
                         className='col-span-4 w-80 mx-auto mt-12'
                     />
                 </div>

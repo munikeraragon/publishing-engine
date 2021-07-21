@@ -20,8 +20,7 @@ module.exports = {
             inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
             none: 'none',
             primary: 'rgb(10, 10, 10) 4px 4px 0px 0px',
-            magical:
-                'rgba(0, 0, 0, 0.02) 0px 30px 30px, rgba(0, 0, 0, 0.03) 0px 0px 8px, rgba(0, 0, 0, 0.05) 0px 1px 0px'
+            magical: '0 .125rem .625rem rgba(90,97,105,.12)'
         }
     },
     variants: {

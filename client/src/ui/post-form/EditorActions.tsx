@@ -1,6 +1,8 @@
-import moment from 'moment';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { useS3PostUpload } from '../../modules/s3-service/useS3PostUpload';
 import { useFormStore } from './useFormStore';
+import moment from 'moment';
 
 export interface UploadPost {
     title: string;
@@ -22,10 +24,24 @@ const validData = (post: UploadPost) => {
 };
 
 export const EditorActions = () => {
-    const { uploadPost } = useS3PostUpload();
-    const { mainImage, imagesIds, title, description, mainBody, tagsString } = useFormStore(
-        (state) => state
-    );
+    const router = useRouter();
+    const { uploadPost, metadata } = useS3PostUpload();
+    const {
+        mainImage,
+        imagesIds,
+        title,
+        description,
+        mainBody,
+        tagsString,
+        publishing,
+        setPublishing
+    } = useFormStore((state) => state);
+
+    useEffect(() => {
+        if (metadata?.status === 'complete') {
+            router.push(`/post/${metadata.data.userName}/${metadata.data.prettyTitle}`);
+        }
+    }, [metadata]);
 
     const handlePublish = async () => {
         const post = {
@@ -34,8 +50,8 @@ export const EditorActions = () => {
             imagesNumber: imagesIds.size,
             imagesIds: [...imagesIds],
             paragraphsNumber: 0,
-            wordsNumber: title.length + mainBody.length,
-            readingTime: Math.round((title.length + mainBody.length) / 200),
+            wordsNumber: Math.round(mainBody.split(' ').length + title.split(' ').length),
+            readingTime: Math.round(mainBody.split(' ').length / 250),
             publish: false,
             mainImage: Number(mainImage),
             mainBody: mainBody,
@@ -47,6 +63,7 @@ export const EditorActions = () => {
         };
 
         if (validData(post)) {
+            setPublishing(true);
             await uploadPost({
                 title: post.title,
                 description: post.description,
@@ -66,17 +83,17 @@ export const EditorActions = () => {
     };
 
     return (
-        <div className='flex my-4'>
-            {console.log(tagsString)}
+        <div className='flex py-4'>
             <button
                 onClick={handlePublish}
-                className='bg-indigo-600 hover:bg-indigo-700 text-white
-             font-medium py-2 px-4 rounded-md mr-2'>
-                Publish
+                className={`${publishing ? 'opacity-60' : ''}
+                bg-indigo-600 hover:bg-indigo-700 text-white
+                font-medium py-2 px-4 rounded-md mr-2`}>
+                {publishing ? 'Publishing...' : 'Publish'}
             </button>
             <button
                 className='bg-gray-300 hover:bg-gray-400 text-gray-800
-             font-medium  rounded-md  py-2 px-4'>
+                font-medium  rounded-md  py-2 px-4'>
                 Save draft
             </button>
         </div>

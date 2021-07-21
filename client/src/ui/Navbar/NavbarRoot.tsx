@@ -22,7 +22,10 @@ const NavbarRoot: FC = ({ children }) => {
     }, [hasScrolled]);
 
     return (
-        <div className={`transition-all duration-150' ${hasScrolled ? 'shadow-magical' : ''}`}>
+        <div
+            className={`transition-all duration-150' ${
+                hasScrolled ? 'shadow-magical border-b border-gray-200' : ''
+            }`}>
             {children}
         </div>
     );

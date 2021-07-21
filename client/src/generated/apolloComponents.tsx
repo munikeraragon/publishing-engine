@@ -78,6 +78,7 @@ export type Post = {
     __typename?: 'Post';
     id: Scalars['ID'];
     userName: Scalars['String'];
+    userIcon: Scalars['String'];
     userPicture: Scalars['String'];
     title: Scalars['String'];
     tags: Array<Scalars['String']>;
@@ -135,6 +136,7 @@ export type SignedPost = {
     __typename?: 'SignedPost';
     id: Scalars['ID'];
     userName: Scalars['String'];
+    userIcon: Scalars['String'];
     userPicture: Scalars['String'];
     title: Scalars['String'];
     tags: Array<Scalars['String']>;
@@ -221,6 +223,8 @@ export type GetUserPostsQuery = { __typename?: 'Query' } & {
             | 'title'
             | 'prettyTitle'
             | 'userName'
+            | 'userIcon'
+            | 'tags'
             | 'userPicture'
             | 'description'
             | 'mainImageId'
@@ -249,6 +253,7 @@ export type GetPostByUserNameAndTitleQuery = { __typename?: 'Query' } & {
         | 'mainImageId'
         | 'imagesNumber'
         | 'paragraphsNumber'
+        | 'userIcon'
         | 'wordsNumber'
         | 'presignedUrl'
         | 'readingTime'
@@ -471,6 +476,8 @@ export const GetUserPostsDocument = gql`
             title
             prettyTitle
             userName
+            userIcon
+            tags
             userPicture
             description
             mainImageId
@@ -533,6 +540,7 @@ export const GetPostByUserNameAndTitleDocument = gql`
             mainImageId
             imagesNumber
             paragraphsNumber
+            userIcon
             wordsNumber
             presignedUrl
             images {

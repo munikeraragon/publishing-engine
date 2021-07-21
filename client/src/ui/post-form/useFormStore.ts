@@ -1,4 +1,5 @@
 import create from 'zustand';
+import { useGetUserQuery, User } from '../../generated/apolloComponents';
 import { Tag } from '../article/Tags';
 
 export interface MainImage {
@@ -35,6 +36,9 @@ export interface FormState {
 
     mainBody: string;
     setMainBody: (_: string) => void;
+
+    publishing: boolean;
+    setPublishing: (_: boolean) => void;
 }
 
 export const useFormStore = create<FormState>((set) => ({
@@ -64,5 +68,8 @@ export const useFormStore = create<FormState>((set) => ({
     setDescription: (arg: string) => set(() => ({ description: arg })),
 
     mainBody: '',
-    setMainBody: (arg: string) => set(() => ({ mainBody: arg }))
+    setMainBody: (arg: string) => set(() => ({ mainBody: arg })),
+
+    publishing: false,
+    setPublishing: (arg: boolean) => set(() => ({ publishing: arg }))
 }));

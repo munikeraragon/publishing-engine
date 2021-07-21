@@ -34,7 +34,7 @@ export const useS3ImageDownload = (imageId: number | undefined) => {
                 imageUrl: data.getImageById.presignedUrl
             });
         }
-    }, [loading, error]);
+    }, [loading, error, data]);
 
     return { downloadMetadata };
 };

@@ -42,7 +42,9 @@ export const LoginCard: React.FC<LoginCardProps> = ({
             <div className='flex flex-col gap-5'>
                 {buttons.map((b: LoginCardButton, index: number) => (
                     <a href={b.href} key={index}>
-                        <div className='flex justify-center py-3 bg-indigo-500 hover:bg-gray-700 text-white rounded-md mt-2'>
+                        <div
+                            className='flex justify-center py-3 bg-indigo-500 hover:bg-gray-700
+                         text-white rounded-md mt-2'>
                             {b.icon}
                             <span className='ml-2 font-bold'>{b.label}</span>
                         </div>

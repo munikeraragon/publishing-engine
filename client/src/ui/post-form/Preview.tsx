@@ -19,8 +19,8 @@ export const Preview = () => {
                 coverImage={mainImageUrl}
                 userName={data?.getUser.userName}
                 creationDate={moment().format('MMM Do, YY')}
-                readingTime={4}
-                wordsNumber={2}
+                readingTime={Math.round(mainBody.split(' ').length / 250)}
+                wordsNumber={mainBody.split(' ').length}
                 articleBody={mainBody}
             />
         </div>

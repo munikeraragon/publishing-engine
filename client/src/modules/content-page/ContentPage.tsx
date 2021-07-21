@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { DashboardLayout } from '../../layouts/dash-auth';
 import { useGetUserPostsQuery } from '../../generated/apolloComponents';
-import { ActionCardWrapper } from '../../ui/wrappers/ActionCardWrapper';
+import { PostCardWrapper } from '../../ui/wrappers/PostCardWrapper';
+import moment from 'moment';
 
 export interface SimplePost {
     userName: string;
@@ -9,6 +10,10 @@ export interface SimplePost {
     title: string;
     prettyTitle: string;
     description: string;
+    creationDate: string;
+    userIcon: string;
+    tags: string[];
+    readingTime: number;
 }
 
 export const ContentPage: React.FC = () => {
@@ -25,7 +30,11 @@ export const ContentPage: React.FC = () => {
                         imageId: elem.mainImageId,
                         title: elem.title,
                         prettyTitle: elem.prettyTitle,
-                        description: elem.description
+                        description: elem.description,
+                        creationDate: moment(Number(elem.creationDate)).format('MMMM Do YYYY'),
+                        readingTime: elem.readingTime,
+                        userIcon: elem.userIcon,
+                        tags: elem.tags
                     };
                 })
             );
@@ -44,14 +53,17 @@ export const ContentPage: React.FC = () => {
 
             <div className='m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {posts.map((post, index) => (
-                    <ActionCardWrapper
+                    <PostCardWrapper
                         key={index}
                         imageId={post.imageId}
                         userName={post.userName}
                         title={post.title}
                         prettyTitle={post.prettyTitle}
                         description={post.description}
-                        completed={0}
+                        creationDate={post.creationDate}
+                        readingTime={post.readingTime}
+                        userIcon={post.userIcon}
+                        tags={post.tags}
                         showEskeleton={showSkeleton}
                     />
                 ))}

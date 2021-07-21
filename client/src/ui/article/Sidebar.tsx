@@ -1,6 +1,10 @@
-export const Sidebar = () => {
+export interface SidebarProps {
+    className?: string;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
     return (
-        <div className='flex w-20 justify-center mt-12 ml-2 mr-6 text-gray-600'>
+        <div className={`${className} flex w-20 justify-center mt-12 ml-2 mr-6 text-gray-600`}>
             <div className='fixed'>
                 <div className='flex flex-col text-sm'>
                     <button className='flex flex-col mb-6 items-center'>

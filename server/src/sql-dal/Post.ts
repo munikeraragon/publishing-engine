@@ -78,7 +78,6 @@ export class PostService {
     }
 
     static async _findById(trx: Knex.Transaction, postId: number) {
-        console.log('finding');
         const postAndImages = await trx('Post')
             .leftJoin('PostImage', 'Post.id', 'PostImage.postId')
             .leftJoin('Image', 'Image.id', 'PostImage.imageId')
@@ -89,6 +88,7 @@ export class PostService {
             .select({
                 id: 'Post.id',
                 userName: 'User.userName',
+                userIcon: 'User.userIcon',
                 userPicture: 'User.picture',
                 title: 'Post.title',
                 tagName: 'Tag.name',
@@ -125,6 +125,7 @@ export class PostService {
         return {
             id: postId,
             userName: postAndImages[0].userName,
+            userIcon: postAndImages[0].userIcon,
             userPicture: postAndImages[0].userPicture,
             title: postAndImages[0].title,
             description: postAndImages[0].description,

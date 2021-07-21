@@ -1,7 +1,6 @@
 import { Knex } from 'knex';
 import { User, UserInput } from '../graphql/entities/User';
 import { getKnex } from './utils';
-import { S3ImageService } from '../s3-dal/Image';
 import Identicon from 'identicon.js';
 import sha256 from 'crypto-js/sha256';
 
@@ -17,11 +16,9 @@ export class UserService {
                 });
 
                 if (res.length === 0) {
-                    const hash = sha256(user.userName).toString();
-                    console.log(hash);
-                    const data = new Identicon(hash, { format: 'svg' }).toString();
-                    const result = await S3ImageService.uploadUserIcon(data, hash);
-                    console.log(result);
+                    const userIconhash = sha256(user.userName).toString();
+                    const userIcon = 'data:image/svg+xml;base64,' + new Identicon(userIconhash, { format: 'svg' }).toString();
+
                     await trx('User').insert({
                         firstName: user.firstName,
                         lastName: user.lastName,
@@ -30,6 +27,7 @@ export class UserService {
                         locale: user.locale,
                         provider: user.provider,
                         picture: user.picture,
+                        userIcon: userIcon,
                         role: user.role
                     });
                     res = await trx('User').where({
@@ -53,6 +51,21 @@ export class UserService {
                     id: userId
                 });
                 return res[0];
+            } catch (err) {
+                console.log(err);
+                return null;
+            }
+        });
+    }
+
+    static async findByUserName(userName: string): Promise<User> {
+        return knex.transaction(async (trx) => {
+            try {
+                return (
+                    await trx('User').where({
+                        id: userName
+                    })
+                )[0];
             } catch (err) {
                 console.log(err);
                 return null;

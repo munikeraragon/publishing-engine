@@ -30,7 +30,7 @@ const generatePost = async (
 };
 
 export interface UploadMetadata {
-    postId: number;
+    data: any;
     status: string;
     message: string;
 }
@@ -50,6 +50,15 @@ export interface UploadPost {
     tags: string[];
     creationDate: string;
 }
+
+const mergeObjects = (primary: any, secondary: any) => {
+    Object.keys(secondary).forEach((key) => {
+        if (!(key in primary)) {
+            primary[key] = secondary[key];
+        }
+    });
+    return primary;
+};
 
 export const useS3PostUpload = () => {
     const [createPost] = useCreatePostMutation();
@@ -78,7 +87,11 @@ export const useS3PostUpload = () => {
         })
             .then((response) => {
                 console.log(response);
-                setMetadata({ postId: Number(postMetadata.id), status: 'complete', message: '' });
+                setMetadata({
+                    data: mergeObjects(postInput, postMetadata),
+                    status: 'complete',
+                    message: ''
+                });
             })
             .catch((err) => {
                 console.log(err);

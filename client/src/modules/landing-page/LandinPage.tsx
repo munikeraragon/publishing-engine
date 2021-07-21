@@ -17,7 +17,7 @@ export const LandingPage: React.FC = () => {
             <div className='h-full max-w-7xl m-auto grid grid-cols-1 lg:grid-cols-2 gap-4 pt-16 pb-8'>
                 <LandingCard
                     primaryHeader='Welcome to Codegrow!'
-                    secondaryHeader="Let's start coding"
+                    secondaryHeader='Start your coding journey'
                     description={`The ultimate resource to learn about tech.\nFind Opensource pojects and join their community.`}
                     linkLabel1='See Projects'
                     linkHref1='/dash/projects'

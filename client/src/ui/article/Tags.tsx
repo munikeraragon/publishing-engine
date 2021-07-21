@@ -1,5 +1,6 @@
 export interface TagsProps {
     tags: string[] | null;
+    size?: 'sm' | 'md' | 'lg';
     className?: string;
 }
 
@@ -13,7 +14,13 @@ export interface EskeletonProps {
 }
 
 const colors = ['green', 'red', 'blue', 'indigo', 'gray'];
-export const Tags: React.FC<TagsProps> = ({ tags, className = '' }) => {
+const tagSize = {
+    sm: 'text-xs',
+    md: 'text-sm',
+    lg: 'text-md'
+};
+
+export const Tags: React.FC<TagsProps> = ({ tags, size = 'md', className = '' }) => {
     if (!tags) return <TagsEskeleton className={className} />;
 
     return (
@@ -21,7 +28,8 @@ export const Tags: React.FC<TagsProps> = ({ tags, className = '' }) => {
             {tags.map((tag, index) => (
                 <button
                     key={index}
-                    className={`text-sm mr-1 bg-${colors[index]}-300 py-0.5 px-2 font-medium rounded-md text-gray-800 align-middle`}>
+                    className={`${tagSize[size]} inline-flex mr-1 leading-4 bg-${colors[index]}-100 px-2.5 py-0.5
+                    font-medium rounded-full text-gray-800 align-middle`}>
                     {tag}
                 </button>
             ))}

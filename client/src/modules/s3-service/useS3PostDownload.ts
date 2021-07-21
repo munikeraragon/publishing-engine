@@ -8,8 +8,6 @@ export interface DownloadMetadata {
 }
 
 const mergeObjects = (primary: any, secondary: any) => {
-    console.log(primary);
-    console.log(secondary);
     Object.keys(secondary).forEach((key) => {
         if (!(key in primary)) {
             primary[key] = secondary[key];

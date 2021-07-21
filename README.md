@@ -85,13 +85,12 @@ docker exec server npx knex migrate:rollback
 ```
 
 Todo:
-Create Tags table
-Create Tags input
-Allow users the ability to add tags
-Create Loading Button when publishink article
-    - Redirect to article
+Fetch all latest post in home page
+Fetch all top posts in landing page
+Add home button in navbar
 Create Loading Button when saving draft article
 Ability to delete article
+
 
 
 Create Follows table
