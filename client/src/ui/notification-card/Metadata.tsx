@@ -7,6 +7,9 @@ export interface MetaDataProps {
     userName: string | undefined;
     creationDate: string | undefined;
     readingTime: number | undefined;
+    reactions: number | undefined;
+    comments: number | undefined;
+    tags: string[] | null;
     className?: string;
 }
 
@@ -20,6 +23,9 @@ export const Metadata: React.FC<MetaDataProps> = ({
     userName,
     creationDate,
     readingTime,
+    tags,
+    reactions,
+    comments,
     className = ''
 }) => {
     if (!userIcon && !userName && !creationDate && !readingTime)
@@ -30,28 +36,26 @@ export const Metadata: React.FC<MetaDataProps> = ({
             <div className='flex items-center justify-start my-2'>
                 <img
                     className='inline-block h-8 w-8 rounded-full'
-                    src={
-                        'data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc2NCcgaGVpZ2h0PSc2NCcgc3R5bGU9J2JhY2tncm91bmQtY29sb3I6cmdiYSgyNDAsMjQwLDI0MCwxKTsnPjxnIHN0eWxlPSdmaWxsOnJnYmEoNTAsMzgsMjE3LDEpOyBzdHJva2U6cmdiYSg1MCwzOCwyMTcsMSk7IHN0cm9rZS13aWR0aDowLjMyOyc+PHJlY3QgIHg9JzI3JyB5PSc3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMjcnIHk9JzI3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMTcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nMzcnIHk9JzQ3JyB3aWR0aD0nMTAnIGhlaWdodD0nMTAnLz48cmVjdCAgeD0nNycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjxyZWN0ICB4PSc0NycgeT0nMzcnIHdpZHRoPScxMCcgaGVpZ2h0PScxMCcvPjwvZz48L3N2Zz4='
-                    }
+                    src={userIcon}
                     alt=''
                 />
-                <div className='flex flex-col ml-3 text-sm font-medium leading-5'>
+                <div className='flex flex-col ml-2 text-sm font-medium leading-5'>
                     <p className='text-gray-900'>{userName}</p>
                     <p className='text-gray-500 text-xs'>
                         {creationDate}
-                        <span className='hidden mx-2 sm:inline'>·</span>
-                        <span className='block sm:inline'>{readingTime} min read</span>
+                        <span className='mx-2'>·</span>
+                        {readingTime} min read
                     </p>
                 </div>
             </div>
 
-            <Title title={title} />
+            <Title title={title} className='lg:ml-10' />
 
-            <Tags tags={['code', 'dev', 'nginx']} size='sm' className='ml-8 my-4' />
+            <Tags tags={tags} size='sm' className='lg:ml-10 my-4' />
 
-            <div className='flex ml-8 mt-8'>
-                <button className='flex items-center text-sm'>
-                    <span className='px-2 hover:bg-purple-200 rounded-full'>
+            <div className='flex lg:ml-5 mt-4'>
+                <button className='flex justify-items-center text-sm hover:bg-gray-50 px-4 py-2 rounded-md'>
+                    <span className='px-2 rounded-full'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             className='h-5 w-5'
@@ -66,11 +70,12 @@ export const Metadata: React.FC<MetaDataProps> = ({
                             />
                         </svg>
                     </span>
-                    <span>54 reactions</span>
+                    <span>{reactions}</span>
+                    <span className='hidden md:flex ml-1'>reactions</span>
                 </button>
 
-                <button className='flex justify-items-center text-sm'>
-                    <span className='px-2 hover:bg-purple-200 rounded-full'>
+                <button className='flex justify-items-center text-sm hover:bg-gray-50 px-4 py-2 rounded-md'>
+                    <span className='px-2 rounded-full'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             className='h-5 w-5'
@@ -85,7 +90,8 @@ export const Metadata: React.FC<MetaDataProps> = ({
                             />
                         </svg>
                     </span>
-                    <span>32 comments</span>
+                    <span>{comments}</span>
+                    <span className='hidden md:flex ml-1'>comments</span>
                 </button>
             </div>
         </div>

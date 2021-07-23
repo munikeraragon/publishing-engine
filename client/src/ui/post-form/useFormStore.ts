@@ -1,5 +1,4 @@
 import create from 'zustand';
-import { useGetUserQuery, User } from '../../generated/apolloComponents';
 import { Tag } from '../article/Tags';
 
 export interface MainImage {

@@ -17,7 +17,7 @@ export interface SimplePost {
 }
 
 export const ContentPage: React.FC = () => {
-    const [showSkeleton, setShowSkeleton] = useState(true);
+    const [showSkeleton, setShowSkeleton] = useState(false);
     const { data, loading, error } = useGetUserPostsQuery();
     const [posts, setPosts] = useState<SimplePost[]>([]);
 
@@ -65,6 +65,7 @@ export const ContentPage: React.FC = () => {
                         userIcon={post.userIcon}
                         tags={post.tags}
                         showEskeleton={showSkeleton}
+                        className="border border-gray-200"
                     />
                 ))}
             </div>

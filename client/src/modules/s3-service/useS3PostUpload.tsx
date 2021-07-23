@@ -39,10 +39,10 @@ export interface UploadPost {
     title: string;
     description: string;
     mainImageId: number;
-    imagesNumber: number;
+    images: number;
     imagesIds: number[];
-    paragraphsNumber: number;
-    wordsNumber: number;
+    paragraphs: number;
+    words: number;
     readingTime: number;
     publish: boolean;
     mainImage: number;
@@ -70,10 +70,10 @@ export const useS3PostUpload = () => {
                 title: postInput.title,
                 description: postInput.description,
                 mainImageId: postInput.mainImageId,
-                imagesNumber: postInput.imagesNumber,
+                images: postInput.images,
                 imagesIds: postInput.imagesIds,
-                paragraphsNumber: postInput.paragraphsNumber,
-                wordsNumber: postInput.wordsNumber,
+                paragraphs: postInput.paragraphs,
+                words: postInput.words,
                 readingTime: postInput.readingTime,
                 publish: postInput.publish,
                 tags: postInput.tags

@@ -10,36 +10,151 @@ query {
   }
 }
 
-mutation {
-  createContactMessage(contactMessageInput: {
-    firstName: "m",
-    lastName: "m",
-    email: "m",
-    company: "m",
-    phone: "m",
-    message: "m",
-    country: "m"
-  })
+query {
+  getImageById(imageId: 1) {
+    id
+    label
+    presignedUrl
+  }
+}
+
+query {
+  getUserPosts {
+    id
+    userName
+    title
+    prettyTitle
+    mainImageId
+    images
+    paragraphs
+    words
+    tags
+    imagesMapping {
+      id
+      label
+    }
+    readingTime
+  }
+}
+
+query {
+  getPostById(postId: 1) {
+    id
+    userName
+    title
+    prettyTitle
+    mainImageId
+    images
+    paragraphs
+    wordsNumber
+    tags
+    presignedUrl
+    imagesMapping {
+      id
+      label
+    }
+    readingTime
+  }
+}
+
+query {
+  getPostByUserNameAndTitle(userName: "munikeraragon", title: "km;l") {
+    id
+    title
+    prettyTitle
+    userName
+    userPicture
+    mainImageId
+    images
+    paragraphs
+    words
+    presignedUrl
+    imagesMapping {
+      id
+      label
+    }
+    readingTime
+  }
 }
 
 mutation {
-  createArticle(articleInput: {
-  	title: "example title"
-    imagesNumber: 10,
-    imagesLabels: ["label1", "label2"],
-    paragraphsNumber: 2,
-    wordsNumber: 323,
-    readingTime: 32
-  }) {
+  createContactMessage(
+    contactMessageInput: {
+      firstName: "m"
+      lastName: "m"
+      email: "m"
+      company: "m"
+      phone: "m"
+      message: "m"
+      country: "m"
+    }
+  )
+}
+
+mutation {
+  createArticle(
+    articleInput: {
+      title: "example title"
+      images: 10
+      imagesLabels: ["label1", "label2"]
+      paragraphs: 2
+      words: 323
+      readingTime: 32
+    }
+  ) {
     id
     title
     presignedUrl
     imagesPresignedUrl {
-      label, presignedUrl
+      label
+      presignedUrl
     }
-    imagesNumber
-    paragraphsNumber
-    wordsNumber
+    images
+    paragraphs
+    words
     readingTime
+  }
+}
+
+mutation {
+  createImage(imageInput: { label: "new Icdwc e" }) {
+    id
+    label
+    presignedUrl
+  }
+}
+
+mutation {
+  createPost(
+    postInput: {
+      title: "thi hbhs jbjb jl ibkndasdsai"
+      description: "this is the description"
+      mainImageId: 1
+      images: 10
+      imagesIds: [1]
+      tags: ["c", "d"]
+      paragraphs: 2
+      words: 323
+      readingTime: 32
+      publish: false
+    }
+  ) {
+    id
+    title
+    userName
+    userPicture
+    prettyTitle
+    images
+    tags
+    paragraphs
+    creationDate
+    mainImageId
+    words
+    imagesMapping {
+      id
+      label
+    }
+    readingTime
+    presignedUrl
   }
 }

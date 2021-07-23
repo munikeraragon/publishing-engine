@@ -1,8 +1,11 @@
 export interface SidebarProps {
+    reactions: number;
+    comments: number;
+    saved: number;
     className?: string;
 }
 
-export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
+export const Sidebar: React.FC<SidebarProps> = ({ className, reactions, comments, saved }) => {
     return (
         <div className={`${className} flex w-20 justify-center mt-12 ml-2 mr-6 text-gray-600`}>
             <div className='fixed'>
@@ -23,7 +26,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
                                 />
                             </svg>
                         </span>
-                        <span>54</span>
+                        <span>{reactions}</span>
                     </button>
 
                     <button className='flex flex-col mb-6 items-center'>
@@ -44,7 +47,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
                                 </svg>
                             </button>
                         </span>
-                        <span>12</span>
+                        <span>{comments}</span>
                     </button>
 
                     <button className='flex flex-col mb-6 items-center'>
@@ -63,7 +66,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ className }) => {
                                 />
                             </svg>
                         </span>
-                        <span>32</span>
+                        <span>{saved}</span>
                     </button>
 
                     <button className='flex flex-col mb-6 items-center'>

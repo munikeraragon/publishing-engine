@@ -7,10 +7,10 @@ import moment from 'moment';
 export interface UploadPost {
     title: string;
     description: string;
-    imagesNumber: number;
+    images: number;
     imagesIds: number[];
-    paragraphsNumber: number;
-    wordsNumber: number;
+    paragraphs: number;
+    words: number;
     readingTime: number;
     publish: boolean;
     mainImage: number;
@@ -47,10 +47,10 @@ export const EditorActions = () => {
         const post = {
             title: title,
             description: description,
-            imagesNumber: imagesIds.size,
+            images: imagesIds.size,
             imagesIds: [...imagesIds],
-            paragraphsNumber: 0,
-            wordsNumber: Math.round(mainBody.split(' ').length + title.split(' ').length),
+            paragraphs: 0,
+            words: Math.round(mainBody.split(' ').length + title.split(' ').length),
             readingTime: Math.round(mainBody.split(' ').length / 250),
             publish: false,
             mainImage: Number(mainImage),
@@ -68,10 +68,10 @@ export const EditorActions = () => {
                 title: post.title,
                 description: post.description,
                 mainImageId: post.mainImage,
-                imagesNumber: post.imagesNumber,
+                images: post.images,
                 imagesIds: post.imagesIds,
-                paragraphsNumber: post.paragraphsNumber,
-                wordsNumber: post.paragraphsNumber,
+                paragraphs: post.paragraphs,
+                words: post.words,
                 readingTime: post.readingTime,
                 publish: post.publish,
                 mainImage: post.mainImage,

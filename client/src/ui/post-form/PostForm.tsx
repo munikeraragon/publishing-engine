@@ -29,7 +29,7 @@ export const PostForm: React.FC = () => {
                 <div className='hidden col-span-4 lg:flex justify-center'>
                     {previewShowing ? (
                         <PostCard
-                            className='w-80 mx-8'
+                            className='w-96 mx-4 border border-gray-200'
                             src={mainImageUrl}
                             title={title}
                             description={description}

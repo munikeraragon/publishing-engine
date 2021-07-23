@@ -5,6 +5,7 @@ import { Post, PostInput, SignedPost } from '../entities/Post';
 import { PostService } from '../../sql-dal/Post';
 import { S3PostService } from '../../s3-dal/Post';
 import { UserService } from '../../sql-dal/User';
+import { SearchInput } from '../entities/Search';
 
 @Resolver()
 export class PostResolver {
@@ -25,10 +26,9 @@ export class PostResolver {
         return await PostService.findUserPosts(userId);
     }
 
-    @Authorized()
-    @Query((returns) => User)
-    async getAllPosts(@CurrentUser() userId: number): Promise<string> {
-        return '';
+    @Query((returns) => [Post])
+    async search(@Arg('searchInput') searchInput: SearchInput): Promise<Post[]> {
+        return await PostService.search(searchInput);
     }
 
     @Authorized()
@@ -53,8 +53,8 @@ export class PostResolver {
         const prettyTitle = postInput.title.toLowerCase().replace(/ /g, '-');
         const objectKey = `${userName}-${prettyTitle}`;
         const post = await PostService.findOrCreate(userId, postInput, objectKey);
-        const presignedUrl = await S3PostService.createUploadUrl(objectKey);;
-        return { ...post, userName, presignedUrl};
+        const presignedUrl = await S3PostService.createUploadUrl(objectKey);
+        return { ...post, userName, presignedUrl };
     }
 
     @Query((returns) => SignedPost)

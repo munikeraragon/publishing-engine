@@ -1,10 +1,10 @@
 module.exports = {
     purge: [
-        // './src/**/*.{ts,tsx,js,jsx}'
-        './src/pages/**/*.{js,ts,jsx,tsx}',
-        './src/modules/**/*.{js,ts,jsx,tsx}',
-        './src/ui/**/*.{js,ts,jsx,tsx}',
-        './src/stories/**/*.{js,ts,jsx,tsx}'
+        './src/**/*.{ts,tsx,js,jsx}'
+        //'./src/pages/**/*.{js,ts,jsx,tsx}',
+        //'./src/modules/**/*.{js,ts,jsx,tsx}',
+        //'./src/ui/**/*.{js,ts,jsx,tsx}',
+        //'./src/stories/**/*.{js,ts,jsx,tsx}',
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {

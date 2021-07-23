@@ -41,17 +41,24 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
 
                     {/* Header: Right side */}
                     <div className='flex items-center'>
-                        <Link href='/dash/new'>
-                            <button className='bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md mr-2'>
-                                Create new
-                            </button>
-                        </Link>
+                        <span className='lg:flex hidden'>
+                            <Link href='/dash/new'>
+                                <button
+                                    className='bg-indigo-600 hover:bg-indigo-700 text-white
+                             font-medium py-2 px-4 rounded-md mr-2'>
+                                    Create new
+                                </button>
+                            </Link>
+                        </span>
                         <SearchModal />
                         <Notifications />
                         <Help />
                         {/*  Divider */}
                         <hr className='w-px h-6 bg-gray-200 mx-3' />
-                        <UserMenu userIcon={data?.getUser.userIcon} />
+                        <UserMenu
+                            userIcon={data?.getUser.userIcon}
+                            userName={data?.getUser.userName}
+                        />
                     </div>
                 </div>
             </div>

@@ -10,11 +10,16 @@ export interface EskeletonProps {
 export const CoverImage: React.FC<CoverImageProps> = ({ alt, src }) => {
     if (!src) return <CoverImageEskeleton />;
     return (
-        <img
-            alt={alt}
-            className='object-cover w-full block bg-cover bg-no-repeat bg-center'
-            src={src}
-            style={{ maxHeight: 360 }}
+        <a
+            style={{
+                backgroundImage: `url("${src}")`,
+                display: 'block',
+                width: '100%',
+                height: 'auto',
+                paddingBottom: '42%',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center'
+            }}
         />
     );
 };

@@ -36,7 +36,10 @@ export const Notifications: React.FC = () => {
                         leave='transition ease-in duration-75'
                         leaveFrom='transform opacity-100 scale-100'
                         leaveTo='transform opacity-0 scale-95'>
-                        <Popover.Panel className='origin-top-right z-10 absolute top-full right-0 w-80 bg-white border border-gray-200 py-1.5 rounded shadow-lg overflow-hidden mt-1'>
+                        <Popover.Panel
+                            className='origin-top-right z-10 absolute top-full md:right-0 -right-28
+                            w-80 bg-white border border-gray-200 py-1.5 rounded shadow-lg
+                            overflow-hidden mt-1'>
                             <div className='text-xs font-semibold text-gray-400 uppercase pt-1.5 pb-2 px-4'>
                                 Notifications
                             </div>

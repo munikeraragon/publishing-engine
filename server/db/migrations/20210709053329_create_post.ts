@@ -10,12 +10,12 @@ export async function up(knex: Knex): Promise<void> {
             t.string('title', 255);
             t.string('prettyTitle', 255);
             t.string('description', 255);
-            t.integer('imagesNumber');
-            t.integer('paragraphsNumber');
-            t.integer('wordsNumber');
+            t.integer('images');
+            t.integer('paragraphs');
+            t.integer('words');
             t.integer('readingTime');
-            t.integer('likesNumber').defaultTo(0);
-            t.integer('commentsNumber').defaultTo(0);
+            t.integer('reactions').defaultTo(0);
+            t.integer('comments').defaultTo(0);
             t.boolean('publish').defaultTo(false);
             t.timestamp('creationDate').defaultTo(knex.fn.now());
             t.unique(['userId', 'title']);

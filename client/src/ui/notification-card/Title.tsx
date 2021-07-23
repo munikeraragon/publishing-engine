@@ -12,7 +12,7 @@ export const Title: React.FC<TitleProps> = ({ title, className = '' }) => {
 
     return (
         <div className={className}>
-            <h1 className='text-2xl font-bold ml-8'>{title}</h1>
+            <h1 className='text-lg md:text-2xl font-bold'>{title}</h1>
         </div>
     );
 };

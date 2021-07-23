@@ -85,10 +85,12 @@ export type Post = {
     prettyTitle: Scalars['String'];
     description: Scalars['String'];
     mainImageId: Scalars['Float'];
-    imagesNumber: Scalars['Float'];
-    paragraphsNumber: Scalars['Float'];
-    wordsNumber: Scalars['Float'];
-    images: Array<ImageMapping>;
+    images: Scalars['Float'];
+    paragraphs: Scalars['Float'];
+    reactions: Scalars['Float'];
+    comments: Scalars['Float'];
+    words: Scalars['Float'];
+    imagesMapping: Array<ImageMapping>;
     readingTime: Scalars['Float'];
     creationDate: Scalars['String'];
 };
@@ -97,11 +99,11 @@ export type PostInput = {
     title: Scalars['String'];
     mainImageId: Scalars['Float'];
     description: Scalars['String'];
-    imagesNumber: Scalars['Float'];
+    images: Scalars['Float'];
     imagesIds: Array<Scalars['Float']>;
     tags: Array<Scalars['String']>;
-    paragraphsNumber: Scalars['Float'];
-    wordsNumber: Scalars['Float'];
+    paragraphs: Scalars['Float'];
+    words: Scalars['Float'];
     readingTime: Scalars['Float'];
     publish: Scalars['Boolean'];
 };
@@ -110,7 +112,7 @@ export type Query = {
     __typename?: 'Query';
     getPostById: SignedPost;
     getUserPosts: Array<Post>;
-    getAllPosts: User;
+    search: Array<Post>;
     deletePost: User;
     updatePost: User;
     getPostByUserNameAndTitle: SignedPost;
@@ -123,6 +125,10 @@ export type QueryGetPostByIdArgs = {
     postId: Scalars['Float'];
 };
 
+export type QuerySearchArgs = {
+    searchInput: SearchInput;
+};
+
 export type QueryGetPostByUserNameAndTitleArgs = {
     title: Scalars['String'];
     userName: Scalars['String'];
@@ -130,6 +136,15 @@ export type QueryGetPostByUserNameAndTitleArgs = {
 
 export type QueryGetImageByIdArgs = {
     imageId: Scalars['Float'];
+};
+
+export type SearchInput = {
+    pageSize: Scalars['Float'];
+    page: Scalars['Float'];
+    sortBy: Scalars['String'];
+    sortDirection: Scalars['String'];
+    startDate: Scalars['String'];
+    endDate: Scalars['String'];
 };
 
 export type SignedPost = {
@@ -142,11 +157,13 @@ export type SignedPost = {
     tags: Array<Scalars['String']>;
     prettyTitle: Scalars['String'];
     mainImageId: Scalars['Float'];
-    imagesNumber: Scalars['Float'];
-    paragraphsNumber: Scalars['Float'];
-    wordsNumber: Scalars['Float'];
-    images: Array<ImageMapping>;
+    images: Scalars['Float'];
+    paragraphs: Scalars['Float'];
+    words: Scalars['Float'];
+    imagesMapping: Array<ImageMapping>;
     readingTime: Scalars['Float'];
+    reactions: Scalars['Float'];
+    comments: Scalars['Float'];
     creationDate: Scalars['String'];
     presignedUrl: Scalars['String'];
 };
@@ -204,13 +221,17 @@ export type CreatePostMutation = { __typename?: 'Mutation' } & {
         | 'mainImageId'
         | 'userPicture'
         | 'prettyTitle'
-        | 'imagesNumber'
-        | 'paragraphsNumber'
-        | 'wordsNumber'
+        | 'images'
+        | 'paragraphs'
+        | 'words'
         | 'readingTime'
         | 'presignedUrl'
         | 'creationDate'
-    > & { images: Array<{ __typename?: 'ImageMapping' } & Pick<ImageMapping, 'id' | 'label'>> };
+    > & {
+            imagesMapping: Array<
+                { __typename?: 'ImageMapping' } & Pick<ImageMapping, 'id' | 'label'>
+            >;
+        };
 };
 
 export type GetUserPostsQueryVariables = Exact<{ [key: string]: never }>;
@@ -228,8 +249,10 @@ export type GetUserPostsQuery = { __typename?: 'Query' } & {
             | 'userPicture'
             | 'description'
             | 'mainImageId'
-            | 'wordsNumber'
-            | 'paragraphsNumber'
+            | 'comments'
+            | 'reactions'
+            | 'words'
+            | 'paragraphs'
             | 'readingTime'
             | 'creationDate'
         >
@@ -251,13 +274,44 @@ export type GetPostByUserNameAndTitleQuery = { __typename?: 'Query' } & {
         | 'tags'
         | 'userPicture'
         | 'mainImageId'
-        | 'imagesNumber'
-        | 'paragraphsNumber'
+        | 'images'
+        | 'paragraphs'
         | 'userIcon'
-        | 'wordsNumber'
+        | 'words'
+        | 'comments'
+        | 'reactions'
         | 'presignedUrl'
         | 'readingTime'
-    > & { images: Array<{ __typename?: 'ImageMapping' } & Pick<ImageMapping, 'id' | 'label'>> };
+    > & {
+            imagesMapping: Array<
+                { __typename?: 'ImageMapping' } & Pick<ImageMapping, 'id' | 'label'>
+            >;
+        };
+};
+
+export type SearchQueryVariables = Exact<{
+    searchInput: SearchInput;
+}>;
+
+export type SearchQuery = { __typename?: 'Query' } & {
+    search: Array<
+        { __typename?: 'Post' } & Pick<
+            Post,
+            | 'id'
+            | 'title'
+            | 'prettyTitle'
+            | 'tags'
+            | 'userName'
+            | 'description'
+            | 'userPicture'
+            | 'userIcon'
+            | 'reactions'
+            | 'comments'
+            | 'mainImageId'
+            | 'readingTime'
+            | 'creationDate'
+        >
+    >;
 };
 
 export type GetUserQueryVariables = Exact<{ [key: string]: never }>;
@@ -419,10 +473,10 @@ export const CreatePostDocument = gql`
             mainImageId
             userPicture
             prettyTitle
-            imagesNumber
-            paragraphsNumber
-            wordsNumber
-            images {
+            images
+            paragraphs
+            words
+            imagesMapping {
                 id
                 label
             }
@@ -481,8 +535,10 @@ export const GetUserPostsDocument = gql`
             userPicture
             description
             mainImageId
-            wordsNumber
-            paragraphsNumber
+            comments
+            reactions
+            words
+            paragraphs
             readingTime
             creationDate
         }
@@ -538,12 +594,14 @@ export const GetPostByUserNameAndTitleDocument = gql`
             tags
             userPicture
             mainImageId
-            imagesNumber
-            paragraphsNumber
+            images
+            paragraphs
             userIcon
-            wordsNumber
+            words
+            comments
+            reactions
             presignedUrl
-            images {
+            imagesMapping {
                 id
                 label
             }
@@ -603,6 +661,57 @@ export type GetPostByUserNameAndTitleQueryResult = Apollo.QueryResult<
     GetPostByUserNameAndTitleQuery,
     GetPostByUserNameAndTitleQueryVariables
 >;
+export const SearchDocument = gql`
+    query Search($searchInput: SearchInput!) {
+        search(searchInput: $searchInput) {
+            id
+            title
+            prettyTitle
+            tags
+            userName
+            description
+            userPicture
+            userIcon
+            reactions
+            comments
+            mainImageId
+            readingTime
+            creationDate
+        }
+    }
+`;
+
+/**
+ * __useSearchQuery__
+ *
+ * To run a query within a React component, call `useSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchQuery({
+ *   variables: {
+ *      searchInput: // value for 'searchInput'
+ *   },
+ * });
+ */
+export function useSearchQuery(
+    baseOptions: Apollo.QueryHookOptions<SearchQuery, SearchQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<SearchQuery, SearchQueryVariables>(SearchDocument, options);
+}
+export function useSearchLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<SearchQuery, SearchQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<SearchQuery, SearchQueryVariables>(SearchDocument, options);
+}
+export type SearchQueryHookResult = ReturnType<typeof useSearchQuery>;
+export type SearchLazyQueryHookResult = ReturnType<typeof useSearchLazyQuery>;
+export type SearchQueryResult = Apollo.QueryResult<SearchQuery, SearchQueryVariables>;
 export const GetUserDocument = gql`
     query GetUser {
         getUser {

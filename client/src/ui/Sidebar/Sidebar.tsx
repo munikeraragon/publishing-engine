@@ -62,7 +62,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
         }
     ];
 
-    const tabsToImplement = [
+    /* const tabsToImplement = [
         {
             label: 'home',
             icon: (
@@ -264,11 +264,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
                 </svg>
             )
         }
-    ];
+    ]; */
 
     return (
         <div
-            className='lg:w-64 z-20'
+            className='md:w-64 z-20'
             style={{
                 boxShadow:
                     '0 .125rem 9.375rem rgba(90,97,105,.1),0 .25rem .5rem rgba(90,97,105,.12),0 .9375rem 1.375rem rgba(90,97,105,.1),0 .4375rem 2.1875rem rgba(165,182,201,.1)'
@@ -283,9 +283,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
 
             {/* Sidebar */}
             <div
-                className={`absolute z-40 left-0 top-0 lg:static lg:left-auto
-                 lg:top-auto lg:translate-x-0 transform h-screen overflow-y-scroll
-                  lg:overflow-y-auto no-scrollbar w-64 flex-shrink-0 bg-white
+                className={`absolute z-40 left-0 top-0 md:static md:left-auto
+                 md:top-auto md:translate-x-0 transform h-screen overflow-y-scroll
+                  md:overflow-y-auto no-scrollbar w-64 flex-shrink-0 bg-white
                 py-4 transition-transform duration-200 ease-in-out ${
                     open ? 'translate-x-0' : '-translate-x-64'
                 }`}>

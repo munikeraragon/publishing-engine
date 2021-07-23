@@ -30,12 +30,12 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ userIcon, userName, cl
 
             <div className='mb-2'>
                 <h3 className='text-sm text-gray-500 font-medium'>Work</h3>
-                <p>Technical Director at Valtech </p>
+                <p>--------------------------</p>
             </div>
 
             <div className='mb-2'>
                 <h3 className='text-sm text-gray-500 font-medium'>Location</h3>
-                <p>Copenhagen</p>
+                <p>------------</p>
             </div>
 
             <div className='mb-2'>

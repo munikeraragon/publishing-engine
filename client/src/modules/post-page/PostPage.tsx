@@ -23,11 +23,15 @@ export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
 
     return (
         <div className='flex max-w-7xl m-auto'>
-            <div className={'hidden md-flex'}>
-                <Sidebar />
+            <div className='lg:flex hidden'>
+                <Sidebar
+                    comments={postMetadata.data?.comments}
+                    reactions={postMetadata.data?.reactions}
+                    saved={0}
+                />
             </div>
 
-            <div className='grid grid-cols-12 gap-4 flex-1'>
+            <div className='grid grid-cols-12 gap-4 flex-1 mx-4 lg:mx-0'>
                 <Article
                     coverImage={showSkeleton ? null : imageMetadata.imageUrl}
                     title={showSkeleton ? undefined : postMetadata.data.title}

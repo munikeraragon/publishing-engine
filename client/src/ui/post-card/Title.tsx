@@ -12,9 +12,7 @@ export const Title: React.FC<TitleProps> = ({ title, className = '' }) => {
 
     return (
         <span className='block hover:underline'>
-            <h3 className='mt-2 text-lg font-semibold leading-7 text-gray-900 md:text-xl'>
-                {title}
-            </h3>
+            <h3 className='text-lg font-semibold leading-7 text-gray-900 md:text-xl'>{title}</h3>
         </span>
     );
 };

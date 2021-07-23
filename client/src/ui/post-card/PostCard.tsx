@@ -10,8 +10,8 @@ export interface PostCardProps {
     description: string | undefined;
     userName: string | undefined;
     userIcon: string | undefined;
-    creationDate: string;
-    readingTime: number;
+    creationDate: string | undefined;
+    readingTime: number | undefined;
     tags: string[];
     className?: string;
 }
@@ -29,11 +29,11 @@ export const PostCard: React.FC<PostCardProps> = ({
 }) => {
     return (
         <div
-            className={`${className} flex flex-col overflow-hidden rounded-lg shadow-lg
-            transition transform hover:-translate-y-1.5 hover:shadow-2xl`}
+            className={`${className} flex flex-col overflow-hidden rounded-lg
+            transition transform hover:-translate-y-1.5`}
             style={{ height: 480 }}>
             <div className='flex-shrink-0'>
-                <CoverImage src={src} alt='post cover image' />
+                <CoverImage src={src} alt='post cover' />
             </div>
 
             <div className='flex flex-col justify-between flex-1 p-6 bg-white'>

@@ -9,10 +9,10 @@ export const CreatePost = gql`
             mainImageId
             userPicture
             prettyTitle
-            imagesNumber
-            paragraphsNumber
-            wordsNumber
-            images {
+            images
+            paragraphs
+            words
+            imagesMapping {
                 id
                 label
             }

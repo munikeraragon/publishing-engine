@@ -12,8 +12,10 @@ export const GetUserPosts = gql`
             userPicture
             description
             mainImageId
-            wordsNumber
-            paragraphsNumber
+            comments
+            reactions
+            words
+            paragraphs
             readingTime
             creationDate
         }
@@ -30,12 +32,14 @@ export const GetPostByUserNameAndTitle = gql`
             tags
             userPicture
             mainImageId
-            imagesNumber
-            paragraphsNumber
+            images
+            paragraphs
             userIcon
-            wordsNumber
+            words
+            comments
+            reactions
             presignedUrl
-            images {
+            imagesMapping {
                 id
                 label
             }

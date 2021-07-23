@@ -11,11 +11,11 @@ export const DashboardLayout: React.FC = ({ children }) => {
 
     return (
         <WaitForAuth>
-            <div className='flex h-screen overflow-hidden'>
+            <div className='flex h-screen overflow-hidden bg-gray-50'>
                 <Sidebar open={sidebarOpen} setOpen={setSidebarOpen} />
                 <div className='relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden'>
                     <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-                    <main className='h-full flex'>{children}</main>
+                    <main className='h-full flex overflow-y-scroll'>{children}</main>
                 </div>
             </div>
         </WaitForAuth>

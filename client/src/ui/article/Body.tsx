@@ -16,7 +16,7 @@ export const Body: React.FC<BodyProps> = ({ articleBody, className = '' }) => {
 
     return (
         <div className={className}>
-            <MDEditor.Markdown source={articleBody} className='py-4 text-xl' />
+            <MDEditor.Markdown source={articleBody} className='py-4' />
         </div>
     );
 };

@@ -36,19 +36,25 @@ export class SignedPost {
     mainImageId!: number;
 
     @Field({ nullable: false })
-    imagesNumber!: number;
+    images!: number;
 
     @Field({ nullable: false })
-    paragraphsNumber!: number;
+    paragraphs!: number;
 
     @Field({ nullable: false })
-    wordsNumber!: number;
+    words!: number;
 
     @Field((type) => [ImageMapping])
-    images!: ImageMapping[];
+    imagesMapping!: ImageMapping[];
 
     @Field({ nullable: false })
     readingTime!: number;
+
+    @Field({ nullable: false })
+    reactions!: number;
+
+    @Field({ nullable: false })
+    comments!: number;
 
     @Field({ nullable: false })
     creationDate!: string;
@@ -87,16 +93,22 @@ export class Post {
     mainImageId: number;
 
     @Field({ nullable: false })
-    imagesNumber!: number;
+    images!: number;
 
     @Field({ nullable: false })
-    paragraphsNumber!: number;
+    paragraphs!: number;
 
     @Field({ nullable: false })
-    wordsNumber!: number;
+    reactions!: number;
+
+    @Field({ nullable: false })
+    comments!: number;
+
+    @Field({ nullable: false })
+    words!: number;
 
     @Field((type) => [ImageMapping])
-    images!: ImageMapping[];
+    imagesMapping!: ImageMapping[];
 
     @Field({ nullable: false })
     readingTime!: number;
@@ -117,7 +129,7 @@ export class PostInput {
     description!: string;
 
     @Field({ nullable: false })
-    imagesNumber!: number;
+    images!: number;
 
     @Field((type) => [Number])
     imagesIds!: number[];
@@ -126,10 +138,10 @@ export class PostInput {
     tags!: string[];
 
     @Field({ nullable: false })
-    paragraphsNumber!: number;
+    paragraphs!: number;
 
     @Field({ nullable: false })
-    wordsNumber!: number;
+    words!: number;
 
     @Field({ nullable: false })
     readingTime!: number;

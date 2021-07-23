@@ -23,7 +23,7 @@ export const Metadata: React.FC<MetaDataProps> = ({
     return (
         <div className={`${className} flex items-center mt-6`}>
             <div className='flex-shrink-0'>
-                <img src={userIcon} className='inline-block h-10 w-10 rounded-full' />
+                <img alt='' src={userIcon} className='inline-block h-10 w-10 rounded-full' />
             </div>
             <div className='flex flex-col ml-3 text-sm font-medium leading-5'>
                 <p className='text-gray-700'>{userName}</p>

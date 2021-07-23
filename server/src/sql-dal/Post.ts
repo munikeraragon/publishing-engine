@@ -2,7 +2,9 @@ import { Knex } from 'knex';
 import { PostInput } from '../graphql/entities/Post';
 import { getKnex } from './utils';
 import { TagService } from './Tag';
+import { SearchInput } from '../graphql/entities/Search';
 import _ from 'lodash';
+
 const knex: Knex = getKnex();
 
 export class PostService {
@@ -42,6 +44,17 @@ export class PostService {
         });
     }
 
+    static async search(searchInput: SearchInput) {
+        return knex.transaction(async (trx) => {
+            try {
+                return await this._search(trx, searchInput);
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
     static async findByUserNameAndTitle(userName: string, title: string) {
         return knex.transaction(async (trx) => {
             try {
@@ -51,6 +64,22 @@ export class PostService {
                 trx.rollback();
             }
         });
+    }
+
+    static async _search(trx: Knex.Transaction, searchInput: SearchInput) {
+        const postsIds = await trx('Post')
+            .leftJoin('User', 'User.id', 'Post.userId')
+            .select('Post.id')
+            .orderBy(`Post.${searchInput.sortBy}`, searchInput.sortDirection)
+            .limit(searchInput.pageSize)
+            .offset(searchInput.pageSize * searchInput.page)
+            
+        
+        return await Promise.all(
+            _.map(postsIds, async (post) => {
+                return await this._findById(trx, post.id);
+            })
+        );
     }
 
     static async _findByUserNameAndTitle(trx: Knex.Transaction, userName: string, title: string) {
@@ -95,20 +124,19 @@ export class PostService {
                 description: 'Post.description',
                 prettyTitle: 'Post.prettyTitle',
                 mainImageId: 'Post.mainImageId',
-                imagesNumber: 'Post.imagesNumber',
-                paragraphsNumber: 'Post.paragraphsNumber',
-                wordsNumber: 'Post.wordsNumber',
+                images: 'Post.images',
+                paragraphs: 'Post.paragraphs',
+                words: 'Post.words',
+                reactions: 'Post.reactions',
                 readingTime: 'Post.readingTime',
-                likesNumber: 'Post.likesNumber',
                 creationDate: 'Post.creationDate',
                 objectKey: 'Post.objectKey',
+                comments: 'Post.comments',
                 imageId: 'Image.id',
                 label: 'Image.label'
             });
 
-        console.log(postAndImages);
-
-        const images = _.map(
+        const imagesMapping = _.map(
             _.filter(postAndImages, (elem) => elem.imageId && elem.label),
             (elem: any) => {
                 return { id: elem.imageId, label: elem.label };
@@ -131,14 +159,15 @@ export class PostService {
             description: postAndImages[0].description,
             prettyTitle: postAndImages[0].prettyTitle,
             mainImageId: postAndImages[0].mainImageId,
-            imagesNumber: postAndImages[0].imagesNumber,
-            paragraphsNumber: postAndImages[0].paragraphsNumber,
-            wordsNumber: postAndImages[0].wordsNumber,
+            images: postAndImages[0].images,
+            paragraphs: postAndImages[0].paragraphs,
+            words: postAndImages[0].words,
             readingTime: postAndImages[0].readingTime,
-            likesNumber: postAndImages[0].likesNumber,
+            reactions: postAndImages[0].reactions,
+            comments: postAndImages[0].comments,
             creationDate: postAndImages[0].creationDate,
             objectKey: postAndImages[0].objectKey,
-            images: images,
+            imagesMapping: imagesMapping,
             tags: tags
         };
     }
@@ -157,9 +186,9 @@ export class PostService {
                 title: postInput.title,
                 prettyTitle: postInput.title.toLowerCase().replace(/ /g, '-'),
                 description: postInput.description,
-                imagesNumber: postInput.imagesNumber,
-                paragraphsNumber: postInput.paragraphsNumber,
-                wordsNumber: postInput.wordsNumber,
+                images: postInput.images,
+                paragraphs: postInput.paragraphs,
+                words: postInput.words,
                 readingTime: postInput.readingTime
             })
         )[0];

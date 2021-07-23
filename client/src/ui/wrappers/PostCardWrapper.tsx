@@ -38,11 +38,12 @@ export const PostCardWrapper: React.FC<PostCardProps> = ({
                     src={showEskeleton ? undefined : downloadMetadata.imageUrl}
                     title={showEskeleton ? undefined : title}
                     description={showEskeleton ? undefined : description}
-                    userName={userName}
-                    creationDate={creationDate}
-                    readingTime={readingTime}
-                    userIcon={userIcon}
-                    tags={tags}
+                    userName={showEskeleton ? undefined : userName}
+                    creationDate={showEskeleton ? undefined : creationDate}
+                    readingTime={showEskeleton ? undefined : readingTime}
+                    userIcon={showEskeleton ? undefined : userIcon}
+                    tags={showEskeleton ? [] : tags}
+                    className={className}
                 />
             </span>
         </Link>
