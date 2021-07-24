@@ -8,6 +8,6 @@ export class UserResolver {
     @Authorized()
     @Query((returns) => User)
     async getUser(@CurrentUser() userId: number): Promise<User> {
-        return { ...await UserService.findById(userId) };
+        return { ...(await UserService.findById(userId)) };
     }
 }

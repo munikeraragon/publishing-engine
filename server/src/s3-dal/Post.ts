@@ -5,7 +5,7 @@ import { s3Client } from './utils';
 export class S3PostService {
     static async createUploadUrl(postKey: string) {
         const command = new PutObjectCommand({
-            Bucket: 'aws-post-uploads',
+            Bucket: process.env.S3_POST_BUCKET,
             Key: postKey
         });
         const signedUrl = await getSignedUrl(s3Client, command, {
@@ -16,7 +16,7 @@ export class S3PostService {
 
     static async createDownloadUrl(postKey: string) {
         const command = new GetObjectCommand({
-            Bucket: 'aws-post-uploads',
+            Bucket: process.env.S3_POST_BUCKET,
             Key: postKey
         });
         const signedUrl = await getSignedUrl(s3Client, command, {
@@ -28,7 +28,7 @@ export class S3PostService {
     static async createBucket() {
         try {
             const articlesBucket = await s3Client.send(
-                new CreateBucketCommand({ Bucket: 'aws-post-uploads' })
+                new CreateBucketCommand({ Bucket: process.env.S3_POST_BUCKET })
             );
             console.log('Success', articlesBucket.Location);
             return articlesBucket;

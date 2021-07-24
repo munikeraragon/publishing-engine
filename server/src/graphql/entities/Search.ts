@@ -1,7 +1,5 @@
 import { IsIn } from 'class-validator';
-import {InputType, Field} from 'type-graphql';
-
-
+import { InputType, Field } from 'type-graphql';
 
 @InputType()
 export class SearchInput {
@@ -13,15 +11,15 @@ export class SearchInput {
 
     @Field({ nullable: false })
     @IsIn(['reactions', 'comments', 'creationDate'])
-    sortBy: string
+    sortBy: string;
 
     @Field({ nullable: false })
     @IsIn(['desc', 'asc'])
-    sortDirection: string
+    sortDirection: string;
 
     @Field({ nullable: false })
-    startDate: string
+    startDate: string;
 
     @Field({ nullable: false })
-    endDate: string
+    endDate: string;
 }

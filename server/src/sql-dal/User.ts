@@ -17,7 +17,9 @@ export class UserService {
 
                 if (res.length === 0) {
                     const userIconhash = sha256(user.userName).toString();
-                    const userIcon = 'data:image/svg+xml;base64,' + new Identicon(userIconhash, { format: 'svg' }).toString();
+                    const userIcon =
+                        'data:image/svg+xml;base64,' +
+                        new Identicon(userIconhash, { format: 'svg' }).toString();
 
                     await trx('User').insert({
                         firstName: user.firstName,

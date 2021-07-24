@@ -40,22 +40,25 @@ services:
             - 4000:4000
         restart: always
         container_name: server
+        env_file: 
+          - ./.env
         volumes:
             - ./server:/usr/src/app
             - /usr/src/app/node_modules
             - ./data/certbot/conf:/etc/letsencrypt
         
     db:
-        image: mariadb
-        restart: always
-        container_name: db
-        ports:
-          - 3306:3306
-        environment:
-            MYSQL_ROOT_USER: "SuperAdmin"
-            MYSQL_ROOT_PASSWORD: "SuperSecretPassword"
-        volumes:
-            - ./db:/bitnami/mariadb
+      image: mariadb
+      restart: always
+      container_name: db
+      ports:
+        - 3306:3306
+      environment:
+          MYSQL_ROOT_USER: "${MYSQL_ROOT_USER}"
+          MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+          MYSQL_DATABASE: "publishing_engine_prod"
+      volumes:
+        - ./mysqldb:/var/lib/mysql
  
     adminer:
         image: adminer

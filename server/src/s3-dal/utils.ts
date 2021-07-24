@@ -4,8 +4,8 @@ import { S3Client } from '@aws-sdk/client-s3';
 const s3Client = new S3Client({
     region: 'us-west-2',
     credentials: {
-        accessKeyId: 'AKIA3FIAQTGKTFEBL22N',
-        secretAccessKey: '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'
+        accessKeyId: process.env.S3_ACCESS_KEY,
+        secretAccessKey: process.env.S3_SECRET_KEY
     }
 });
 export { s3Client };

@@ -72,9 +72,8 @@ export class PostService {
             .select('Post.id')
             .orderBy(`Post.${searchInput.sortBy}`, searchInput.sortDirection)
             .limit(searchInput.pageSize)
-            .offset(searchInput.pageSize * searchInput.page)
-            
-        
+            .offset(searchInput.pageSize * searchInput.page);
+
         return await Promise.all(
             _.map(postsIds, async (post) => {
                 return await this._findById(trx, post.id);

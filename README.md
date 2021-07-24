@@ -1,5 +1,6 @@
 # Publishing Engine
-A publishing engine similar to [Medium](https://medium.com/) and [DEV](https://dev.to/).
+A publishing engine similar to [Medium](https://medium.com/) and [DEV](https://dev.to/) built using
+Typescript, React.js, and Graphql.
 
 ## Branches 
 - main -> pr this branch for everything
@@ -42,7 +43,7 @@ JWT_SERVER_SECRET=TypeGraphQL
 3) Run Docker environmnet
 ``` bash
 # dev
-docker-compose up -d
+docker-compose up
 
 # prod
 docker-compose -f production.yml up -d
@@ -85,30 +86,23 @@ docker exec server npx knex migrate:rollback
 ```
 
 Todo:
-Fetch all latest post in home page
-Fetch all top posts in landing page
-Add home button in navbar
-Create Loading Button when saving draft article
-Ability to delete article
-
-
-
-Create Follows table
-Allow uses to follow other users
-
-
-Refactor S3 services
-
-
-Create Home notification page
+- Add admin page to track number of users, posted articles, total article views
+- implement refresh token correctly
+- Add home button in navbar
+- Create Loading Button when saving draft article
+- Ability to delete article
+- Create Follows table
+- Allow uses to follow other users
+- Refactor S3 services
+- Create Home notification page
 
 
 Notes:
 Basic goals:
-
-I want to use this site to post articles and post projects.
-I want to be able to subscribe to other people.
-I want to be able to have a profile/portfolio page that people can see.
+- I want to use this site to post articles and post projects.
+- I want to be able to subscribe to other people.
+- I want to be able to have a profile/portfolio page that people can see.
 
 Strech goals:
-Platform to learn about coding as well as the best platform to participate in open source projetcs. People will be able to learn about the project and post things related to the project.
+- Platform to learn about coding as well as participate in open source projetcs.
+ People - will be able to learn about the project and post things related to the project.
