@@ -10,6 +10,7 @@ export interface ContactCardProps {
     phone: string;
     company: string;
     message: string;
+    submitting: boolean;
     setFirstName: (value: string) => void;
     setLastName: (value: string) => void;
     setEmail: (value: string) => void;
@@ -28,6 +29,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
     phone,
     company,
     message,
+    submitting,
     setFirstName,
     setLastName,
     setEmail,
@@ -150,11 +152,13 @@ export const ContactCard: React.FC<ContactCardProps> = ({
             <div className='col-span w-48'>
                 <button
                     onClick={onSubmit}
-                    className='w-full flex items-center justify-center px-8
+                    className={`${
+                        submitting ? 'opacity-60' : ''
+                    } w-full flex items-center justify-center px-8
                             py-2 border border-transparent text-base font-medium
                             rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                            md:py-2 md:text-lg md:px-10'>
-                    Submit
+                            md:text-lg md:px-10`}>
+                    {submitting ? 'Submiting...' : 'Submit'}
                 </button>
             </div>
         </div>

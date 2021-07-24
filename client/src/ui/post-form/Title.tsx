@@ -15,6 +15,7 @@ export const Title = () => {
                 autoComplete='off'
                 value={title}
                 onChange={(event) => {
+                    console.log("changing title")
                     setTitle(event.target.value);
                 }}
                 onKeyDown={(e) => {

@@ -11,7 +11,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ className, reactions, comments
             <div className='fixed'>
                 <div className='flex flex-col text-sm'>
                     <button className='flex flex-col mb-6 items-center'>
-                        <span className='px-2 py-2 hover:bg-purple-200 rounded-full'>
+                        <span className='p-2 hover:bg-red-50 rounded-full hover:text-red-500'>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
                                 className='h-6 w-6'
@@ -30,28 +30,26 @@ export const Sidebar: React.FC<SidebarProps> = ({ className, reactions, comments
                     </button>
 
                     <button className='flex flex-col mb-6 items-center'>
-                        <span className='px-2 py-2 hover:bg-purple-200 rounded-full'>
-                            <button>
-                                <svg
-                                    xmlns='http://www.w3.org/2000/svg'
-                                    className='h-6 w-6'
-                                    fill='none'
-                                    viewBox='0 0 24 24'
-                                    stroke='currentColor'>
-                                    <path
-                                        strokeLinecap='round'
-                                        strokeLinejoin='round'
-                                        strokeWidth='2'
-                                        d='M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z'
-                                    />
-                                </svg>
-                            </button>
+                        <span className='p-2 hover:bg-teal-50 hover:text-teal-400 rounded-full'>
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='h-6 w-6'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'>
+                                <path
+                                    strokeLinecap='round'
+                                    strokeLinejoin='round'
+                                    strokeWidth='2'
+                                    d='M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z'
+                                />
+                            </svg>
                         </span>
                         <span>{comments}</span>
                     </button>
 
                     <button className='flex flex-col mb-6 items-center'>
-                        <span className='px-2 py-2 hover:bg-purple-200 rounded-full'>
+                        <span className='p-2 hover:bg-indigo-50 hover:text-indigo-500 rounded-full'>
                             <svg
                                 xmlns='http://www.w3.org/2000/svg'
                                 className='h-6 w-6'
@@ -69,10 +67,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ className, reactions, comments
                         <span>{saved}</span>
                     </button>
 
-                    <button className='flex flex-col mb-6 items-center'>
+                    <button className='flex flex-col mb-6 p-2 items-center hover:bg-gray-100 rounded-full'>
                         <svg
-                            xmlns='http://www.w3.org/2000/svg'
                             className='h-6 w-6'
+                            xmlns='http://www.w3.org/2000/svg'
                             fill='none'
                             viewBox='0 0 24 24'
                             stroke='currentColor'>

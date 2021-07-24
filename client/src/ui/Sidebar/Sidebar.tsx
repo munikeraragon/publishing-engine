@@ -276,7 +276,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
             {/* Sidebar backdrop (mobile only) */}
             <div
                 className={`fixed inset-0 bg-gray-900 bg-opacity-30 z-40
-                 lg:hidden lg:z-auto transition-opacity duration-200 ${
+                 md:hidden md:z-auto transition-opacity duration-200 ${
                      open ? 'opacity-100' : 'opacity-0 pointer-events-none'
                  }`}
                 aria-hidden='true'></div>
@@ -290,25 +290,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen }) => {
                     open ? 'translate-x-0' : '-translate-x-64'
                 }`}>
                 {/* Sidebar header */}
-                <div className='flex justify-between pr-3 sm:px-2'>
+                <div className='flex h-12 border-b mb-8'>
                     {/* Close button */}
-                    <button
-                        className='lg:hidden text-gray-500 hover:text-gray-400'
-                        onClick={() => setOpen(!open)}
-                        aria-controls='sidebar'
-                        aria-expanded={open}>
-                        <span className='sr-only'>Close sidebar</span>
-                        <svg
-                            className='w-6 h-6 fill-current'
-                            viewBox='0 0 24 24'
-                            xmlns='http://www.w3.org/2000/svg'>
-                            <path d='M10.7 18.7l1.4-1.4L7.8 13H20v-2H7.8l4.3-4.3-1.4-1.4L4 12z' />
-                        </svg>
-                    </button>
-                </div>
-
-                <div className='h-12 border-b mb-8'>
-                    <div className='flex justify-center'>
+                    <div className='ml-2'>
+                        <button
+                            className='md:hidden text-gray-500 hover:text-gray-400'
+                            onClick={() => setOpen(!open)}
+                            aria-controls='sidebar'
+                            aria-expanded={open}>
+                            <span className='sr-only'>Close sidebar</span>
+                            <svg
+                                className='w-6 h-6 fill-current'
+                                viewBox='0 0 24 24'
+                                xmlns='http://www.w3.org/2000/svg'>
+                                <path d='M10.7 18.7l1.4-1.4L7.8 13H20v-2H7.8l4.3-4.3-1.4-1.4L4 12z' />
+                            </svg>
+                        </button>
+                    </div>
+                    <div className='flex justify-center flex-1'>
                         <span className='text-xl hover:text-indigo-600 text-gray-600 font-semibold -ml-4'>
                             Codegrow
                         </span>

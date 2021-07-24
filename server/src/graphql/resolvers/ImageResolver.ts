@@ -8,7 +8,6 @@ import { UserService } from '../../sql-dal/User';
 
 @Resolver()
 export class ImageResolver {
-    @Authorized()
     @Query((returns) => Image)
     async getImageById(@Arg('imageId') imageId: number): Promise<Image> {
         const image = await ImageService.findById(imageId);

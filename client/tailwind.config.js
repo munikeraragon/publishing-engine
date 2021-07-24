@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
     purge: [
         './src/**/*.{ts,tsx,js,jsx}'
@@ -8,7 +10,15 @@ module.exports = {
     ],
     darkMode: false, // or 'media' or 'class'
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                cyan: colors.cyan,
+                teal: colors.teal
+            },
+            height: theme => ({
+                "screen/2": "calc(100% - 64)",
+              }),
+        },
         boxShadow: {
             sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
             DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)',
@@ -26,5 +36,6 @@ module.exports = {
     variants: {
         extend: {}
     },
+    presets: [require('tailwindcss/colors')],
     plugins: [require('@tailwindcss/forms')]
 };

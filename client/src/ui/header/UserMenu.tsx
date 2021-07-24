@@ -1,5 +1,6 @@
-import { Fragment, useEffect } from 'react';
+import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
+import { Logout } from '../../pages/logout';
 import Link from 'next/link';
 
 export interface UserMenuProps {
@@ -41,9 +42,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ userIcon, userName }) => {
                                         className='flex flex-col items-start w-full text-md
                                         hover:bg-gray-50 hover:text-indigo-600 px-4 py-2 rounded-md'>
                                         <span className='font-semibold'>{userName}</span>
-                                        <span className='text-sm text-gray-500'>
-                                            @{userName}
-                                        </span>
+                                        <span className='text-sm text-gray-500'>@{userName}</span>
                                     </button>
                                 </div>
 
@@ -63,7 +62,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ userIcon, userName }) => {
                                     </button>
                                 </Link>
 
-                                <Link href='/settings'>
+                                <Link href='/dash/home'>
                                     <button
                                         className='flex flex-col items-start w-full text-md
                                      hover:bg-gray-50 hover:text-indigo-600 px-4 py-2 rounded-md'>
@@ -72,11 +71,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ userIcon, userName }) => {
                                 </Link>
 
                                 <div className='border-t border-gray-200 py-1'>
-                                    <button
-                                        className='flex flex-col items-start w-full text-md
-                                        text-indigo-600 hover:bg-gray-50 px-4 py-2 rounded-md'>
-                                        Sing Out
-                                    </button>
+                                    <Logout />
                                 </div>
                             </div>
                         </Popover.Panel>

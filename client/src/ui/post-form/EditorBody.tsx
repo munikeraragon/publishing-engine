@@ -6,6 +6,7 @@ import '@uiw/react-markdown-preview/dist/markdown.css';
 
 export const EditorBody = () => {
     const { mainBody, setMainBody } = useFormStore((state) => state);
+
     return (
         <div className='flex flex-col flex-1 pt-8'>
             <Toolbar />
@@ -14,7 +15,7 @@ export const EditorBody = () => {
                 value={mainBody}
                 preview='edit'
                 hideToolbar={true}
-                onChange={(body) => setMainBody(body || '')}
+                onChange={(body) => { console.log("changing body"); setMainBody(body || '')}}
                 visiableDragbar={false}
                 placeholder='Write your post content here...'
             />

@@ -48,7 +48,7 @@ export const ContentPage: React.FC = () => {
     return (
         <div className='min-h-full mx-8 my-4 w-full'>
             <div className='pb-8'>
-                <h1 className='text-2xl text-gray-700 tracking-tight font-medium'>My Posts</h1>
+                <h1 className='text-xl text-gray-900 tracking-tight font-semibold'>My Posts</h1>
             </div>
 
             <div className='m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
@@ -65,7 +65,7 @@ export const ContentPage: React.FC = () => {
                         userIcon={post.userIcon}
                         tags={post.tags}
                         showEskeleton={showSkeleton}
-                        className="border border-gray-200"
+                        className='border border-gray-200'
                     />
                 ))}
             </div>

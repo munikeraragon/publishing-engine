@@ -57,14 +57,14 @@ const MainImage = () => {
     }, []);
 
     useEffect(() => {
-        if (downloadMetadata.imageUrl) {
+        if (downloadMetadata.imageUrl && !mainImageUrl) {
+            console.log("setting main image url")
             setMainImageUrl(downloadMetadata.imageUrl);
         }
     }, [downloadMetadata]);
 
     return (
         <div className='flex items-center'>
-            {console.log(mainImageUrl)}
             <img
                 src={mainImageUrl}
                 className='object-cover mr-8'

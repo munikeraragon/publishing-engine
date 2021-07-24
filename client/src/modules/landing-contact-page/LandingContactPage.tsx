@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCreateContactMessageMutation } from '../../generated/apolloComponents';
 import { ContactCard } from '../../ui/ContactCard';
 
@@ -10,10 +10,25 @@ export const LandingContactPage = () => {
     const [country, setCountry] = useState('United States');
     const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
+    const [submitting, setSubmitting] = useState(false);
     const [createContactMessage] = useCreateContactMessageMutation();
+
+    const clearForm = () => {
+        setTimeout(() => {
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setCompany('');
+            setPhone('');
+            setMessage('');
+            setCountry('United States');
+            setSubmitting(false);
+        }, 1000);
+    };
 
     const onSubmit = async () => {
         try {
+            setSubmitting(true);
             const response = await createContactMessage({
                 variables: {
                     contactMessage: {
@@ -26,8 +41,13 @@ export const LandingContactPage = () => {
                         country
                     }
                 }
-            });
-            console.log(response);
+            })
+                .then((value) => {
+                    clearForm();
+                })
+                .catch((err) => {
+                    clearForm();
+                });
         } catch (error) {
             console.log(error);
         }
@@ -128,6 +148,7 @@ export const LandingContactPage = () => {
                     setCompany={setCompany}
                     setMessage={setMessage}
                     onSubmit={onSubmit}
+                    submitting={submitting}
                 />
             </div>
         </div>

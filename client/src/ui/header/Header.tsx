@@ -23,7 +23,7 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
                     <div className='flex'>
                         {/* Hamburger button */}
                         <button
-                            className='text-gray-500 hover:text-gray-600 lg:hidden'
+                            className='text-gray-500 hover:text-gray-600 md:hidden'
                             aria-controls='sidebar'
                             aria-expanded={sidebarOpen}
                             onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -50,9 +50,9 @@ export const Header: React.FC<HeaderProps> = ({ sidebarOpen, setSidebarOpen }) =
                                 </button>
                             </Link>
                         </span>
-                        <SearchModal />
+                        {/*<SearchModal />
                         <Notifications />
-                        <Help />
+                        <Help />*/}
                         {/*  Divider */}
                         <hr className='w-px h-6 bg-gray-200 mx-3' />
                         <UserMenu

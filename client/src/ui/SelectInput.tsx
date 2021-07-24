@@ -30,7 +30,7 @@ export const SelectInput: React.FC<TextInputProps> = ({
 
                 <select
                     value={value}
-                    onBlur={onChange}
+                    onChange={onChange}
                     className='focus:ring-indigo-500 focus:border-indigo-500 block h-14
                             w-full pl-4 pr-12 sm:text-sm border-gray-500 rounded-md'>
                     {options.map((option, index) => (

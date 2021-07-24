@@ -42,9 +42,9 @@ export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
                     wordsNumber={showSkeleton ? undefined : postMetadata.data.wordsNumber}
                     articleBody={showSkeleton ? undefined : postMetadata.data.mainBody}
                     tags={showSkeleton ? undefined : postMetadata.data.tags}
-                    className='w-full col-span-12 lg:col-span-8 max-w-3xl mt-8'
+                    className='w-full col-span-12 lg:col-span-8 max-w-3xl mt-8 mx-auto'
                 />
-                <div className='col-span-4 invisible lg:visible'>
+                <div className='col-span-4 hidden lg:block'>
                     <ProfileCard
                         userName={showSkeleton ? undefined : postMetadata.data.userName}
                         userIcon={showSkeleton ? undefined : postMetadata.data.userIcon}
