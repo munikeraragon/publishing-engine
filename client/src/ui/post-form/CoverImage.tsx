@@ -58,7 +58,7 @@ const MainImage = () => {
 
     useEffect(() => {
         if (downloadMetadata.imageUrl && !mainImageUrl) {
-            console.log("setting main image url")
+            console.log('setting main image url');
             setMainImageUrl(downloadMetadata.imageUrl);
         }
     }, [downloadMetadata]);

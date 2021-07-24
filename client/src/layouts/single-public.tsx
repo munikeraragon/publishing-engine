@@ -14,7 +14,7 @@ export const SinglePublicLayout: React.FC = ({ children }) => {
                     <Header sidebarOpen={open} setSidebarOpen={setOpen} />
                 ) : (
                     <div>
-                        <Navbar className="sticky"/>
+                        <Navbar className='sticky' />
                     </div>
                 )}
                 <div className='h-full overflow-y-scroll'>{children}</div>

@@ -15,9 +15,9 @@ module.exports = {
                 cyan: colors.cyan,
                 teal: colors.teal
             },
-            height: theme => ({
-                "screen/2": "calc(100% - 64)",
-              }),
+            height: (theme) => ({
+                'screen/2': 'calc(100% - 64)'
+            })
         },
         boxShadow: {
             sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',

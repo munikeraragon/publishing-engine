@@ -8,9 +8,8 @@ export const useVerifyLoggedIn = () => {
 
     useEffect(() => {
         if (!hasTokens) {
-            console.log('sending to as path')
+            console.log('sending to as path');
             replace(`/?next=${asPath}`);
-            
         }
     }, [hasTokens, asPath, replace]);
 

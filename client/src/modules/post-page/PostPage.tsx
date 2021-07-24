@@ -34,20 +34,20 @@ export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
             <div className='grid grid-cols-12 gap-4 flex-1 mx-4 lg:mx-0'>
                 <Article
                     coverImage={showSkeleton ? null : imageMetadata.imageUrl}
-                    title={showSkeleton ? undefined : postMetadata.data.title}
-                    userIcon={showSkeleton ? null : postMetadata.data.userIcon}
-                    userName={showSkeleton ? undefined : postMetadata.data.userName}
-                    creationDate={showSkeleton ? undefined : postMetadata.data.creationDate}
-                    readingTime={showSkeleton ? undefined : postMetadata.data.readingTime}
-                    wordsNumber={showSkeleton ? undefined : postMetadata.data.wordsNumber}
-                    articleBody={showSkeleton ? undefined : postMetadata.data.mainBody}
-                    tags={showSkeleton ? undefined : postMetadata.data.tags}
+                    title={showSkeleton ? undefined : postMetadata.data?.title}
+                    userIcon={showSkeleton ? null : postMetadata.data?.userIcon}
+                    userName={showSkeleton ? undefined : postMetadata.data?.userName}
+                    creationDate={showSkeleton ? undefined : postMetadata.data?.creationDate}
+                    readingTime={showSkeleton ? undefined : postMetadata.data?.readingTime}
+                    wordsNumber={showSkeleton ? undefined : postMetadata.data?.wordsNumber}
+                    articleBody={showSkeleton ? undefined : postMetadata.data?.mainBody}
+                    tags={showSkeleton ? undefined : postMetadata.data?.tags}
                     className='w-full col-span-12 lg:col-span-8 max-w-3xl mt-8 mx-auto'
                 />
                 <div className='col-span-4 hidden lg:block'>
                     <ProfileCard
-                        userName={showSkeleton ? undefined : postMetadata.data.userName}
-                        userIcon={showSkeleton ? undefined : postMetadata.data.userIcon}
+                        userName={showSkeleton ? undefined : postMetadata.data?.userName}
+                        userIcon={showSkeleton ? undefined : postMetadata.data?.userIcon}
                         className='col-span-4 w-80 mx-auto mt-12'
                     />
                 </div>

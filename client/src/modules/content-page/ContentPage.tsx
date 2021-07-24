@@ -47,7 +47,7 @@ export const ContentPage: React.FC = () => {
 
     return (
         <div className='min-h-full mx-8 my-4 w-full'>
-            <div className='pb-8'>
+            <div className='pb-2'>
                 <h1 className='text-xl text-gray-900 tracking-tight font-semibold'>My Posts</h1>
             </div>
 

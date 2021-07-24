@@ -6,7 +6,7 @@ import { Navbar } from '../ui/navbar/Navbar';
 const App: React.FC = () => {
     return (
         <>
-            <Navbar className={"fixed"}/>
+            <Navbar className={'fixed'} />
             <LandingPage />
             <LandingPostsPage />
             <LandingContactPage />

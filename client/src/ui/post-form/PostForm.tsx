@@ -14,7 +14,7 @@ export const PostForm: React.FC = () => {
     const user = useGetUserQuery().data?.getUser;
 
     return (
-        <div className='py-2 flex flex-col px-8 '>
+        <div className='py-2 flex flex-col md:px-8'>
             <div className='grid grid-cols-8'>
                 <div className='col-span-5'>
                     <Header />
@@ -79,7 +79,7 @@ export const PostForm: React.FC = () => {
                 </div>
             </div>
 
-            <EditorActions />
+            <EditorActions className='mx-2' />
         </div>
     );
 };

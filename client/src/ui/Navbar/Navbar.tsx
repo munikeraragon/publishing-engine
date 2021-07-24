@@ -90,15 +90,14 @@ const recentPosts = [
     { id: 3, name: 'Improve your customer experience', href: '#' }
 ];
 
-
 export interface NavbarProps {
-    className?: string
+    className?: string;
 }
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ');
 }
 
-export const Navbar: React.FC<NavbarProps> = ({className=""}) => {
+export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
     return (
         <Popover className={`${className} w-full bg-white z-50`}>
             {({ open }) => (

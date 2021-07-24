@@ -19,11 +19,14 @@ export interface UploadPost {
     creationDate: string;
 }
 
+export interface EditorActionsProps {
+    className?: string;
+}
 const validData = (post: UploadPost) => {
     return !Object.values(post).some((value) => value === null);
 };
 
-export const EditorActions = () => {
+export const EditorActions: React.FC<EditorActionsProps> = ({ className = '' }) => {
     const router = useRouter();
     const { uploadPost, metadata } = useS3PostUpload();
     const {
@@ -83,7 +86,7 @@ export const EditorActions = () => {
     };
 
     return (
-        <div className='flex py-4'>
+        <div className={`${className} flex py-4`}>
             <button
                 onClick={handlePublish}
                 className={`${publishing ? 'opacity-60' : ''}

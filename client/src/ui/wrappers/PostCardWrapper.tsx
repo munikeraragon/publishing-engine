@@ -33,7 +33,7 @@ export const PostCardWrapper: React.FC<PostCardProps> = ({
 
     return (
         <Link href={`/post/${userName}/${prettyTitle}`}>
-            <span>
+            <a>
                 <PostCard
                     src={showEskeleton ? undefined : downloadMetadata.imageUrl}
                     title={showEskeleton ? undefined : title}
@@ -45,7 +45,7 @@ export const PostCardWrapper: React.FC<PostCardProps> = ({
                     tags={showEskeleton ? [] : tags}
                     className={className}
                 />
-            </span>
+            </a>
         </Link>
     );
 };

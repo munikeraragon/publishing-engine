@@ -45,7 +45,7 @@ export const Metadata: React.FC<MetaDataProps> = ({
                 </div>
             </div>
 
-            <Title title={title} className='lg:ml-10' />
+            <Title title={title} className='lg:ml-10 hover:text-indigo-700' />
 
             <Tags tags={tags} size='sm' className='lg:ml-10 my-4' />
 

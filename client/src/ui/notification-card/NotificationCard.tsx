@@ -28,7 +28,7 @@ export const NotificationCard: React.FC<NotificationCard> = ({
     className = ''
 }) => {
     return (
-        <div className={`${className} bg-white border border-gray-200 rounded-md`}>
+        <div className={`${className} bg-white border border-gray-200 hover:border-8 rounded-md`}>
             {showCoverImage && <CoverImage alt='' src={src} />}
             <Metadata
                 title={title}

@@ -35,7 +35,7 @@ export const NotificationCardWrapper: React.FC<NotificationCardProps> = ({
 
     return (
         <Link href={`/post/${userName}/${prettyTitle}`}>
-            <span>
+            <a>
                 <NotificationCard
                     className={className}
                     title={title}
@@ -49,7 +49,7 @@ export const NotificationCardWrapper: React.FC<NotificationCardProps> = ({
                     reactions={reactions}
                     tags={tags}
                 />
-            </span>
+            </a>
         </Link>
     );
 };
