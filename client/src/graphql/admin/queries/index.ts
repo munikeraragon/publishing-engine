@@ -1,13 +1,34 @@
 import { gql } from '@apollo/client';
 
-export const GetTotalUsers = gql`
-    query GetTotalUsers {
-        getTotalUsers
-    }
-`;
-
-export const GetTotalPosts = gql`
-    query GetTotalPosts {
-        getTotalPosts
+export const GetAdminInsight = gql`
+    query GetAdminInsight {
+        getAdminInsight {
+            userInsight {
+                users {
+                    id
+                    userName
+                    locale
+                    email
+                    creationDate
+                }
+                totalUsers
+            }
+            contactMessageInsight {
+                contactMessages {
+                    id
+                    firstName
+                    lastName
+                    email
+                    company
+                    country
+                    creationDate
+                    phone
+                }
+                totalMessages
+            }
+            postInsight {
+                totalPosts
+            }
+        }
     }
 `;

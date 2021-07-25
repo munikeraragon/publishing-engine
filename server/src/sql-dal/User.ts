@@ -78,10 +78,22 @@ export class UserService {
     static async countAll() {
         return knex.transaction(async (trx) => {
             try {
-                return (await trx('User').count('id as count'))[0].count;
+                return Number((await trx('User').count('id as count'))[0].count);
             } catch (err) {
                 console.log(err);
                 return null;
+            }
+        });
+    }
+
+    static async findAll() {
+        return knex.transaction(async (trx) => {
+            try {
+                const users = await trx.select().table('User');
+                return users;
+            } catch (err) {
+                console.log(err);
+                return [];
             }
         });
     }

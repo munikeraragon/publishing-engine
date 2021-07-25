@@ -1,7 +1,10 @@
-import { ObjectType, InputType, Field } from 'type-graphql';
+import { ObjectType, InputType, Field, ID } from 'type-graphql';
 
 @ObjectType()
 export class ContactMessage {
+    @Field((type) => ID)
+    id: number;
+
     @Field({ nullable: false })
     firstName!: string;
 

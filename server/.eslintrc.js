@@ -11,5 +11,8 @@ module.exports = {
         sourceType: 'module'
     },
     plugins: ['@typescript-eslint'],
-    rules: {}
+    rules: {
+        'no-use-before-define': [0],
+        '@typescript-eslint/no-use-before-define': [1]
+    }
 };

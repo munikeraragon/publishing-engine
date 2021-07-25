@@ -67,15 +67,22 @@ export class ContactMessageService {
         });
     }
 
-    static async findById() {
-        return knex('ContactMessage');
+    static async countAll() {
+        return knex.transaction(async (trx) => {
+            try {
+                return Number((await trx('ContactMessage').count('id as count'))[0].count);
+            } catch (err) {
+                console.log(err);
+                return null;
+            }
+        });
     }
 
-    static async findAll(): Promise<ContactMessage[]> {
-        return knex.transaction(async function (trx) {
+    static async findAll() {
+        return knex.transaction(async (trx) => {
             try {
-                const res = await trx.select().table('ContactMessage');
-                return res;
+                const contactMessages = await trx.select().table('ContactMessage');
+                return contactMessages;
             } catch (err) {
                 console.log(err);
                 return [];

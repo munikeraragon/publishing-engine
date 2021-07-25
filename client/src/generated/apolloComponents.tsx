@@ -16,8 +16,16 @@ export type Scalars = {
     DateTime: any;
 };
 
+export type AdminInsight = {
+    __typename?: 'AdminInsight';
+    userInsight: UserInsight;
+    postInsight: PostInsight;
+    contactMessageInsight: ContactMessageInsight;
+};
+
 export type ContactMessage = {
     __typename?: 'ContactMessage';
+    id: Scalars['ID'];
     firstName: Scalars['String'];
     lastName: Scalars['String'];
     email: Scalars['String'];
@@ -36,6 +44,12 @@ export type ContactMessageInput = {
     phone: Scalars['String'];
     message: Scalars['String'];
     country: Scalars['String'];
+};
+
+export type ContactMessageInsight = {
+    __typename?: 'ContactMessageInsight';
+    totalMessages: Scalars['Float'];
+    contactMessages: Array<ContactMessage>;
 };
 
 export type Image = {
@@ -108,6 +122,11 @@ export type PostInput = {
     publish: Scalars['Boolean'];
 };
 
+export type PostInsight = {
+    __typename?: 'PostInsight';
+    totalPosts: Scalars['Float'];
+};
+
 export type Query = {
     __typename?: 'Query';
     getPostById: SignedPost;
@@ -119,8 +138,7 @@ export type Query = {
     getContactMessages: Array<ContactMessage>;
     getUser: User;
     getImageById: Image;
-    getTotalPosts: Scalars['Float'];
-    getTotalUsers: Scalars['Float'];
+    getAdminInsight: AdminInsight;
 };
 
 export type QueryGetPostByIdArgs = {
@@ -185,13 +203,45 @@ export type User = {
     creationDate: Scalars['DateTime'];
 };
 
-export type GetTotalUsersQueryVariables = Exact<{ [key: string]: never }>;
+export type UserInsight = {
+    __typename?: 'UserInsight';
+    totalUsers: Scalars['Float'];
+    users: Array<User>;
+};
 
-export type GetTotalUsersQuery = { __typename?: 'Query' } & Pick<Query, 'getTotalUsers'>;
+export type GetAdminInsightQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetTotalPostsQueryVariables = Exact<{ [key: string]: never }>;
-
-export type GetTotalPostsQuery = { __typename?: 'Query' } & Pick<Query, 'getTotalPosts'>;
+export type GetAdminInsightQuery = { __typename?: 'Query' } & {
+    getAdminInsight: { __typename?: 'AdminInsight' } & {
+        userInsight: { __typename?: 'UserInsight' } & Pick<UserInsight, 'totalUsers'> & {
+                users: Array<
+                    { __typename?: 'User' } & Pick<
+                        User,
+                        'id' | 'userName' | 'locale' | 'email' | 'creationDate'
+                    >
+                >;
+            };
+        contactMessageInsight: { __typename?: 'ContactMessageInsight' } & Pick<
+            ContactMessageInsight,
+            'totalMessages'
+        > & {
+                contactMessages: Array<
+                    { __typename?: 'ContactMessage' } & Pick<
+                        ContactMessage,
+                        | 'id'
+                        | 'firstName'
+                        | 'lastName'
+                        | 'email'
+                        | 'company'
+                        | 'country'
+                        | 'creationDate'
+                        | 'phone'
+                    >
+                >;
+            };
+        postInsight: { __typename?: 'PostInsight' } & Pick<PostInsight, 'totalPosts'>;
+    };
+};
 
 export type CreateContactMessageMutationVariables = Exact<{
     contactMessage: ContactMessageInput;
@@ -330,95 +380,77 @@ export type GetUserQuery = { __typename?: 'Query' } & {
     getUser: { __typename?: 'User' } & Pick<User, 'userIcon' | 'userName'>;
 };
 
-export const GetTotalUsersDocument = gql`
-    query GetTotalUsers {
-        getTotalUsers
+export const GetAdminInsightDocument = gql`
+    query GetAdminInsight {
+        getAdminInsight {
+            userInsight {
+                users {
+                    id
+                    userName
+                    locale
+                    email
+                    creationDate
+                }
+                totalUsers
+            }
+            contactMessageInsight {
+                contactMessages {
+                    id
+                    firstName
+                    lastName
+                    email
+                    company
+                    country
+                    creationDate
+                    phone
+                }
+                totalMessages
+            }
+            postInsight {
+                totalPosts
+            }
+        }
     }
 `;
 
 /**
- * __useGetTotalUsersQuery__
+ * __useGetAdminInsightQuery__
  *
- * To run a query within a React component, call `useGetTotalUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTotalUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetAdminInsightQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAdminInsightQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetTotalUsersQuery({
+ * const { data, loading, error } = useGetAdminInsightQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetTotalUsersQuery(
-    baseOptions?: Apollo.QueryHookOptions<GetTotalUsersQuery, GetTotalUsersQueryVariables>
+export function useGetAdminInsightQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetAdminInsightQuery, GetAdminInsightQueryVariables>
 ) {
     const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useQuery<GetTotalUsersQuery, GetTotalUsersQueryVariables>(
-        GetTotalUsersDocument,
+    return Apollo.useQuery<GetAdminInsightQuery, GetAdminInsightQueryVariables>(
+        GetAdminInsightDocument,
         options
     );
 }
-export function useGetTotalUsersLazyQuery(
-    baseOptions?: Apollo.LazyQueryHookOptions<GetTotalUsersQuery, GetTotalUsersQueryVariables>
+export function useGetAdminInsightLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<GetAdminInsightQuery, GetAdminInsightQueryVariables>
 ) {
     const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useLazyQuery<GetTotalUsersQuery, GetTotalUsersQueryVariables>(
-        GetTotalUsersDocument,
+    return Apollo.useLazyQuery<GetAdminInsightQuery, GetAdminInsightQueryVariables>(
+        GetAdminInsightDocument,
         options
     );
 }
-export type GetTotalUsersQueryHookResult = ReturnType<typeof useGetTotalUsersQuery>;
-export type GetTotalUsersLazyQueryHookResult = ReturnType<typeof useGetTotalUsersLazyQuery>;
-export type GetTotalUsersQueryResult = Apollo.QueryResult<
-    GetTotalUsersQuery,
-    GetTotalUsersQueryVariables
->;
-export const GetTotalPostsDocument = gql`
-    query GetTotalPosts {
-        getTotalPosts
-    }
-`;
-
-/**
- * __useGetTotalPostsQuery__
- *
- * To run a query within a React component, call `useGetTotalPostsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetTotalPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetTotalPostsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetTotalPostsQuery(
-    baseOptions?: Apollo.QueryHookOptions<GetTotalPostsQuery, GetTotalPostsQueryVariables>
-) {
-    const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useQuery<GetTotalPostsQuery, GetTotalPostsQueryVariables>(
-        GetTotalPostsDocument,
-        options
-    );
-}
-export function useGetTotalPostsLazyQuery(
-    baseOptions?: Apollo.LazyQueryHookOptions<GetTotalPostsQuery, GetTotalPostsQueryVariables>
-) {
-    const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useLazyQuery<GetTotalPostsQuery, GetTotalPostsQueryVariables>(
-        GetTotalPostsDocument,
-        options
-    );
-}
-export type GetTotalPostsQueryHookResult = ReturnType<typeof useGetTotalPostsQuery>;
-export type GetTotalPostsLazyQueryHookResult = ReturnType<typeof useGetTotalPostsLazyQuery>;
-export type GetTotalPostsQueryResult = Apollo.QueryResult<
-    GetTotalPostsQuery,
-    GetTotalPostsQueryVariables
+export type GetAdminInsightQueryHookResult = ReturnType<typeof useGetAdminInsightQuery>;
+export type GetAdminInsightLazyQueryHookResult = ReturnType<typeof useGetAdminInsightLazyQuery>;
+export type GetAdminInsightQueryResult = Apollo.QueryResult<
+    GetAdminInsightQuery,
+    GetAdminInsightQueryVariables
 >;
 export const CreateContactMessageDocument = gql`
     mutation CreateContactMessage($contactMessage: ContactMessageInput!) {
