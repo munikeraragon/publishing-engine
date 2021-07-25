@@ -55,6 +55,18 @@ export class PostService {
         });
     }
 
+    static async countAll() {
+        return knex.transaction(async (trx) => {
+            try {
+                return (await trx('Post').count('id as count'))[0].count;
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+                return null;
+            }
+        });
+    }
+
     static async findByUserNameAndTitle(userName: string, title: string) {
         return knex.transaction(async (trx) => {
             try {

@@ -119,6 +119,8 @@ export type Query = {
     getContactMessages: Array<ContactMessage>;
     getUser: User;
     getImageById: Image;
+    getTotalPosts: Scalars['Float'];
+    getTotalUsers: Scalars['Float'];
 };
 
 export type QueryGetPostByIdArgs = {
@@ -179,9 +181,17 @@ export type User = {
     provider: Scalars['String'];
     picture: Scalars['String'];
     userIcon: Scalars['String'];
-    roles: Array<Scalars['String']>;
+    role: Scalars['String'];
     creationDate: Scalars['DateTime'];
 };
+
+export type GetTotalUsersQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetTotalUsersQuery = { __typename?: 'Query' } & Pick<Query, 'getTotalUsers'>;
+
+export type GetTotalPostsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetTotalPostsQuery = { __typename?: 'Query' } & Pick<Query, 'getTotalPosts'>;
 
 export type CreateContactMessageMutationVariables = Exact<{
     contactMessage: ContactMessageInput;
@@ -320,6 +330,96 @@ export type GetUserQuery = { __typename?: 'Query' } & {
     getUser: { __typename?: 'User' } & Pick<User, 'userIcon' | 'userName'>;
 };
 
+export const GetTotalUsersDocument = gql`
+    query GetTotalUsers {
+        getTotalUsers
+    }
+`;
+
+/**
+ * __useGetTotalUsersQuery__
+ *
+ * To run a query within a React component, call `useGetTotalUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTotalUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTotalUsersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTotalUsersQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetTotalUsersQuery, GetTotalUsersQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetTotalUsersQuery, GetTotalUsersQueryVariables>(
+        GetTotalUsersDocument,
+        options
+    );
+}
+export function useGetTotalUsersLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<GetTotalUsersQuery, GetTotalUsersQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetTotalUsersQuery, GetTotalUsersQueryVariables>(
+        GetTotalUsersDocument,
+        options
+    );
+}
+export type GetTotalUsersQueryHookResult = ReturnType<typeof useGetTotalUsersQuery>;
+export type GetTotalUsersLazyQueryHookResult = ReturnType<typeof useGetTotalUsersLazyQuery>;
+export type GetTotalUsersQueryResult = Apollo.QueryResult<
+    GetTotalUsersQuery,
+    GetTotalUsersQueryVariables
+>;
+export const GetTotalPostsDocument = gql`
+    query GetTotalPosts {
+        getTotalPosts
+    }
+`;
+
+/**
+ * __useGetTotalPostsQuery__
+ *
+ * To run a query within a React component, call `useGetTotalPostsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetTotalPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetTotalPostsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetTotalPostsQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetTotalPostsQuery, GetTotalPostsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetTotalPostsQuery, GetTotalPostsQueryVariables>(
+        GetTotalPostsDocument,
+        options
+    );
+}
+export function useGetTotalPostsLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<GetTotalPostsQuery, GetTotalPostsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetTotalPostsQuery, GetTotalPostsQueryVariables>(
+        GetTotalPostsDocument,
+        options
+    );
+}
+export type GetTotalPostsQueryHookResult = ReturnType<typeof useGetTotalPostsQuery>;
+export type GetTotalPostsLazyQueryHookResult = ReturnType<typeof useGetTotalPostsLazyQuery>;
+export type GetTotalPostsQueryResult = Apollo.QueryResult<
+    GetTotalPostsQuery,
+    GetTotalPostsQueryVariables
+>;
 export const CreateContactMessageDocument = gql`
     mutation CreateContactMessage($contactMessage: ContactMessageInput!) {
         createContactMessage(contactMessageInput: $contactMessage)

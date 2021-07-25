@@ -4,7 +4,6 @@ import { Image, ImageInput } from '../entities/Image';
 import { ImageService } from '../../sql-dal/Image';
 import { S3ImageService } from '../../s3-dal/Image';
 import { UserService } from '../../sql-dal/User';
-// import _ from 'lodash';
 
 @Resolver()
 export class ImageResolver {

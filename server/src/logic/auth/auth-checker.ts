@@ -5,19 +5,13 @@ import { Context } from './context.interface';
 export const authChecker: AuthChecker<Context> = ({ context: { user } }, roles) => {
     if (roles.length === 0) {
         // if `@Authorized()`, check only if user exists
-        return user !== undefined;
+        return user.id !== undefined;
     }
     // there are some roles defined now
-
-    if (!user) {
+    if (!user.id) {
         // and if no user, restrict access
         return false;
     }
-    if (user.roles.some((role) => roles.includes(role))) {
-        // grant access if the roles overlap
-        return true;
-    }
-
-    // no roles matched, restrict access
-    return false;
+    // grant access if user possesses the required role
+    return roles.includes(user.role);
 };

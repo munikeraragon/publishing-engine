@@ -29,8 +29,8 @@ export class User {
     @Field({ nullable: false })
     userIcon!: string;
 
-    @Field((type) => [String])
-    roles!: string[];
+    @Field({ nullable: false })
+    role: string;
 
     @Field()
     creationDate: Date;
@@ -59,6 +59,6 @@ export class UserInput {
     @Field({ nullable: false })
     picture!: string;
 
-    @Field((type) => [String])
+    @Field({ nullable: false })
     role: string;
 }

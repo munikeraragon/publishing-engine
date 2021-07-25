@@ -74,4 +74,15 @@ export class UserService {
             }
         });
     }
+
+    static async countAll() {
+        return knex.transaction(async (trx) => {
+            try {
+                return (await trx('User').count('id as count'))[0].count;
+            } catch (err) {
+                console.log(err);
+                return null;
+            }
+        });
+    }
 }

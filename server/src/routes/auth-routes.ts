@@ -24,7 +24,7 @@ router.get(
     '/google/callback',
     passport.authenticate('google', { failureRedirect: getClientAddress() }),
     (req, res, next) => {
-        const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
+        const token = jwt.sign(req.user, process.env.JWT_SERVER_SECRET, {
             expiresIn: 60 * 60 * 60
         });
         req.logIn(req.user, function (err) {
@@ -47,7 +47,7 @@ router.get(
     '/github/callback',
     passport.authenticate('github', { failureRedirect: getClientAddress() }),
     (req, res, next) => {
-        const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
+        const token = jwt.sign(req.user, process.env.JWT_SERVER_SECRET, {
             expiresIn: 60 * 15
         });
         req.logIn(req.user, function (err) {
@@ -65,7 +65,7 @@ router.get(
     '/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: getClientAddress() }),
     (req, res, next) => {
-        const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
+        const token = jwt.sign(req.user, process.env.JWT_SERVER_SECRET, {
             expiresIn: 60 * 15
         });
         req.logIn(req.user, function (err) {
@@ -83,7 +83,7 @@ router.get(
     '/discord/callback',
     passport.authenticate('discord', { failureRedirect: getClientAddress() }),
     (req, res, next) => {
-        const token = jwt.sign({ id: req.user }, process.env.JWT_SERVER_SECRET, {
+        const token = jwt.sign(req.user, process.env.JWT_SERVER_SECRET, {
             expiresIn: 60 * 15
         });
         req.logIn(req.user, function (err) {

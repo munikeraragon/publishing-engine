@@ -11,10 +11,7 @@ import { SearchInput } from '../entities/Search';
 export class PostResolver {
     @Authorized()
     @Query((returns) => SignedPost)
-    async getPostById(
-        @CurrentUser() userId: number,
-        @Arg('postId') postId: number
-    ): Promise<SignedPost> {
+    async getPostById(@Arg('postId') postId: number): Promise<SignedPost> {
         const post = await PostService.findById(postId);
         const presignedUrl = await S3PostService.createDownloadUrl(post.objectKey);
         return { ...post, presignedUrl };

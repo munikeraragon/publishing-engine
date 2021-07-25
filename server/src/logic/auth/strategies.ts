@@ -36,13 +36,13 @@ passport.use(
                 userName: String(profile._json.email).replace(/@.*$/, ''),
                 email: String(profile._json.email),
                 locale: String(profile._json.locale),
-                role: 'user',
+                role: 'USER',
                 provider: 'google'
             };
             UserService.findOrCreate(user)
                 .then((result: User) => {
                     console.log(result);
-                    return done(null, result.id);
+                    return done(null, { id: result.id, role: result.role });
                 })
                 .catch((err: any) => {
                     return done(err, profile);
@@ -67,13 +67,13 @@ passport.use(
                 picture: String(profile._json.avatar_url),
                 email: String(profile._json.html_url),
                 locale: String(profile._json.location),
-                role: 'user',
+                role: 'USER',
                 provider: 'github'
             };
             UserService.findOrCreate(user)
                 .then((result: User) => {
                     console.log(result);
-                    return done(null, user);
+                    return done(null, { id: result.id, role: result.role });
                 })
                 .catch((err: any) => {
                     return done(err, profile);
@@ -100,13 +100,13 @@ passport.use(
                 email: String(profile._json.email),
                 userName: String(profile._json.email).replace(/@.*$/, ''),
                 locale: String(profile._json.location),
-                role: 'user',
+                role: 'USER',
                 provider: 'facebook'
             };
             UserService.findOrCreate(user)
                 .then((result: User) => {
                     console.log(result);
-                    return done(null, user);
+                    return done(null, { id: result.id, role: result.role });
                 })
                 .catch((err: any) => {
                     return done(err, profile);
@@ -132,13 +132,13 @@ passport.use(
                 picture: String(profile.avatar),
                 email: String(profile.email),
                 locale: String(profile.locale),
-                role: 'user',
+                role: 'USER',
                 provider: 'discord'
             };
             UserService.findOrCreate(user)
                 .then((result: User) => {
                     console.log(result);
-                    return done(null, user);
+                    return done(null, { id: result.id, role: result.role });
                 })
                 .catch((err: any) => {
                     return done(err, profile);
