@@ -5,6 +5,8 @@ import { Title } from './Title';
 import { Tags } from './Tags';
 
 export interface ArticleProps {
+    postId?: number | undefined;
+    prettyTitle?: string | undefined;
     title: string | undefined;
     userIcon: string | undefined;
     coverImage: string | null;
@@ -14,11 +16,14 @@ export interface ArticleProps {
     wordsNumber: number | undefined;
     articleBody: string | undefined;
     tags: string[];
+    isOwner?: boolean;
     className?: string;
 }
 
 export const Article: React.FC<ArticleProps> = ({
+    postId,
     title,
+    prettyTitle,
     userIcon,
     coverImage,
     userName,
@@ -27,6 +32,7 @@ export const Article: React.FC<ArticleProps> = ({
     wordsNumber,
     articleBody,
     tags,
+    isOwner = false,
     className = ''
 }) => {
     return (
@@ -34,11 +40,14 @@ export const Article: React.FC<ArticleProps> = ({
             <Title title={title} />
             <Metadata
                 className='mt-5'
+                postId={postId}
+                prettyTitle={prettyTitle}
                 userIcon={userIcon}
                 userName={userName}
                 creationDate={creationDate}
                 readingTime={readingTime}
                 wordsNumber={wordsNumber}
+                isOwner={isOwner}
             />
             <Tags className='mt-3 mb-8' tags={tags} />
             <CoverImage alt='' src={coverImage} />

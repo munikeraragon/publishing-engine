@@ -22,7 +22,7 @@ export const PostForm: React.FC = () => {
             </div>
 
             <div className='flex-1 grid grid-cols-12 gap-x-8'>
-                <div className='col-span-12 lg:col-span-8 flex flex-col bg-white '>
+                <div className='col-span-12 lg:col-span-8 flex flex-col bg-white'>
                     {previewShowing ? <Preview /> : <Form />}
                 </div>
 

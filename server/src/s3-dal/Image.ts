@@ -1,4 +1,9 @@
-import { CreateBucketCommand, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import {
+    CreateBucketCommand,
+    PutObjectCommand,
+    GetObjectCommand,
+    DeleteObjectCommand
+} from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { s3Client } from './utils'; // Helper function that creates Amazon S3 service client module.
 
@@ -23,6 +28,17 @@ export class S3ImageService {
             expiresIn: 100
         });
         return signedUrl;
+    }
+
+    static async delete(imageKey: string) {
+        const result = await s3Client.send(
+            new DeleteObjectCommand({
+                Bucket: process.env.S3_IMAGE_BUCKET,
+                Key: imageKey
+            })
+        );
+        console.log(result);
+        return result;
     }
 
     static async createBucket() {

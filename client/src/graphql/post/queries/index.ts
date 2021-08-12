@@ -29,6 +29,8 @@ export const GetPostByUserNameAndTitle = gql`
             title
             prettyTitle
             userName
+            userLocale
+            userCreationDate
             tags
             userPicture
             mainImageId
@@ -45,5 +47,11 @@ export const GetPostByUserNameAndTitle = gql`
             }
             readingTime
         }
+    }
+`;
+
+export const DeletePost = gql`
+    query DeletePost($postId: Float!) {
+        deletePost(postId: $postId)
     }
 `;

@@ -7,6 +7,9 @@ export interface MainImage {
 }
 
 export interface FormState {
+    postId: number | null;
+    setPostId: (_: number | null) => void;
+
     previewShowing: boolean;
     setPreviewShowing: (_: boolean) => void;
 
@@ -38,9 +41,15 @@ export interface FormState {
 
     publishing: boolean;
     setPublishing: (_: boolean) => void;
+
+    updating: boolean;
+    setUpdating: (_: boolean) => void;
 }
 
 export const useFormStore = create<FormState>((set) => ({
+    postId: null,
+    setPostId: (arg: number | null) => set(() => ({ postId: arg })),
+
     previewShowing: false,
     setPreviewShowing: (arg: boolean) => set(() => ({ previewShowing: arg })),
 
@@ -69,6 +78,9 @@ export const useFormStore = create<FormState>((set) => ({
     mainBody: '',
     setMainBody: (arg: string) => set(() => ({ mainBody: arg })),
 
-    publishing: false,
-    setPublishing: (arg: boolean) => set(() => ({ publishing: arg }))
+    publishing: true,
+    setPublishing: (arg: boolean) => set(() => ({ publishing: arg })),
+
+    updating: false,
+    setUpdating: (arg: boolean) => set(() => ({ updating: arg }))
 }));

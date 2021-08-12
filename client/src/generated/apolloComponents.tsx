@@ -72,11 +72,17 @@ export type ImageMapping = {
 export type Mutation = {
     __typename?: 'Mutation';
     createPost: SignedPost;
+    updatePost: SignedPost;
     createContactMessage: Scalars['String'];
     createImage: Image;
 };
 
 export type MutationCreatePostArgs = {
+    postInput: PostInput;
+};
+
+export type MutationUpdatePostArgs = {
+    postId: Scalars['Float'];
     postInput: PostInput;
 };
 
@@ -93,6 +99,8 @@ export type Post = {
     id: Scalars['ID'];
     userName: Scalars['String'];
     userIcon: Scalars['String'];
+    userLocale: Scalars['String'];
+    userCreationDate: Scalars['String'];
     userPicture: Scalars['String'];
     title: Scalars['String'];
     tags: Array<Scalars['String']>;
@@ -132,8 +140,7 @@ export type Query = {
     getPostById: SignedPost;
     getUserPosts: Array<Post>;
     search: Array<Post>;
-    deletePost: User;
-    updatePost: User;
+    deletePost: Scalars['String'];
     getPostByUserNameAndTitle: SignedPost;
     getContactMessages: Array<ContactMessage>;
     getUser: User;
@@ -147,6 +154,10 @@ export type QueryGetPostByIdArgs = {
 
 export type QuerySearchArgs = {
     searchInput: SearchInput;
+};
+
+export type QueryDeletePostArgs = {
+    postId: Scalars['Float'];
 };
 
 export type QueryGetPostByUserNameAndTitleArgs = {
@@ -172,6 +183,8 @@ export type SignedPost = {
     id: Scalars['ID'];
     userName: Scalars['String'];
     userIcon: Scalars['String'];
+    userLocale: Scalars['String'];
+    userCreationDate: Scalars['String'];
     userPicture: Scalars['String'];
     title: Scalars['String'];
     tags: Array<Scalars['String']>;
@@ -278,8 +291,39 @@ export type CreatePostMutation = { __typename?: 'Mutation' } & {
         | 'id'
         | 'title'
         | 'userName'
-        | 'mainImageId'
         | 'userPicture'
+        | 'userLocale'
+        | 'userCreationDate'
+        | 'mainImageId'
+        | 'prettyTitle'
+        | 'images'
+        | 'paragraphs'
+        | 'words'
+        | 'readingTime'
+        | 'presignedUrl'
+        | 'creationDate'
+    > & {
+            imagesMapping: Array<
+                { __typename?: 'ImageMapping' } & Pick<ImageMapping, 'id' | 'label'>
+            >;
+        };
+};
+
+export type UpdatePostMutationVariables = Exact<{
+    postId: Scalars['Float'];
+    postInput: PostInput;
+}>;
+
+export type UpdatePostMutation = { __typename?: 'Mutation' } & {
+    updatePost: { __typename?: 'SignedPost' } & Pick<
+        SignedPost,
+        | 'id'
+        | 'title'
+        | 'userName'
+        | 'userPicture'
+        | 'userLocale'
+        | 'userCreationDate'
+        | 'mainImageId'
         | 'prettyTitle'
         | 'images'
         | 'paragraphs'
@@ -331,6 +375,8 @@ export type GetPostByUserNameAndTitleQuery = { __typename?: 'Query' } & {
         | 'title'
         | 'prettyTitle'
         | 'userName'
+        | 'userLocale'
+        | 'userCreationDate'
         | 'tags'
         | 'userPicture'
         | 'mainImageId'
@@ -348,6 +394,12 @@ export type GetPostByUserNameAndTitleQuery = { __typename?: 'Query' } & {
             >;
         };
 };
+
+export type DeletePostQueryVariables = Exact<{
+    postId: Scalars['Float'];
+}>;
+
+export type DeletePostQuery = { __typename?: 'Query' } & Pick<Query, 'deletePost'>;
 
 export type SearchQueryVariables = Exact<{
     searchInput: SearchInput;
@@ -377,7 +429,10 @@ export type SearchQuery = { __typename?: 'Query' } & {
 export type GetUserQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUserQuery = { __typename?: 'Query' } & {
-    getUser: { __typename?: 'User' } & Pick<User, 'userIcon' | 'userName'>;
+    getUser: { __typename?: 'User' } & Pick<
+        User,
+        'userIcon' | 'userName' | 'locale' | 'creationDate'
+    >;
 };
 
 export const GetAdminInsightDocument = gql`
@@ -602,8 +657,10 @@ export const CreatePostDocument = gql`
             id
             title
             userName
-            mainImageId
             userPicture
+            userLocale
+            userCreationDate
+            mainImageId
             prettyTitle
             images
             paragraphs
@@ -654,6 +711,68 @@ export type CreatePostMutationResult = Apollo.MutationResult<CreatePostMutation>
 export type CreatePostMutationOptions = Apollo.BaseMutationOptions<
     CreatePostMutation,
     CreatePostMutationVariables
+>;
+export const UpdatePostDocument = gql`
+    mutation UpdatePost($postId: Float!, $postInput: PostInput!) {
+        updatePost(postId: $postId, postInput: $postInput) {
+            id
+            title
+            userName
+            userPicture
+            userLocale
+            userCreationDate
+            mainImageId
+            prettyTitle
+            images
+            paragraphs
+            words
+            imagesMapping {
+                id
+                label
+            }
+            readingTime
+            presignedUrl
+            creationDate
+        }
+    }
+`;
+export type UpdatePostMutationFn = Apollo.MutationFunction<
+    UpdatePostMutation,
+    UpdatePostMutationVariables
+>;
+
+/**
+ * __useUpdatePostMutation__
+ *
+ * To run a mutation, you first call `useUpdatePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePostMutation, { data, loading, error }] = useUpdatePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *      postInput: // value for 'postInput'
+ *   },
+ * });
+ */
+export function useUpdatePostMutation(
+    baseOptions?: Apollo.MutationHookOptions<UpdatePostMutation, UpdatePostMutationVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<UpdatePostMutation, UpdatePostMutationVariables>(
+        UpdatePostDocument,
+        options
+    );
+}
+export type UpdatePostMutationHookResult = ReturnType<typeof useUpdatePostMutation>;
+export type UpdatePostMutationResult = Apollo.MutationResult<UpdatePostMutation>;
+export type UpdatePostMutationOptions = Apollo.BaseMutationOptions<
+    UpdatePostMutation,
+    UpdatePostMutationVariables
 >;
 export const GetUserPostsDocument = gql`
     query GetUserPosts {
@@ -723,6 +842,8 @@ export const GetPostByUserNameAndTitleDocument = gql`
             title
             prettyTitle
             userName
+            userLocale
+            userCreationDate
             tags
             userPicture
             mainImageId
@@ -793,6 +914,46 @@ export type GetPostByUserNameAndTitleQueryResult = Apollo.QueryResult<
     GetPostByUserNameAndTitleQuery,
     GetPostByUserNameAndTitleQueryVariables
 >;
+export const DeletePostDocument = gql`
+    query DeletePost($postId: Float!) {
+        deletePost(postId: $postId)
+    }
+`;
+
+/**
+ * __useDeletePostQuery__
+ *
+ * To run a query within a React component, call `useDeletePostQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDeletePostQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDeletePostQuery({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useDeletePostQuery(
+    baseOptions: Apollo.QueryHookOptions<DeletePostQuery, DeletePostQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<DeletePostQuery, DeletePostQueryVariables>(DeletePostDocument, options);
+}
+export function useDeletePostLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<DeletePostQuery, DeletePostQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<DeletePostQuery, DeletePostQueryVariables>(
+        DeletePostDocument,
+        options
+    );
+}
+export type DeletePostQueryHookResult = ReturnType<typeof useDeletePostQuery>;
+export type DeletePostLazyQueryHookResult = ReturnType<typeof useDeletePostLazyQuery>;
+export type DeletePostQueryResult = Apollo.QueryResult<DeletePostQuery, DeletePostQueryVariables>;
 export const SearchDocument = gql`
     query Search($searchInput: SearchInput!) {
         search(searchInput: $searchInput) {
@@ -849,6 +1010,8 @@ export const GetUserDocument = gql`
         getUser {
             userIcon
             userName
+            locale
+            creationDate
         }
     }
 `;

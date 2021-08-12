@@ -21,6 +21,12 @@ export class SignedPost {
     userIcon!: string;
 
     @Field({ nullable: false })
+    userLocale!: string;
+
+    @Field({ nullable: false })
+    userCreationDate!: string;
+
+    @Field({ nullable: false })
     userPicture!: string;
 
     @Field({ nullable: false })
@@ -73,6 +79,12 @@ export class Post {
 
     @Field({ nullable: false })
     userIcon!: string;
+
+    @Field({ nullable: false })
+    userLocale!: string;
+
+    @Field({ nullable: false })
+    userCreationDate!: string;
 
     @Field({ nullable: false })
     userPicture!: string;

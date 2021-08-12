@@ -31,6 +31,10 @@ a {
     height: 100% !important;
 }
 
+.w-md-editor-aree {
+    overflow: unset !important;
+}
+
 .w-md-editor {
     box-shadow: none !important;
     border: 0 !important;
@@ -38,4 +42,5 @@ a {
 
 .w-md-editor-text {
     font-size: 1.2rem !important;
+    padding: 0 !important;
 }

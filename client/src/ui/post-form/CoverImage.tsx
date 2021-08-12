@@ -48,8 +48,6 @@ const MainImage = () => {
     const { imageId, setUploadImage, setMainImage, setMainImageUrl, mainImageUrl } = useFormStore(
         (state) => state
     );
-    if (!imageId) return null;
-
     const { downloadMetadata } = useS3ImageDownload(imageId);
 
     useEffect(() => {

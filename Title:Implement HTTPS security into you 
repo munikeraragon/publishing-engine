@@ -1,0 +1,18 @@
+Title:Implement HTTPS security into you full-stack application
+
+description:Secure your React and Express application using Docker, Nginx, and Letsencrypt.
+
+react, express, letsencrypt, docker
+
+body: 
+
+In this post, I want to show how to overcome the hurdle of integrating HTTPS security into both the front-end and back-end of your React and Express application.
+
+Why do I need HTTPS?
+
+There are two main reasons why you would want to implement HTTPS security in your web app.  As you may have guessed, the first reason it's due to application security and information encryption. Following the HTTPS protocol signifies that all incoming and outgoing information is being encrypted and that malicious attackers will not be able to intercept the information and decipher it.  
+
+Prerequisites:
+Docker
+Dokcer-compose
+

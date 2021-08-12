@@ -7,28 +7,6 @@ import {
     PostInput
 } from '../../generated/apolloComponents';
 
-const generatePost = async (
-    postInput: PostInput,
-    createPost: (
-        options?:
-            | MutationFunctionOptions<CreatePostMutation, Exact<{ postInput: PostInput }>>
-            | undefined
-    ) => any
-) => {
-    try {
-        return (
-            await createPost({
-                variables: {
-                    postInput: postInput
-                }
-            })
-        ).data.createPost;
-    } catch (err) {
-        console.log(err);
-        return '';
-    }
-};
-
 export interface UploadMetadata {
     data: any;
     status: string;
@@ -58,6 +36,28 @@ const mergeObjects = (primary: any, secondary: any) => {
         }
     });
     return primary;
+};
+
+const generatePost = async (
+    postInput: PostInput,
+    createPost: (
+        options?:
+            | MutationFunctionOptions<CreatePostMutation, Exact<{ postInput: PostInput }>>
+            | undefined
+    ) => any
+) => {
+    try {
+        return (
+            await createPost({
+                variables: {
+                    postInput: postInput
+                }
+            })
+        ).data.createPost;
+    } catch (err) {
+        console.log(err);
+        return '';
+    }
 };
 
 export const useS3PostUpload = () => {

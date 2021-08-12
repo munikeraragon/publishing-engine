@@ -5,6 +5,8 @@ export const GetUser = gql`
         getUser {
             userIcon
             userName
+            locale
+            creationDate
         }
     }
 `;

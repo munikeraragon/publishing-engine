@@ -13,3 +13,19 @@ export interface Article {
     wordsNumber: number;
     readingTime: number;
 }
+
+export interface UploadPost {
+    title: string;
+    description: string;
+    mainImageId: number;
+    images: number;
+    imagesIds: number[];
+    paragraphs: number;
+    words: number;
+    readingTime: number;
+    publish: boolean;
+    mainImage: number;
+    mainBody: string;
+    tags: string[];
+    creationDate: string;
+}

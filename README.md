@@ -78,6 +78,10 @@ CREATE DATABASE publishing_engine_dev;
 CREATE DATABASE publishing_engine_stage;
 
 CREATE DATABASE publishing_engine_prod;
+
+UPDATE User
+SET role = 'ADMIN'
+WHERE userName = 'munikeraragon';
 ```
 
 Rollback migration

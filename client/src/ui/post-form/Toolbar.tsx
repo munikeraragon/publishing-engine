@@ -1,8 +1,11 @@
 import { ImageUploader } from './ImageUploader';
 
-export const Toolbar = () => {
+export interface ToolbarProps {
+    className?: string;
+}
+export const Toolbar: React.FC<ToolbarProps> = ({ className = '' }) => {
     return (
-        <div>
+        <div className={`${className}`}>
             <ImageUploader />
         </div>
     );

@@ -4,6 +4,7 @@ import { getKnex } from './utils';
 import { TagService } from './Tag';
 import { SearchInput } from '../graphql/entities/Search';
 import _ from 'lodash';
+import { S3PostService } from '../s3-dal/Post';
 
 const knex: Knex = getKnex();
 
@@ -48,6 +49,53 @@ export class PostService {
         return knex.transaction(async (trx) => {
             try {
                 return await this._search(trx, searchInput);
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
+    static async delete(postId: Number) {
+        return knex.transaction(async (trx) => {
+            try {
+                await trx('PostImage').where({ postId: postId }).del();
+                await trx('PostTag').where({ postId: postId }).del();
+                await trx('Post').where({ id: postId }).del();
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
+    static async update(postId: number, postInput: PostInput, objectKey: string) {
+        return knex.transaction(async (trx) => {
+            try {
+                const post = await this.findById(postId);
+
+                if (post.objectKey !== objectKey) {
+                    S3PostService.delete(objectKey);
+                }
+
+                if (postInput.tags !== post.tags) {
+                    await this._insertTags(trx, post.id, _.difference(postInput.tags, post.tags));
+                    await this._deleteTags(trx, post.id, _.difference(post.tags, postInput.tags));
+                }
+
+                await trx('Post')
+                    .where({ id: post.id })
+                    .update({
+                        objectKey: objectKey,
+                        mainImageId: postInput.mainImageId,
+                        title: postInput.title,
+                        prettyTitle: postInput.title.toLowerCase().replace(/ /g, '-'),
+                        description: postInput.description,
+                        images: postInput.images,
+                        paragraphs: postInput.paragraphs,
+                        words: postInput.words,
+                        readingTime: postInput.readingTime
+                    });
             } catch (err) {
                 console.log(err);
                 trx.rollback();
@@ -128,6 +176,8 @@ export class PostService {
             .select({
                 id: 'Post.id',
                 userName: 'User.userName',
+                userLocale: 'User.locale',
+                userCreationDate: 'User.creationDate',
                 userIcon: 'User.userIcon',
                 userPicture: 'User.picture',
                 title: 'Post.title',
@@ -166,6 +216,8 @@ export class PostService {
             userName: postAndImages[0].userName,
             userIcon: postAndImages[0].userIcon,
             userPicture: postAndImages[0].userPicture,
+            userLocale: postAndImages[0].userLocale,
+            userCreationDate: postAndImages[0].creationDate,
             title: postAndImages[0].title,
             description: postAndImages[0].description,
             prettyTitle: postAndImages[0].prettyTitle,
@@ -223,6 +275,21 @@ export class PostService {
                     postId: postId,
                     tagId: (await TagService.findOrCreate(name)).id
                 });
+            })
+        );
+    }
+
+    static async _deleteTags(trx: Knex.Transaction, postId: number, tags: string[]) {
+        if (tags.length === 0) return;
+
+        await Promise.all(
+            _.map(tags, async (name) => {
+                await trx('PostTag')
+                    .where({
+                        postId: postId,
+                        tagId: (await TagService.findOrCreate(name)).id
+                    })
+                    .delete();
             })
         );
     }

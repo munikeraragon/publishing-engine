@@ -1,6 +1,7 @@
 import { Knex } from 'knex';
 import { getKnex } from './utils';
 import { ImageInput } from '../graphql/entities/Image';
+import _ from 'lodash';
 
 // every 24 hours I would want to check images that are
 // associated to users but not to articles and delete them.
@@ -24,6 +25,33 @@ export class ImageService {
         return knex.transaction(async (trx) => {
             try {
                 return this._findById(trx, imageId);
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
+    static async findByPostId(postId: number) {
+        return knex.transaction(async (trx) => {
+            try {
+                const images = await trx('PostImage').where({ postId: postId });
+                return await Promise.all(
+                    _.map(images, async (image: any) => {
+                        return await this._findById(trx, image.imageId);
+                    })
+                );
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
+    static async delete(imageId: number) {
+        return knex.transaction(async (trx) => {
+            try {
+                return await trx('Image').where({ id: imageId }).del();
             } catch (err) {
                 console.log(err);
                 trx.rollback();

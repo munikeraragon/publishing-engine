@@ -7,14 +7,13 @@ export interface DownloadMetadata {
     message: string;
 }
 
-export const useS3ImageDownload = (imageId: number | undefined) => {
+export const useS3ImageDownload = (imageId: number | null) => {
+    const [useGetImageById, { data, loading, error }] = useGetImageByIdLazyQuery();
     const [downloadMetadata, setMetadata] = useState<DownloadMetadata>({
         status: 'start',
         message: '',
         imageUrl: null
     });
-
-    const [useGetImageById, { data, loading, error }] = useGetImageByIdLazyQuery();
 
     useEffect(() => {
         if (imageId) {

@@ -40,18 +40,18 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
                     {props.linkLabel1 && (
                         <div data-aos='fade-right' className='z-10 rounded-md shadow'>
                             <Link href={props.linkHref1 || ''}>
-                                <span className='w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
+                                <a className='w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
                                     {props.linkLabel1}
-                                </span>
+                                </a>
                             </Link>
                         </div>
                     )}
                     {props.linkLabel2 && (
                         <div data-aos='fade-right' className='z-10 mt-3 sm:mt-0 sm:ml-3'>
                             <Link href={props.linkHref2 || 'link-2'}>
-                                <span className=' w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 hover:bg-blue-200 md:py-2 md:text-lg md:px-10'>
+                                <a className=' w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 hover:bg-blue-200 md:py-2 md:text-lg md:px-10'>
                                     {props.linkLabel2}
-                                </span>
+                                </a>
                             </Link>
                         </div>
                     )}
