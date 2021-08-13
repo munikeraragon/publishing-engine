@@ -140,6 +140,8 @@ export const HomePage: React.FC = () => {
                 <ProfileCard
                     userName={user?.userName}
                     userIcon={user?.userIcon}
+                    creationDate={user?.creationDate}
+                    location={user?.locale}
                     className='col-span-4 w-80 mx-auto mt-8'
                 />
             </div>
