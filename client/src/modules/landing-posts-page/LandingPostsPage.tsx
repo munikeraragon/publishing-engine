@@ -12,7 +12,7 @@ export interface Post {
     readingTime: number;
     userIcon: string;
     comments: number;
-    reactions: number;
+    likes: number;
     description: string;
     tags: string[];
 }
@@ -45,7 +45,7 @@ export const LandingPostsPage: React.FC = () => {
                         readingTime: elem.readingTime,
                         userIcon: elem.userIcon,
                         comments: elem.comments,
-                        reactions: elem.reactions,
+                        likes: elem.likes,
                         description: elem.description,
                         tags: elem.tags
                     };
