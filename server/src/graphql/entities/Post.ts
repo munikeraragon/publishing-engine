@@ -57,7 +57,10 @@ export class SignedPost {
     readingTime!: number;
 
     @Field({ nullable: false })
-    reactions!: number;
+    likes!: number;
+
+    @Field({ nullable: false })
+    saved!: number;
 
     @Field({ nullable: false })
     comments!: number;
@@ -111,7 +114,10 @@ export class Post {
     paragraphs!: number;
 
     @Field({ nullable: false })
-    reactions!: number;
+    likes!: number;
+
+    @Field({ nullable: false })
+    saved!: number;
 
     @Field({ nullable: false })
     comments!: number;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { DashboardLayout } from '../../layouts/dash-auth';
-import { useGetUserPostsQuery } from '../../generated/apolloComponents';
+import { useGetUserSavedPostsQuery } from '../../generated/apolloComponents';
 import { PostCardWrapper } from '../../ui/wrappers/PostCardWrapper';
 import moment from 'moment';
 
@@ -16,15 +16,15 @@ export interface SimplePost {
     readingTime: number;
 }
 
-export const ContentPage: React.FC = () => {
+export const ReadingListPage: React.FC = () => {
     const [showSkeleton, setShowSkeleton] = useState(false);
-    const { data, loading, error } = useGetUserPostsQuery();
+    const { data, loading, error } = useGetUserSavedPostsQuery();
     const [posts, setPosts] = useState<SimplePost[]>([]);
 
     useEffect(() => {
         if (!loading && !error && data) {
             setPosts(
-                data.getUserPosts.map((elem) => {
+                data.getUserSavedPosts.map((elem) => {
                     return {
                         userName: elem.userName,
                         imageId: elem.mainImageId,
@@ -48,7 +48,7 @@ export const ContentPage: React.FC = () => {
     return (
         <div className='min-h-full mx-8 my-4 w-full'>
             <div className='pb-2'>
-                <h1 className='text-xl text-gray-900 tracking-tight font-semibold'>My Content</h1>
+                <h1 className='text-xl text-gray-900 tracking-tight font-semibold'>Reading List</h1>
             </div>
 
             <div className='m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
@@ -73,4 +73,4 @@ export const ContentPage: React.FC = () => {
     );
 };
 
-(ContentPage as any).layout = DashboardLayout;
+(ReadingListPage as any).layout = DashboardLayout;

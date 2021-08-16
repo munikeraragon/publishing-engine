@@ -11,7 +11,7 @@ export const GetUser = gql`
             description
             userPicture
             userIcon
-            reactions
+            likes
             comments
             mainImageId
             readingTime

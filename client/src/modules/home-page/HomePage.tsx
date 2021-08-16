@@ -48,7 +48,7 @@ export const HomePage: React.FC = () => {
                         readingTime: elem.readingTime,
                         userIcon: elem.userIcon,
                         comments: elem.comments,
-                        reactions: elem.reactions,
+                        reactions: elem.likes,
                         tags: elem.tags
                     };
                 })

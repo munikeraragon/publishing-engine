@@ -45,7 +45,11 @@ export const useS3PostDownload = (userName: string, title: string) => {
                     });
                 })
                 .catch((err) => {
-                    console.log(err);
+                    setMetadata({
+                        status: 'error',
+                        data: data.getPostByUserNameAndTitle,
+                        message: err
+                    });
                 });
         }
     }, [loading, error]);

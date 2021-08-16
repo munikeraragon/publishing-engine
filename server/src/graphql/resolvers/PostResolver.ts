@@ -19,10 +19,44 @@ export class PostResolver {
         return { ...post, presignedUrl };
     }
 
+    @Query((returns) => SignedPost)
+    async getPostByUserNameAndTitle(
+        @Arg('userName') userName: string,
+        @Arg('title') title: string
+    ): Promise<SignedPost> {
+        const post = await PostService.findByUserNameAndTitle(userName, title);
+        const presignedUrl = await S3PostService.createDownloadUrl(post.objectKey);
+        return { ...post, presignedUrl };
+    }
+
     @Authorized()
     @Query((returns) => [Post])
     async getUserPosts(@CurrentUser() userId: number): Promise<Post[]> {
         return await PostService.findUserPosts(userId);
+    }
+
+    @Authorized()
+    @Query((returns) => [Post])
+    async getUserSavedPosts(@CurrentUser() userId: number): Promise<Post[]> {
+        return await PostService.findUserSavedPosts(userId);
+    }
+
+    @Authorized()
+    @Query((returns) => Boolean)
+    async isPostSaved(
+        @CurrentUser() userId: number,
+        @Arg('postId') postId: number
+    ): Promise<boolean> {
+        return await PostService.isPostSaved(userId, postId);
+    }
+
+    @Authorized()
+    @Query((returns) => Boolean)
+    async isPostLiked(
+        @CurrentUser() userId: number,
+        @Arg('postId') postId: number
+    ): Promise<boolean> {
+        return await PostService.isPostSaved(userId, postId);
     }
 
     @Query((returns) => [Post])
@@ -60,7 +94,31 @@ export class PostResolver {
     }
 
     @Authorized()
-    @Query((returns) => String)
+    @Mutation((returns) => String)
+    async likePost(@CurrentUser() userId: number, @Arg('postId') postId: number) {
+        return await PostService.like(userId, postId);
+    }
+
+    @Authorized()
+    @Mutation((returns) => String)
+    async unlikePost(@CurrentUser() userId: number, @Arg('postId') postId: number) {
+        return await PostService.unlike(userId, postId);
+    }
+
+    @Authorized()
+    @Mutation((returns) => String)
+    async savePost(@CurrentUser() userId: number, @Arg('postId') postId: number) {
+        return await PostService.save(userId, postId);
+    }
+
+    @Authorized()
+    @Mutation((returns) => String)
+    async unsavePost(@CurrentUser() userId: number, @Arg('postId') postId: number) {
+        return await PostService.unsave(userId, postId);
+    }
+
+    @Authorized()
+    @Mutation((returns) => String)
     async deletePost(@Arg('postId') postId: number): Promise<string> {
         const imagesToDelete = await ImageService.findByPostId(postId);
         const postToDelete = await PostService.findById(postId);
@@ -72,15 +130,5 @@ export class PostResolver {
             })
         );
         return '';
-    }
-
-    @Query((returns) => SignedPost)
-    async getPostByUserNameAndTitle(
-        @Arg('userName') userName: string,
-        @Arg('title') title: string
-    ): Promise<SignedPost> {
-        const post = await PostService.findByUserNameAndTitle(userName, title);
-        const presignedUrl = await S3PostService.createDownloadUrl(post.objectKey);
-        return { ...post, presignedUrl };
     }
 }

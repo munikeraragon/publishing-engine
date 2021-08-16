@@ -5,7 +5,7 @@ import { useTokenStore } from '../modules/auth/useTokenStore';
 interface logoutProps {}
 
 export const Logout: React.FC<logoutProps> = ({}) => {
-    const { replace } = useRouter();
+    const { push } = useRouter();
     const [hasTokens, setTokens] = useTokenStore((s) => [
         !!(s.accessToken && s.refreshToken),
         s.setTokens
@@ -14,9 +14,9 @@ export const Logout: React.FC<logoutProps> = ({}) => {
     useEffect(() => {
         if (!hasTokens) {
             console.log('sending to main');
-            replace('/');
+            push('/');
         }
-    }, [hasTokens, replace]);
+    }, [hasTokens]);
 
     return (
         <button

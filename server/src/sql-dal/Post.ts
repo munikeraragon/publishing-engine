@@ -3,8 +3,8 @@ import { PostInput } from '../graphql/entities/Post';
 import { getKnex } from './utils';
 import { TagService } from './Tag';
 import { SearchInput } from '../graphql/entities/Search';
-import _ from 'lodash';
 import { S3PostService } from '../s3-dal/Post';
+import _ from 'lodash';
 
 const knex: Knex = getKnex();
 
@@ -45,6 +45,17 @@ export class PostService {
         });
     }
 
+    static async findUserSavedPosts(userId: number) {
+        return knex.transaction(async (trx) => {
+            try {
+                return await this._findUserSavedPosts(trx, userId);
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
     static async search(searchInput: SearchInput) {
         return knex.transaction(async (trx) => {
             try {
@@ -65,6 +76,78 @@ export class PostService {
             } catch (err) {
                 console.log(err);
                 trx.rollback();
+            }
+        });
+    }
+
+    static async like(userId: number, postId: Number) {
+        return knex.transaction(async (trx) => {
+            try {
+                const res = await trx('Likes').where({ userId, postId });
+                if (res.length === 0) {
+                    await trx('Likes').insert({ userId, postId });
+                    await trx('Post').increment('likes').where({ id: postId });
+                    return 'success';
+                }
+                return 'post has already been liked';
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+                return err;
+            }
+        });
+    }
+
+    static async unlike(userId: number, postId: Number) {
+        return knex.transaction(async (trx) => {
+            try {
+                const res = await trx('Likes').where({ userId, postId });
+                if (res.length === 1) {
+                    await trx('Likes').where({ userId, postId }).delete();
+                    await trx('Post').decrement('likes').where({ id: postId });
+                    return 'success';
+                }
+                return 'post has already been unliked';
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+                return err;
+            }
+        });
+    }
+
+    static async save(userId: number, postId: Number) {
+        return knex.transaction(async (trx) => {
+            try {
+                const res = await trx('Saved').where({ userId, postId });
+                if (res.length === 0) {
+                    await trx('Saved').insert({ userId, postId });
+                    await trx('Post').increment('saved').where({ id: postId });
+                    return 'success';
+                }
+                return 'post has already been saved';
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+                return err;
+            }
+        });
+    }
+
+    static async unsave(userId: number, postId: Number) {
+        return knex.transaction(async (trx) => {
+            try {
+                const res = await trx('Saved').where({ userId, postId });
+                if (res.length === 1) {
+                    await trx('Saved').where({ userId, postId }).delete();
+                    await trx('Post').decrement('saved').where({ id: postId });
+                    return 'success';
+                }
+                return 'post has already been unsaved';
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+                return err;
             }
         });
     }
@@ -126,6 +209,28 @@ export class PostService {
         });
     }
 
+    static async isPostSaved(userId: number, postId: number) {
+        return knex.transaction(async (trx) => {
+            try {
+                return (await trx('Saved').where({ userId, postId })).length === 1;
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
+    static async isPostLiked(userId: number, postId: number) {
+        return knex.transaction(async (trx) => {
+            try {
+                return (await trx('Likes').where({ userId, postId })).length === 1;
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
     static async _search(trx: Knex.Transaction, searchInput: SearchInput) {
         const postsIds = await trx('Post')
             .leftJoin('User', 'User.id', 'Post.userId')
@@ -154,13 +259,28 @@ export class PostService {
 
     static async _findUserPosts(trx: Knex.Transaction, userId: number) {
         const postsIds = await trx('Post')
-            .leftJoin('User', 'User.id', 'Post.userId')
+            .join('User', 'User.id', 'Post.userId')
             .where({ 'User.id': userId })
             .select('Post.id');
 
         return await Promise.all(
             _.map(postsIds, async (post) => {
                 return await this._findById(trx, post.id);
+            })
+        );
+    }
+
+    static async _findUserSavedPosts(trx: Knex.Transaction, userId: number) {
+        const postsIds = await trx('User')
+            .join('Saved', 'User.id', 'Saved.userId')
+            .where({ 'User.id': userId })
+            .select('Saved.postId');
+
+        console.log(postsIds);
+
+        return await Promise.all(
+            _.map(postsIds, async (post) => {
+                return await this._findById(trx, post.postId);
             })
         );
     }
@@ -188,7 +308,8 @@ export class PostService {
                 images: 'Post.images',
                 paragraphs: 'Post.paragraphs',
                 words: 'Post.words',
-                reactions: 'Post.reactions',
+                likes: 'Post.likes',
+                saved: 'Post.saved',
                 readingTime: 'Post.readingTime',
                 creationDate: 'Post.creationDate',
                 objectKey: 'Post.objectKey',
@@ -226,7 +347,8 @@ export class PostService {
             paragraphs: postAndImages[0].paragraphs,
             words: postAndImages[0].words,
             readingTime: postAndImages[0].readingTime,
-            reactions: postAndImages[0].reactions,
+            likes: postAndImages[0].likes,
+            saved: postAndImages[0].saved,
             comments: postAndImages[0].comments,
             creationDate: postAndImages[0].creationDate,
             objectKey: postAndImages[0].objectKey,

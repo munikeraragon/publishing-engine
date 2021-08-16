@@ -14,8 +14,9 @@ export async function up(knex: Knex): Promise<void> {
             t.integer('paragraphs');
             t.integer('words');
             t.integer('readingTime');
-            t.integer('reactions').defaultTo(0);
+            t.integer('likes').defaultTo(0);
             t.integer('comments').defaultTo(0);
+            t.integer('saved').defaultTo(0);
             t.boolean('publish').defaultTo(false);
             t.timestamp('creationDate').defaultTo(knex.fn.now());
             t.unique(['userId', 'title']);

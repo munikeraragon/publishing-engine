@@ -73,7 +73,13 @@ export type Mutation = {
     __typename?: 'Mutation';
     createPost: SignedPost;
     updatePost: SignedPost;
+    likePost: Scalars['String'];
+    unlikePost: Scalars['String'];
+    savePost: Scalars['String'];
+    unsavePost: Scalars['String'];
+    deletePost: Scalars['String'];
     createContactMessage: Scalars['String'];
+    follow: Scalars['String'];
     createImage: Image;
 };
 
@@ -86,8 +92,32 @@ export type MutationUpdatePostArgs = {
     postInput: PostInput;
 };
 
+export type MutationLikePostArgs = {
+    postId: Scalars['Float'];
+};
+
+export type MutationUnlikePostArgs = {
+    postId: Scalars['Float'];
+};
+
+export type MutationSavePostArgs = {
+    postId: Scalars['Float'];
+};
+
+export type MutationUnsavePostArgs = {
+    postId: Scalars['Float'];
+};
+
+export type MutationDeletePostArgs = {
+    postId: Scalars['Float'];
+};
+
 export type MutationCreateContactMessageArgs = {
     contactMessageInput: ContactMessageInput;
+};
+
+export type MutationFollowArgs = {
+    creatorId: Scalars['Float'];
 };
 
 export type MutationCreateImageArgs = {
@@ -109,7 +139,8 @@ export type Post = {
     mainImageId: Scalars['Float'];
     images: Scalars['Float'];
     paragraphs: Scalars['Float'];
-    reactions: Scalars['Float'];
+    likes: Scalars['Float'];
+    saved: Scalars['Float'];
     comments: Scalars['Float'];
     words: Scalars['Float'];
     imagesMapping: Array<ImageMapping>;
@@ -138,10 +169,12 @@ export type PostInsight = {
 export type Query = {
     __typename?: 'Query';
     getPostById: SignedPost;
-    getUserPosts: Array<Post>;
-    search: Array<Post>;
-    deletePost: Scalars['String'];
     getPostByUserNameAndTitle: SignedPost;
+    getUserPosts: Array<Post>;
+    getUserSavedPosts: Array<Post>;
+    isPostSaved: Scalars['Boolean'];
+    isPostLiked: Scalars['Boolean'];
+    search: Array<Post>;
     getContactMessages: Array<ContactMessage>;
     getUser: User;
     getImageById: Image;
@@ -152,17 +185,21 @@ export type QueryGetPostByIdArgs = {
     postId: Scalars['Float'];
 };
 
-export type QuerySearchArgs = {
-    searchInput: SearchInput;
-};
-
-export type QueryDeletePostArgs = {
-    postId: Scalars['Float'];
-};
-
 export type QueryGetPostByUserNameAndTitleArgs = {
     title: Scalars['String'];
     userName: Scalars['String'];
+};
+
+export type QueryIsPostSavedArgs = {
+    postId: Scalars['Float'];
+};
+
+export type QueryIsPostLikedArgs = {
+    postId: Scalars['Float'];
+};
+
+export type QuerySearchArgs = {
+    searchInput: SearchInput;
 };
 
 export type QueryGetImageByIdArgs = {
@@ -195,7 +232,8 @@ export type SignedPost = {
     words: Scalars['Float'];
     imagesMapping: Array<ImageMapping>;
     readingTime: Scalars['Float'];
-    reactions: Scalars['Float'];
+    likes: Scalars['Float'];
+    saved: Scalars['Float'];
     comments: Scalars['Float'];
     creationDate: Scalars['String'];
     presignedUrl: Scalars['String'];
@@ -338,6 +376,36 @@ export type UpdatePostMutation = { __typename?: 'Mutation' } & {
         };
 };
 
+export type DeletePostMutationVariables = Exact<{
+    postId: Scalars['Float'];
+}>;
+
+export type DeletePostMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'deletePost'>;
+
+export type LikePostMutationVariables = Exact<{
+    postId: Scalars['Float'];
+}>;
+
+export type LikePostMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'likePost'>;
+
+export type UnlikePostMutationVariables = Exact<{
+    postId: Scalars['Float'];
+}>;
+
+export type UnlikePostMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'unlikePost'>;
+
+export type SavePostMutationVariables = Exact<{
+    postId: Scalars['Float'];
+}>;
+
+export type SavePostMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'savePost'>;
+
+export type UnsavePostMutationVariables = Exact<{
+    postId: Scalars['Float'];
+}>;
+
+export type UnsavePostMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'unsavePost'>;
+
 export type GetUserPostsQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetUserPostsQuery = { __typename?: 'Query' } & {
@@ -354,7 +422,34 @@ export type GetUserPostsQuery = { __typename?: 'Query' } & {
             | 'description'
             | 'mainImageId'
             | 'comments'
-            | 'reactions'
+            | 'likes'
+            | 'saved'
+            | 'words'
+            | 'paragraphs'
+            | 'readingTime'
+            | 'creationDate'
+        >
+    >;
+};
+
+export type GetUserSavedPostsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetUserSavedPostsQuery = { __typename?: 'Query' } & {
+    getUserSavedPosts: Array<
+        { __typename?: 'Post' } & Pick<
+            Post,
+            | 'id'
+            | 'title'
+            | 'prettyTitle'
+            | 'userName'
+            | 'userIcon'
+            | 'tags'
+            | 'userPicture'
+            | 'description'
+            | 'mainImageId'
+            | 'comments'
+            | 'likes'
+            | 'saved'
             | 'words'
             | 'paragraphs'
             | 'readingTime'
@@ -385,7 +480,8 @@ export type GetPostByUserNameAndTitleQuery = { __typename?: 'Query' } & {
         | 'userIcon'
         | 'words'
         | 'comments'
-        | 'reactions'
+        | 'likes'
+        | 'saved'
         | 'presignedUrl'
         | 'readingTime'
     > & {
@@ -395,11 +491,17 @@ export type GetPostByUserNameAndTitleQuery = { __typename?: 'Query' } & {
         };
 };
 
-export type DeletePostQueryVariables = Exact<{
+export type IsPostSavedQueryVariables = Exact<{
     postId: Scalars['Float'];
 }>;
 
-export type DeletePostQuery = { __typename?: 'Query' } & Pick<Query, 'deletePost'>;
+export type IsPostSavedQuery = { __typename?: 'Query' } & Pick<Query, 'isPostSaved'>;
+
+export type IsPostLikedQueryVariables = Exact<{
+    postId: Scalars['Float'];
+}>;
+
+export type IsPostLikedQuery = { __typename?: 'Query' } & Pick<Query, 'isPostLiked'>;
 
 export type SearchQueryVariables = Exact<{
     searchInput: SearchInput;
@@ -417,7 +519,7 @@ export type SearchQuery = { __typename?: 'Query' } & {
             | 'description'
             | 'userPicture'
             | 'userIcon'
-            | 'reactions'
+            | 'likes'
             | 'comments'
             | 'mainImageId'
             | 'readingTime'
@@ -774,6 +876,216 @@ export type UpdatePostMutationOptions = Apollo.BaseMutationOptions<
     UpdatePostMutation,
     UpdatePostMutationVariables
 >;
+export const DeletePostDocument = gql`
+    mutation DeletePost($postId: Float!) {
+        deletePost(postId: $postId)
+    }
+`;
+export type DeletePostMutationFn = Apollo.MutationFunction<
+    DeletePostMutation,
+    DeletePostMutationVariables
+>;
+
+/**
+ * __useDeletePostMutation__
+ *
+ * To run a mutation, you first call `useDeletePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePostMutation, { data, loading, error }] = useDeletePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useDeletePostMutation(
+    baseOptions?: Apollo.MutationHookOptions<DeletePostMutation, DeletePostMutationVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<DeletePostMutation, DeletePostMutationVariables>(
+        DeletePostDocument,
+        options
+    );
+}
+export type DeletePostMutationHookResult = ReturnType<typeof useDeletePostMutation>;
+export type DeletePostMutationResult = Apollo.MutationResult<DeletePostMutation>;
+export type DeletePostMutationOptions = Apollo.BaseMutationOptions<
+    DeletePostMutation,
+    DeletePostMutationVariables
+>;
+export const LikePostDocument = gql`
+    mutation LikePost($postId: Float!) {
+        likePost(postId: $postId)
+    }
+`;
+export type LikePostMutationFn = Apollo.MutationFunction<
+    LikePostMutation,
+    LikePostMutationVariables
+>;
+
+/**
+ * __useLikePostMutation__
+ *
+ * To run a mutation, you first call `useLikePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLikePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [likePostMutation, { data, loading, error }] = useLikePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useLikePostMutation(
+    baseOptions?: Apollo.MutationHookOptions<LikePostMutation, LikePostMutationVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<LikePostMutation, LikePostMutationVariables>(
+        LikePostDocument,
+        options
+    );
+}
+export type LikePostMutationHookResult = ReturnType<typeof useLikePostMutation>;
+export type LikePostMutationResult = Apollo.MutationResult<LikePostMutation>;
+export type LikePostMutationOptions = Apollo.BaseMutationOptions<
+    LikePostMutation,
+    LikePostMutationVariables
+>;
+export const UnlikePostDocument = gql`
+    mutation UnlikePost($postId: Float!) {
+        unlikePost(postId: $postId)
+    }
+`;
+export type UnlikePostMutationFn = Apollo.MutationFunction<
+    UnlikePostMutation,
+    UnlikePostMutationVariables
+>;
+
+/**
+ * __useUnlikePostMutation__
+ *
+ * To run a mutation, you first call `useUnlikePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUnlikePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [unlikePostMutation, { data, loading, error }] = useUnlikePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useUnlikePostMutation(
+    baseOptions?: Apollo.MutationHookOptions<UnlikePostMutation, UnlikePostMutationVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<UnlikePostMutation, UnlikePostMutationVariables>(
+        UnlikePostDocument,
+        options
+    );
+}
+export type UnlikePostMutationHookResult = ReturnType<typeof useUnlikePostMutation>;
+export type UnlikePostMutationResult = Apollo.MutationResult<UnlikePostMutation>;
+export type UnlikePostMutationOptions = Apollo.BaseMutationOptions<
+    UnlikePostMutation,
+    UnlikePostMutationVariables
+>;
+export const SavePostDocument = gql`
+    mutation SavePost($postId: Float!) {
+        savePost(postId: $postId)
+    }
+`;
+export type SavePostMutationFn = Apollo.MutationFunction<
+    SavePostMutation,
+    SavePostMutationVariables
+>;
+
+/**
+ * __useSavePostMutation__
+ *
+ * To run a mutation, you first call `useSavePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSavePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [savePostMutation, { data, loading, error }] = useSavePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useSavePostMutation(
+    baseOptions?: Apollo.MutationHookOptions<SavePostMutation, SavePostMutationVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<SavePostMutation, SavePostMutationVariables>(
+        SavePostDocument,
+        options
+    );
+}
+export type SavePostMutationHookResult = ReturnType<typeof useSavePostMutation>;
+export type SavePostMutationResult = Apollo.MutationResult<SavePostMutation>;
+export type SavePostMutationOptions = Apollo.BaseMutationOptions<
+    SavePostMutation,
+    SavePostMutationVariables
+>;
+export const UnsavePostDocument = gql`
+    mutation UnsavePost($postId: Float!) {
+        unsavePost(postId: $postId)
+    }
+`;
+export type UnsavePostMutationFn = Apollo.MutationFunction<
+    UnsavePostMutation,
+    UnsavePostMutationVariables
+>;
+
+/**
+ * __useUnsavePostMutation__
+ *
+ * To run a mutation, you first call `useUnsavePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUnsavePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [unsavePostMutation, { data, loading, error }] = useUnsavePostMutation({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useUnsavePostMutation(
+    baseOptions?: Apollo.MutationHookOptions<UnsavePostMutation, UnsavePostMutationVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useMutation<UnsavePostMutation, UnsavePostMutationVariables>(
+        UnsavePostDocument,
+        options
+    );
+}
+export type UnsavePostMutationHookResult = ReturnType<typeof useUnsavePostMutation>;
+export type UnsavePostMutationResult = Apollo.MutationResult<UnsavePostMutation>;
+export type UnsavePostMutationOptions = Apollo.BaseMutationOptions<
+    UnsavePostMutation,
+    UnsavePostMutationVariables
+>;
 export const GetUserPostsDocument = gql`
     query GetUserPosts {
         getUserPosts {
@@ -787,7 +1099,8 @@ export const GetUserPostsDocument = gql`
             description
             mainImageId
             comments
-            reactions
+            likes
+            saved
             words
             paragraphs
             readingTime
@@ -835,6 +1148,71 @@ export type GetUserPostsQueryResult = Apollo.QueryResult<
     GetUserPostsQuery,
     GetUserPostsQueryVariables
 >;
+export const GetUserSavedPostsDocument = gql`
+    query GetUserSavedPosts {
+        getUserSavedPosts {
+            id
+            title
+            prettyTitle
+            userName
+            userIcon
+            tags
+            userPicture
+            description
+            mainImageId
+            comments
+            likes
+            saved
+            words
+            paragraphs
+            readingTime
+            creationDate
+        }
+    }
+`;
+
+/**
+ * __useGetUserSavedPostsQuery__
+ *
+ * To run a query within a React component, call `useGetUserSavedPostsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetUserSavedPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetUserSavedPostsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetUserSavedPostsQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetUserSavedPostsQuery, GetUserSavedPostsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetUserSavedPostsQuery, GetUserSavedPostsQueryVariables>(
+        GetUserSavedPostsDocument,
+        options
+    );
+}
+export function useGetUserSavedPostsLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<
+        GetUserSavedPostsQuery,
+        GetUserSavedPostsQueryVariables
+    >
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetUserSavedPostsQuery, GetUserSavedPostsQueryVariables>(
+        GetUserSavedPostsDocument,
+        options
+    );
+}
+export type GetUserSavedPostsQueryHookResult = ReturnType<typeof useGetUserSavedPostsQuery>;
+export type GetUserSavedPostsLazyQueryHookResult = ReturnType<typeof useGetUserSavedPostsLazyQuery>;
+export type GetUserSavedPostsQueryResult = Apollo.QueryResult<
+    GetUserSavedPostsQuery,
+    GetUserSavedPostsQueryVariables
+>;
 export const GetPostByUserNameAndTitleDocument = gql`
     query GetPostByUserNameAndTitle($userName: String!, $title: String!) {
         getPostByUserNameAndTitle(userName: $userName, title: $title) {
@@ -852,7 +1230,8 @@ export const GetPostByUserNameAndTitleDocument = gql`
             userIcon
             words
             comments
-            reactions
+            likes
+            saved
             presignedUrl
             imagesMapping {
                 id
@@ -914,46 +1293,98 @@ export type GetPostByUserNameAndTitleQueryResult = Apollo.QueryResult<
     GetPostByUserNameAndTitleQuery,
     GetPostByUserNameAndTitleQueryVariables
 >;
-export const DeletePostDocument = gql`
-    query DeletePost($postId: Float!) {
-        deletePost(postId: $postId)
+export const IsPostSavedDocument = gql`
+    query IsPostSaved($postId: Float!) {
+        isPostSaved(postId: $postId)
     }
 `;
 
 /**
- * __useDeletePostQuery__
+ * __useIsPostSavedQuery__
  *
- * To run a query within a React component, call `useDeletePostQuery` and pass it any options that fit your needs.
- * When your component renders, `useDeletePostQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useIsPostSavedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIsPostSavedQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useDeletePostQuery({
+ * const { data, loading, error } = useIsPostSavedQuery({
  *   variables: {
  *      postId: // value for 'postId'
  *   },
  * });
  */
-export function useDeletePostQuery(
-    baseOptions: Apollo.QueryHookOptions<DeletePostQuery, DeletePostQueryVariables>
+export function useIsPostSavedQuery(
+    baseOptions: Apollo.QueryHookOptions<IsPostSavedQuery, IsPostSavedQueryVariables>
 ) {
     const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useQuery<DeletePostQuery, DeletePostQueryVariables>(DeletePostDocument, options);
-}
-export function useDeletePostLazyQuery(
-    baseOptions?: Apollo.LazyQueryHookOptions<DeletePostQuery, DeletePostQueryVariables>
-) {
-    const options = { ...defaultOptions, ...baseOptions };
-    return Apollo.useLazyQuery<DeletePostQuery, DeletePostQueryVariables>(
-        DeletePostDocument,
+    return Apollo.useQuery<IsPostSavedQuery, IsPostSavedQueryVariables>(
+        IsPostSavedDocument,
         options
     );
 }
-export type DeletePostQueryHookResult = ReturnType<typeof useDeletePostQuery>;
-export type DeletePostLazyQueryHookResult = ReturnType<typeof useDeletePostLazyQuery>;
-export type DeletePostQueryResult = Apollo.QueryResult<DeletePostQuery, DeletePostQueryVariables>;
+export function useIsPostSavedLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<IsPostSavedQuery, IsPostSavedQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<IsPostSavedQuery, IsPostSavedQueryVariables>(
+        IsPostSavedDocument,
+        options
+    );
+}
+export type IsPostSavedQueryHookResult = ReturnType<typeof useIsPostSavedQuery>;
+export type IsPostSavedLazyQueryHookResult = ReturnType<typeof useIsPostSavedLazyQuery>;
+export type IsPostSavedQueryResult = Apollo.QueryResult<
+    IsPostSavedQuery,
+    IsPostSavedQueryVariables
+>;
+export const IsPostLikedDocument = gql`
+    query IsPostLiked($postId: Float!) {
+        isPostLiked(postId: $postId)
+    }
+`;
+
+/**
+ * __useIsPostLikedQuery__
+ *
+ * To run a query within a React component, call `useIsPostLikedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIsPostLikedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIsPostLikedQuery({
+ *   variables: {
+ *      postId: // value for 'postId'
+ *   },
+ * });
+ */
+export function useIsPostLikedQuery(
+    baseOptions: Apollo.QueryHookOptions<IsPostLikedQuery, IsPostLikedQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<IsPostLikedQuery, IsPostLikedQueryVariables>(
+        IsPostLikedDocument,
+        options
+    );
+}
+export function useIsPostLikedLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<IsPostLikedQuery, IsPostLikedQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<IsPostLikedQuery, IsPostLikedQueryVariables>(
+        IsPostLikedDocument,
+        options
+    );
+}
+export type IsPostLikedQueryHookResult = ReturnType<typeof useIsPostLikedQuery>;
+export type IsPostLikedLazyQueryHookResult = ReturnType<typeof useIsPostLikedLazyQuery>;
+export type IsPostLikedQueryResult = Apollo.QueryResult<
+    IsPostLikedQuery,
+    IsPostLikedQueryVariables
+>;
 export const SearchDocument = gql`
     query Search($searchInput: SearchInput!) {
         search(searchInput: $searchInput) {
@@ -965,7 +1396,7 @@ export const SearchDocument = gql`
             description
             userPicture
             userIcon
-            reactions
+            likes
             comments
             mainImageId
             readingTime

@@ -97,4 +97,19 @@ export class UserService {
             }
         });
     }
+
+    static async follow(userId: number, creatorId: Number) {
+        return knex.transaction(async (trx) => {
+            try {
+                const res = await trx('Follows').where({ userId, creatorId });
+
+                if (res.length === 0) {
+                    await trx('Follows').insert({ userId, creatorId });
+                }
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
 }

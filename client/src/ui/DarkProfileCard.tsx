@@ -1,6 +1,8 @@
 export interface ProfileCardProps {
     userIcon: string | undefined;
     userName: string | undefined;
+    creationDate: string | undefined;
+    location: string | undefined;
     className?: string;
 }
 
@@ -8,10 +10,18 @@ export interface EskeletonProps {
     className?: string;
 }
 
-export const ProfileCard: React.FC<ProfileCardProps> = ({ userIcon, userName, className = '' }) => {
+export const ProfileCard: React.FC<ProfileCardProps> = ({
+    userIcon,
+    userName,
+    creationDate,
+    location,
+    className = ''
+}) => {
     if (!userIcon || !userName) return <ProfileCardEskeleton className={className} />;
     return (
-        <div className={`px-6 py-8 bg-gray-800 text-white rounded-lg ${className}`}>
+        <div
+            style={{ background: 'rgb(42, 57, 77)' }}
+            className={`px-6 py-8 bg-gray-800 text-white rounded-lg ${className}`}>
             <div className='space-y-4 xl:space-y-6'>
                 <img src={userIcon} alt='user profile' className='w-36 h-36 mx-auto rounded-full' />
 
@@ -23,18 +33,18 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({ userIcon, userName, cl
             </div>
 
             <div className='mb-2'>
-                <h3 className='text-sm text-indigo-300 font-medium'>Work</h3>
+                <h3 className='text-sm text-indigo-200 font-medium'>Work</h3>
                 <p>Technical Director at Valtech </p>
             </div>
 
             <div className='mb-2'>
-                <h3 className='text-sm text-indigo-300 font-medium'>Location</h3>
-                <p>Copenhagen</p>
+                <h3 className='text-sm text-indigo-200 font-medium'>Location</h3>
+                <p>{location}</p>
             </div>
 
             <div className='mb-2'>
-                <h3 className='text-sm text-indigo-300 font-medium'>Joined</h3>
-                <p>Nov 16, 2020</p>
+                <h3 className='text-sm text-indigo-200 font-medium'>Joined</h3>
+                <p>{creationDate}</p>
             </div>
         </div>
     );

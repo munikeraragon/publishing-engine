@@ -21,10 +21,8 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
         return <ProfileCardEskeleton className={className} />;
     return (
         <div
-            className={`px-6 pt-4 text-gray-800 border border-gray-200 rounded-lg shadow ${className}`}
-            style={{
-                background: 'rgba(235, 235, 235, 0.05)'
-            }}>
+            className={`${className} bg-white px-6 pt-4 text-gray-800 border border-gray-500 rounded-lg`}
+            style={{ boxShadow: 'rgb(113, 113, 123) 4px 4px 0px 0px' }}>
             <div className='space-y-4 xl:space-y-6'>
                 <img src={userIcon} alt='user profile' className='w-32 h-32 mx-auto rounded-full' />
 
@@ -49,7 +47,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
                 <h3 className='text-sm text-indigo-500 font-medium'>Joined</h3>
                 <p>{creationDate}</p>
             </div>
-            <div className='text-center my-2'>
+            <div className='text-center mt-2 mb-3'>
                 <button
                     className='flex justify-center items-center border rounded-md
                     text-gray-600 border-gray-500 hover:border-indigo-600 hover:text-indigo-600

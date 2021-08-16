@@ -13,7 +13,31 @@ export const GetUserPosts = gql`
             description
             mainImageId
             comments
-            reactions
+            likes
+            saved
+            words
+            paragraphs
+            readingTime
+            creationDate
+        }
+    }
+`;
+
+export const GetUserSavedPosts = gql`
+    query GetUserSavedPosts {
+        getUserSavedPosts {
+            id
+            title
+            prettyTitle
+            userName
+            userIcon
+            tags
+            userPicture
+            description
+            mainImageId
+            comments
+            likes
+            saved
             words
             paragraphs
             readingTime
@@ -39,7 +63,8 @@ export const GetPostByUserNameAndTitle = gql`
             userIcon
             words
             comments
-            reactions
+            likes
+            saved
             presignedUrl
             imagesMapping {
                 id
@@ -50,8 +75,14 @@ export const GetPostByUserNameAndTitle = gql`
     }
 `;
 
-export const DeletePost = gql`
-    query DeletePost($postId: Float!) {
-        deletePost(postId: $postId)
+export const isPostSaved = gql`
+    query IsPostSaved($postId: Float!) {
+        isPostSaved(postId: $postId)
+    }
+`;
+
+export const isPostLiked = gql`
+    query IsPostLiked($postId: Float!) {
+        isPostLiked(postId: $postId)
     }
 `;

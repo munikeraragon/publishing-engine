@@ -49,3 +49,33 @@ export const UpdatePost = gql`
         }
     }
 `;
+
+export const DeletePost = gql`
+    mutation DeletePost($postId: Float!) {
+        deletePost(postId: $postId)
+    }
+`;
+
+export const LikePost = gql`
+    mutation LikePost($postId: Float!) {
+        likePost(postId: $postId)
+    }
+`;
+
+export const UnlikePost = gql`
+    mutation UnlikePost($postId: Float!) {
+        unlikePost(postId: $postId)
+    }
+`;
+
+export const SavePost = gql`
+    mutation SavePost($postId: Float!) {
+        savePost(postId: $postId)
+    }
+`;
+
+export const UnsavePost = gql`
+    mutation UnsavePost($postId: Float!) {
+        unsavePost(postId: $postId)
+    }
+`;
