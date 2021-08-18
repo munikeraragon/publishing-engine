@@ -198,6 +198,41 @@ export class PostService {
         });
     }
 
+    static async countAllPublished() {
+        return knex.transaction(async (trx) => {
+            try {
+                return Number(
+                    (await trx('Post').count('id as count').where({ publish: true }))[0].count
+                );
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+                return null;
+            }
+        });
+    }
+
+    static async getPopularTags(pageSize: number) {
+        return knex.transaction(async (trx) => {
+            try {
+                return (
+                    await trx('PostTag')
+                        .join('Post', 'Post.id', 'PostTag.postId')
+                        .join('Tag', 'Tag.id', 'PostTag.tagId')
+                        .count('Tag.name as frequency')
+                        .groupBy('Tag.name')
+                        .orderBy('frequency', 'desc')
+                        .select('Tag.name')
+                        .limit(pageSize)
+                ).map((tag) => tag.name);
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+                return null;
+            }
+        });
+    }
+
     static async findByUserNameAndTitle(userName: string, title: string) {
         return knex.transaction(async (trx) => {
             try {
@@ -235,6 +270,7 @@ export class PostService {
         const postsIds = await trx('Post')
             .leftJoin('User', 'User.id', 'Post.userId')
             .select('Post.id')
+            .where({ publish: true })
             .orderBy(`Post.${searchInput.sortBy}`, searchInput.sortDirection)
             .limit(searchInput.pageSize)
             .offset(searchInput.pageSize * searchInput.page);
@@ -374,7 +410,8 @@ export class PostService {
                 images: postInput.images,
                 paragraphs: postInput.paragraphs,
                 words: postInput.words,
-                readingTime: postInput.readingTime
+                readingTime: postInput.readingTime,
+                publish: postInput.publish
             })
         )[0];
     }

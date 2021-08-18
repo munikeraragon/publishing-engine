@@ -116,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                 </Popover.Button>
                             </div>
                             <Popover.Group as='nav' className='hidden md:flex space-x-10'>
-                                <Popover className='relative'>
+                                {/*<Popover className='relative'>
                                     {({ open }) => (
                                         <>
                                             <Popover.Button
@@ -124,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                                     open ? 'text-gray-900' : 'text-gray-700',
                                                     'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                                                 )}>
-                                                <span>Posts</span>
+                                                <span>Services</span>
                                                 <ChevronDownIcon
                                                     className={classNames(
                                                         open ? 'text-gray-600' : 'text-gray-400',
@@ -192,20 +192,20 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                             </Transition>
                                         </>
                                     )}
-                                </Popover>
+                                </Popover>*/}
 
-                                <Link href='#projects'>
+                                <Link href='/#posts'>
                                     <span className='text-base font-medium text-gray-700 hover:text-indigo-500'>
-                                        Projects
+                                        Posts
                                     </span>
                                 </Link>
 
-                                <Link href='#contact'>
+                                <Link href='/#contact'>
                                     <span className='text-base font-medium text-gray-700 hover:text-indigo-500'>
                                         Contact
                                     </span>
                                 </Link>
-
+                                {/*
                                 <Popover className='relative'>
                                     {({ open }) => (
                                         <>
@@ -294,7 +294,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                             </Transition>
                                         </>
                                     )}
-                                </Popover>
+                                </Popover> */}
                             </Popover.Group>
                             <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
                                 <Link href='/login'>
@@ -381,7 +381,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                         ))}
                                     </div>
                                     <div>
-                                        <Link href='/login-page'>
+                                        <Link href='/login'>
                                             <span
                                                 className='w-full flex items-center justify-center px-4 py-1.5
                                                 border border-transparent rounded-md shadow-sm text-base font-medium

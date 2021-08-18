@@ -40,8 +40,8 @@ export const ContactCard: React.FC<ContactCardProps> = ({
     onSubmit
 }) => {
     return (
-        <div className='shadow-2xl grid grid-cols-1 lg:grid-cols-2 gap-4 p-8'>
-            <div>
+        <div className='shadow-2xl grid grid-cols-2 gap-4 p-8'>
+            <div className='col-span-2 sm:col-span-1'>
                 <TextInput
                     label='First name'
                     name='First name'
@@ -55,7 +55,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                 />
             </div>
 
-            <div>
+            <div className='col-span-2 sm:col-span-1'>
                 <TextInput
                     label='Last name'
                     name='Last name'
@@ -69,7 +69,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                 />
             </div>
 
-            <div>
+            <div className='col-span-2 sm:col-span-1'>
                 <TextInput
                     label='Email'
                     name='Email'
@@ -83,7 +83,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                 />
             </div>
 
-            <div>
+            <div className='col-span-2 sm:col-span-1'>
                 <SelectInput
                     label='Country'
                     name='Country'
@@ -97,7 +97,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                 />
             </div>
 
-            <div>
+            <div className='col-span-2 sm:col-span-1'>
                 <TextInput
                     label='Phone number'
                     name='Phone bumber'
@@ -111,7 +111,7 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                 />
             </div>
 
-            <div>
+            <div className='col-span-2 sm:col-span-1'>
                 <TextInput
                     label='Company'
                     name='Company'

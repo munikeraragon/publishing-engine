@@ -75,14 +75,26 @@ export const GetPostByUserNameAndTitle = gql`
     }
 `;
 
-export const isPostSaved = gql`
+export const IsPostSaved = gql`
     query IsPostSaved($postId: Float!) {
         isPostSaved(postId: $postId)
     }
 `;
 
-export const isPostLiked = gql`
+export const IsPostLiked = gql`
     query IsPostLiked($postId: Float!) {
         isPostLiked(postId: $postId)
+    }
+`;
+
+export const CountAllPublished = gql`
+    query CountAllPublished {
+        countAllPublished
+    }
+`;
+
+export const GetPopularTags = gql`
+    query GetPopularTags($pageSize: Float!) {
+        getPopularTags(pageSize: $pageSize)
     }
 `;

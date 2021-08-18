@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import { useEffect, useState } from 'react';
 import {
     useLikePostMutation,
@@ -5,6 +6,7 @@ import {
     useUnlikePostMutation,
     useUnsavePostMutation
 } from '../../generated/apolloComponents';
+import { useTokenStore } from '../../modules/auth/useTokenStore';
 
 export interface EditProps {
     postId: number | undefined;
@@ -35,6 +37,7 @@ export const Actions: React.FC<EditProps> = ({
     const [unsavePost, { data: unsavedStatus }] = useUnsavePostMutation();
 
     const [state, setState] = useState({ likes, comments, saved, isSaved, isLiked });
+    const hasTokens = useTokenStore((s) => !!(s.accessToken && s.refreshToken));
 
     useEffect(() => {
         setState({ likes, comments, saved, isSaved, isLiked });
@@ -73,7 +76,8 @@ export const Actions: React.FC<EditProps> = ({
     }, [unsavedStatus]);
 
     const onLike = () => {
-        if (postId) {
+        authCheck();
+        if (postId && hasTokens) {
             likePost({
                 variables: {
                     postId: Number(postId)
@@ -83,7 +87,8 @@ export const Actions: React.FC<EditProps> = ({
     };
 
     const onUnlike = () => {
-        if (postId) {
+        authCheck();
+        if (postId && hasTokens) {
             unlikePost({
                 variables: {
                     postId: Number(postId)
@@ -93,7 +98,8 @@ export const Actions: React.FC<EditProps> = ({
     };
 
     const onSave = () => {
-        if (postId) {
+        authCheck();
+        if (postId && hasTokens) {
             savePost({
                 variables: {
                     postId: Number(postId)
@@ -103,7 +109,8 @@ export const Actions: React.FC<EditProps> = ({
     };
 
     const onUnsave = () => {
-        if (postId) {
+        authCheck();
+        if (postId && hasTokens) {
             unsavePost({
                 variables: {
                     postId: Number(postId)
@@ -112,21 +119,18 @@ export const Actions: React.FC<EditProps> = ({
         }
     };
 
-    if (
-        likes === undefined ||
-        comments === undefined ||
-        saved === undefined ||
-        isSaved === undefined ||
-        isLiked === undefined
-    ) {
+    const authCheck = () => {
+        if (!hasTokens) {
+            Router.push('/login');
+        }
+    };
+
+    if (likes === undefined || comments === undefined || saved === undefined) {
         return <ActionsEskeleton />;
     }
 
     return (
         <div className='flex flex-col text-sm'>
-            {console.log(unsavedStatus?.unsavePost)}
-            {console.log(savedStatus?.savePost)}
-            {console.log(error)}
             <button
                 onClick={state.isLiked ? onUnlike : onLike}
                 className='flex flex-col mb-6 items-center'>

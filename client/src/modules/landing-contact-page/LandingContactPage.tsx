@@ -56,13 +56,13 @@ export const LandingContactPage = () => {
     return (
         <div id='contact' className='pt-16 pb-10'>
             <div className='max-w-7xl m-auto grid grid-cols-1 lg:grid-cols-2 gap-8'>
-                <div className='pt-10'>
+                <div className='pt-10 mx-2'>
                     <div className='pb-8'>
-                        <h1 className='text-4xl tracking-tight font-bold text-gray-800'>
+                        <h1 className='text-2xl md:text-3xl tracking-tight font-bold text-gray-800'>
                             Join the comunity
                         </h1>
                     </div>
-                    <div className='flex text-xl text-indigo-600 py-4'>
+                    <div className='flex text-lg md:text-xl text-indigo-600 py-4'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='28'
@@ -73,7 +73,7 @@ export const LandingContactPage = () => {
                         </svg>
                         <span className='ml-4 text-gray-800'>Contribute to the project</span>
                     </div>
-                    <div className='flex text-xl text-indigo-600 py-4'>
+                    <div className='flex text-lg md:text-xl text-indigo-600 py-4'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='28'
@@ -112,7 +112,7 @@ export const LandingContactPage = () => {
                         </svg>
                         <span className='ml-4 text-gray-800'>Report a bug</span>
                     </div>
-                    <div className='flex text-xl  text-indigo-600 py-4'>
+                    <div className='flex text-lg md:text-xl text-indigo-600 py-4'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='28'

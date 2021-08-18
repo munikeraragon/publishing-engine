@@ -67,7 +67,11 @@ export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
                     wordsNumber={showSkeleton ? undefined : postMetadata.data?.wordsNumber}
                     articleBody={showSkeleton ? undefined : postMetadata.data?.mainBody}
                     tags={showSkeleton ? undefined : postMetadata.data?.tags}
-                    isOwner={postMetadata.data?.userName === userData?.getUser.userName}
+                    isOwner={
+                        postMetadata.data?.userName &&
+                        userData?.getUser.userName &&
+                        postMetadata.data?.userName === userData?.getUser.userName
+                    }
                     className='w-full col-span-12 lg:col-span-8 max-w-3xl mt-8 mx-auto'
                 />
                 <div className='col-span-4 hidden lg:block'>

@@ -35,7 +35,7 @@ export async function publishArticle() {
             articleStore.mainBody.split(' ').length + articleStore.title.split(' ').length
         ),
         readingTime: Math.round(articleStore.mainBody.split(' ').length / 250),
-        publish: false,
+        publish: true,
         mainImage: Number(articleStore.mainImage),
         mainImageId: Number(articleStore.mainImage),
         mainBody: articleStore.mainBody,

@@ -64,6 +64,16 @@ export class PostResolver {
         return await PostService.search(searchInput);
     }
 
+    @Query((returns) => Number)
+    async countAllPublished(): Promise<number> {
+        return await PostService.countAllPublished();
+    }
+
+    @Query((returns) => [String])
+    async getPopularTags(@Arg('pageSize') pageSize: number): Promise<string[]> {
+        return await PostService.getPopularTags(pageSize);
+    }
+
     @Authorized()
     @Mutation((returns) => SignedPost)
     async createPost(

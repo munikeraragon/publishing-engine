@@ -55,7 +55,7 @@ export const EditorActions: React.FC<EditorActionsProps> = ({ className = '' }) 
             paragraphs: 0,
             words: Math.round(article.mainBody.split(' ').length + article.title.split(' ').length),
             readingTime: Math.round(article.mainBody.split(' ').length / 250),
-            publish: false,
+            publish: true,
             mainImage: Number(article.mainImage),
             mainImageId: Number(article.mainImage),
             mainBody: article.mainBody,

@@ -175,6 +175,8 @@ export type Query = {
     isPostSaved: Scalars['Boolean'];
     isPostLiked: Scalars['Boolean'];
     search: Array<Post>;
+    countAllPublished: Scalars['Float'];
+    getPopularTags: Array<Scalars['String']>;
     getContactMessages: Array<ContactMessage>;
     getUser: User;
     getImageById: Image;
@@ -200,6 +202,10 @@ export type QueryIsPostLikedArgs = {
 
 export type QuerySearchArgs = {
     searchInput: SearchInput;
+};
+
+export type QueryGetPopularTagsArgs = {
+    pageSize: Scalars['Float'];
 };
 
 export type QueryGetImageByIdArgs = {
@@ -502,6 +508,16 @@ export type IsPostLikedQueryVariables = Exact<{
 }>;
 
 export type IsPostLikedQuery = { __typename?: 'Query' } & Pick<Query, 'isPostLiked'>;
+
+export type CountAllPublishedQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CountAllPublishedQuery = { __typename?: 'Query' } & Pick<Query, 'countAllPublished'>;
+
+export type GetPopularTagsQueryVariables = Exact<{
+    pageSize: Scalars['Float'];
+}>;
+
+export type GetPopularTagsQuery = { __typename?: 'Query' } & Pick<Query, 'getPopularTags'>;
 
 export type SearchQueryVariables = Exact<{
     searchInput: SearchInput;
@@ -1384,6 +1400,100 @@ export type IsPostLikedLazyQueryHookResult = ReturnType<typeof useIsPostLikedLaz
 export type IsPostLikedQueryResult = Apollo.QueryResult<
     IsPostLikedQuery,
     IsPostLikedQueryVariables
+>;
+export const CountAllPublishedDocument = gql`
+    query CountAllPublished {
+        countAllPublished
+    }
+`;
+
+/**
+ * __useCountAllPublishedQuery__
+ *
+ * To run a query within a React component, call `useCountAllPublishedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCountAllPublishedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCountAllPublishedQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCountAllPublishedQuery(
+    baseOptions?: Apollo.QueryHookOptions<CountAllPublishedQuery, CountAllPublishedQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<CountAllPublishedQuery, CountAllPublishedQueryVariables>(
+        CountAllPublishedDocument,
+        options
+    );
+}
+export function useCountAllPublishedLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<
+        CountAllPublishedQuery,
+        CountAllPublishedQueryVariables
+    >
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<CountAllPublishedQuery, CountAllPublishedQueryVariables>(
+        CountAllPublishedDocument,
+        options
+    );
+}
+export type CountAllPublishedQueryHookResult = ReturnType<typeof useCountAllPublishedQuery>;
+export type CountAllPublishedLazyQueryHookResult = ReturnType<typeof useCountAllPublishedLazyQuery>;
+export type CountAllPublishedQueryResult = Apollo.QueryResult<
+    CountAllPublishedQuery,
+    CountAllPublishedQueryVariables
+>;
+export const GetPopularTagsDocument = gql`
+    query GetPopularTags($pageSize: Float!) {
+        getPopularTags(pageSize: $pageSize)
+    }
+`;
+
+/**
+ * __useGetPopularTagsQuery__
+ *
+ * To run a query within a React component, call `useGetPopularTagsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPopularTagsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPopularTagsQuery({
+ *   variables: {
+ *      pageSize: // value for 'pageSize'
+ *   },
+ * });
+ */
+export function useGetPopularTagsQuery(
+    baseOptions: Apollo.QueryHookOptions<GetPopularTagsQuery, GetPopularTagsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetPopularTagsQuery, GetPopularTagsQueryVariables>(
+        GetPopularTagsDocument,
+        options
+    );
+}
+export function useGetPopularTagsLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<GetPopularTagsQuery, GetPopularTagsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetPopularTagsQuery, GetPopularTagsQueryVariables>(
+        GetPopularTagsDocument,
+        options
+    );
+}
+export type GetPopularTagsQueryHookResult = ReturnType<typeof useGetPopularTagsQuery>;
+export type GetPopularTagsLazyQueryHookResult = ReturnType<typeof useGetPopularTagsLazyQuery>;
+export type GetPopularTagsQueryResult = Apollo.QueryResult<
+    GetPopularTagsQuery,
+    GetPopularTagsQueryVariables
 >;
 export const SearchDocument = gql`
     query Search($searchInput: SearchInput!) {
