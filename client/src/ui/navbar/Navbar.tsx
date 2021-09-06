@@ -116,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                 </Popover.Button>
                             </div>
                             <Popover.Group as='nav' className='hidden md:flex space-x-10'>
-                                {/*<Popover className='relative'>
+                                {/* <Popover className='relative'>
                                     {({ open }) => (
                                         <>
                                             <Popover.Button
@@ -192,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                             </Transition>
                                         </>
                                     )}
-                                </Popover>*/}
+                                </Popover> */}
 
                                 <Link href='/#posts'>
                                     <span className='text-base font-medium text-gray-700 hover:text-indigo-500'>

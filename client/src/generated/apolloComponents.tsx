@@ -171,6 +171,7 @@ export type Query = {
     getPostById: SignedPost;
     getPostByUserNameAndTitle: SignedPost;
     getUserPosts: Array<Post>;
+    getAllPosts: Array<Post>;
     getUserSavedPosts: Array<Post>;
     isPostSaved: Scalars['Boolean'];
     isPostLiked: Scalars['Boolean'];
@@ -411,6 +412,32 @@ export type UnsavePostMutationVariables = Exact<{
 }>;
 
 export type UnsavePostMutation = { __typename?: 'Mutation' } & Pick<Mutation, 'unsavePost'>;
+
+export type GetAllPostsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllPostsQuery = { __typename?: 'Query' } & {
+    getAllPosts: Array<
+        { __typename?: 'Post' } & Pick<
+            Post,
+            | 'id'
+            | 'title'
+            | 'prettyTitle'
+            | 'userName'
+            | 'userIcon'
+            | 'tags'
+            | 'userPicture'
+            | 'description'
+            | 'mainImageId'
+            | 'comments'
+            | 'likes'
+            | 'saved'
+            | 'words'
+            | 'paragraphs'
+            | 'readingTime'
+            | 'creationDate'
+        >
+    >;
+};
 
 export type GetUserPostsQueryVariables = Exact<{ [key: string]: never }>;
 
@@ -1101,6 +1128,68 @@ export type UnsavePostMutationResult = Apollo.MutationResult<UnsavePostMutation>
 export type UnsavePostMutationOptions = Apollo.BaseMutationOptions<
     UnsavePostMutation,
     UnsavePostMutationVariables
+>;
+export const GetAllPostsDocument = gql`
+    query GetAllPosts {
+        getAllPosts {
+            id
+            title
+            prettyTitle
+            userName
+            userIcon
+            tags
+            userPicture
+            description
+            mainImageId
+            comments
+            likes
+            saved
+            words
+            paragraphs
+            readingTime
+            creationDate
+        }
+    }
+`;
+
+/**
+ * __useGetAllPostsQuery__
+ *
+ * To run a query within a React component, call `useGetAllPostsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllPostsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllPostsQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetAllPostsQuery, GetAllPostsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useQuery<GetAllPostsQuery, GetAllPostsQueryVariables>(
+        GetAllPostsDocument,
+        options
+    );
+}
+export function useGetAllPostsLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<GetAllPostsQuery, GetAllPostsQueryVariables>
+) {
+    const options = { ...defaultOptions, ...baseOptions };
+    return Apollo.useLazyQuery<GetAllPostsQuery, GetAllPostsQueryVariables>(
+        GetAllPostsDocument,
+        options
+    );
+}
+export type GetAllPostsQueryHookResult = ReturnType<typeof useGetAllPostsQuery>;
+export type GetAllPostsLazyQueryHookResult = ReturnType<typeof useGetAllPostsLazyQuery>;
+export type GetAllPostsQueryResult = Apollo.QueryResult<
+    GetAllPostsQuery,
+    GetAllPostsQueryVariables
 >;
 export const GetUserPostsDocument = gql`
     query GetUserPosts {

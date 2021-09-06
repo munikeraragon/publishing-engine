@@ -44,6 +44,9 @@ export interface FormState {
 
     updating: boolean;
     setUpdating: (_: boolean) => void;
+
+    published: boolean;
+    setPublished: (_: boolean) => void;
 }
 
 export const useFormStore = create<FormState>((set) => ({
@@ -82,5 +85,8 @@ export const useFormStore = create<FormState>((set) => ({
     setPublishing: (arg: boolean) => set(() => ({ publishing: arg })),
 
     updating: false,
-    setUpdating: (arg: boolean) => set(() => ({ updating: arg }))
+    setUpdating: (arg: boolean) => set(() => ({ updating: arg })),
+
+    published: false,
+    setPublished: (arg: boolean) => set(() => ({ publishing: arg }))
 }));

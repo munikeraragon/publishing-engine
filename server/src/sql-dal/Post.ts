@@ -67,6 +67,23 @@ export class PostService {
         });
     }
 
+    static async findAll() {
+        return knex.transaction(async (trx) => {
+            try {
+                const postsIds = await trx('Post').orderBy('creationDate', 'desc').select('id');
+
+                return await Promise.all(
+                    _.map(postsIds, async (post) => {
+                        return await this._findById(trx, post.id);
+                    })
+                );
+            } catch (err) {
+                console.log(err);
+                trx.rollback();
+            }
+        });
+    }
+
     static async delete(postId: Number) {
         return knex.transaction(async (trx) => {
             try {
@@ -172,12 +189,17 @@ export class PostService {
                         objectKey: objectKey,
                         mainImageId: postInput.mainImageId,
                         title: postInput.title,
-                        prettyTitle: postInput.title.toLowerCase().replace(/ /g, '-'),
+                        prettyTitle: postInput.title
+                            .toLowerCase()
+                            .replaceAll(' ', '-')
+                            .replaceAll('?', '>'),
                         description: postInput.description,
                         images: postInput.images,
                         paragraphs: postInput.paragraphs,
                         words: postInput.words,
-                        readingTime: postInput.readingTime
+                        readingTime: postInput.readingTime,
+                        publish: postInput.publish
+
                     });
             } catch (err) {
                 console.log(err);
@@ -405,7 +427,10 @@ export class PostService {
                 objectKey: objectKey,
                 mainImageId: postInput.mainImageId,
                 title: postInput.title,
-                prettyTitle: postInput.title.toLowerCase().replace(/ /g, '-'),
+                prettyTitle: postInput.title
+                    .toLowerCase()
+                    .replaceAll(' ', '-')
+                    .replaceAll('?', '>'),
                 description: postInput.description,
                 images: postInput.images,
                 paragraphs: postInput.paragraphs,

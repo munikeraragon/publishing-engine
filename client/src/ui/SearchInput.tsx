@@ -26,7 +26,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
                         <svg
                             stroke='currentColor'
                             fill='currentColor'
-                            stroke-width='0'
+                            strokeWidth='0'
                             version='1'
                             viewBox='0 0 48 48'
                             enableBackground='new 0 0 48 48'

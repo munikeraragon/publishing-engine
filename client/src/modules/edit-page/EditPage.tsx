@@ -22,6 +22,7 @@ export const ValidEdit: React.FC<ValidPageProps> = ({ userName, title }) => {
         setMainBody,
         setUpdating,
         setPublishing,
+        setPublished,
         setImageId
     } = useFormStore();
 
@@ -34,6 +35,7 @@ export const ValidEdit: React.FC<ValidPageProps> = ({ userName, title }) => {
             setImageId(postMetadata.data?.mainImageId);
             setMainBody(postMetadata.data?.mainBody);
             setTagsString(postMetadata.data?.tags.join(', '));
+            setPublished(postMetadata.data?.published);
             setPublishing(false);
             setUpdating(true);
             setUploadImage(false);

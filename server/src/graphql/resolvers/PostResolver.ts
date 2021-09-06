@@ -37,6 +37,12 @@ export class PostResolver {
 
     @Authorized()
     @Query((returns) => [Post])
+    async getAllPosts(@CurrentUser() userId: number): Promise<Post[]> {
+        return await PostService.findAll();
+    }
+
+    @Authorized()
+    @Query((returns) => [Post])
     async getUserSavedPosts(@CurrentUser() userId: number): Promise<Post[]> {
         return await PostService.findUserSavedPosts(userId);
     }
@@ -81,7 +87,7 @@ export class PostResolver {
         @Arg('postInput') postInput: PostInput
     ): Promise<SignedPost> {
         const { userName } = await UserService.findById(userId);
-        const prettyTitle = postInput.title.toLowerCase().replace(/ /g, '-');
+        const prettyTitle = postInput.title.toLowerCase().replaceAll(' ', '-').replaceAll('?', '>');
         const objectKey = `${userName}/${prettyTitle}`;
         const post = await PostService.findOrCreate(userId, postInput, objectKey);
         const presignedUrl = await S3PostService.createUploadUrl(post.objectKey);
@@ -96,7 +102,7 @@ export class PostResolver {
         @Arg('postId') postId: number
     ): Promise<SignedPost> {
         const { userName } = await UserService.findById(userId);
-        const prettyTitle = postInput.title.toLowerCase().replace(/ /g, '-');
+        const prettyTitle = postInput.title.toLowerCase().replaceAll(' ', '-').replaceAll('?', '>');
         const objectKey = `${userName}/${prettyTitle}`;
         const presignedUrl = await S3PostService.createUploadUrl(objectKey);
         await PostService.update(postId, postInput, objectKey);

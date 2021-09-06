@@ -73,7 +73,33 @@ export const EditorActions: React.FC<EditorActionsProps> = ({ className = '' }) 
         }
     };
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (publish: boolean) => {
+        const post = {
+            title: article.title,
+            description: article.description,
+            images: article.imagesIds.size,
+            imagesIds: [...article.imagesIds],
+            paragraphs: 0,
+            words: Math.round(article.mainBody.split(' ').length + article.title.split(' ').length),
+            readingTime: Math.round(article.mainBody.split(' ').length / 250),
+            publish: publish,
+            mainImage: Number(article.mainImage),
+            mainImageId: Number(article.mainImage),
+            mainBody: article.mainBody,
+            tags: article.tagsString
+                .split(',')
+                .map((tag) => tag.trim())
+                .filter((tag) => tag),
+            creationDate: moment().format('MMMM Do YYYY')
+        };
+
+        if (validData(post)) {
+            setLoading(true);
+            await updatePost(post, article.postId);
+        }
+    };
+
+    const handleSaveDraft = async () => {
         const post = {
             title: article.title,
             description: article.description,
@@ -95,7 +121,8 @@ export const EditorActions: React.FC<EditorActionsProps> = ({ className = '' }) 
 
         if (validData(post)) {
             setLoading(true);
-            await updatePost(post, article.postId);
+            article.setPublishing(true);
+            await uploadPost(post);
         }
     };
 
@@ -111,20 +138,29 @@ export const EditorActions: React.FC<EditorActionsProps> = ({ className = '' }) 
                         {loading ? 'Publishing...' : 'Publish'}
                     </button>
                     <button
-                        className='bg-gray-300 hover:bg-gray-400 text-gray-800
-                        font-medium  rounded-md  py-2 px-4'>
-                        Save draft
+                        onClick={handleSaveDraft}
+                        className={`${loading ? 'opacity-60' : ''} bg-gray-300
+                        hover:bg-gray-400 text-gray-800 font-medium  rounded-md
+                        py-2 px-4`}>
+                        {loading ? 'Saving Draft...' : 'Save Draft'}
                     </button>
                 </>
             )}
             {article.updating && (
                 <>
                     <button
-                        onClick={handleUpdate}
+                        onClick={() => handleUpdate(true)}
                         className={`${loading ? 'opacity-60' : ''}
                         bg-indigo-600 hover:bg-indigo-700 text-white
                         font-medium py-2 px-4 rounded-md mr-2`}>
-                        {loading ? 'Saving changes...' : 'Save changes'}
+                        {loading ? 'Publishing...' : 'Publish'}
+                    </button>
+                    <button
+                        onClick={() => handleUpdate(false)}
+                        className={`${loading ? 'opacity-60' : ''} bg-gray-300
+                        hover:bg-gray-400 text-gray-800 font-medium  rounded-md
+                        py-2 px-4`}>
+                        {loading ? 'Saving Draft...' : 'Save Draft'}
                     </button>
                 </>
             )}
