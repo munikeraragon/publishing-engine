@@ -1,6 +1,3 @@
-import { SearchModal } from './SearchModal';
-import { Notifications } from './Notifications';
-import { Help } from './Help';
 import { UserMenu } from './UserMenu';
 import Link from 'next/link';
 import { useGetUserQuery } from '../../generated/apolloComponents';

@@ -33,7 +33,7 @@ export const Actions: React.FC<EditProps> = ({
 }) => {
     const [likePost, { data: likedStatus }] = useLikePostMutation();
     const [savePost, { data: savedStatus }] = useSavePostMutation();
-    const [unlikePost, { data: unlikedStatus, error }] = useUnlikePostMutation();
+    const [unlikePost, { data: unlikedStatus }] = useUnlikePostMutation();
     const [unsavePost, { data: unsavedStatus }] = useUnsavePostMutation();
 
     const [state, setState] = useState({ likes, comments, saved, isSaved, isLiked });
@@ -130,7 +130,7 @@ export const Actions: React.FC<EditProps> = ({
     }
 
     return (
-        <div className='flex flex-col text-sm'>
+        <div className={`${className} flex flex-col text-sm`}>
             <button
                 onClick={state.isLiked ? onUnlike : onLike}
                 className='flex flex-col mb-6 items-center'>
@@ -219,7 +219,7 @@ export const Actions: React.FC<EditProps> = ({
 
 export const ActionsEskeleton: React.FC<EskeletonProps> = ({ className = '' }) => {
     return (
-        <div className='flex flex-col text-sm'>
+        <div className={`${className} flex flex-col text-sm`}>
             <button className='flex flex-col mb-10 items-center rounded-full h-10 w-10 bg-gray-200' />
             <button className='flex flex-col mb-10 items-center rounded-full h-10 w-10 bg-gray-200' />
             <button className='flex flex-col mb-10 items-center rounded-full h-10 w-10 bg-gray-200' />

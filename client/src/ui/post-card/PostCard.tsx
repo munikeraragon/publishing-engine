@@ -30,7 +30,7 @@ export const PostCard: React.FC<PostCardProps> = ({
     return (
         <div
             className={`${className} flex flex-col overflow-hidden rounded-lg
-            transition transform hover:-translate-y-1.5`}
+            transition transform hover:-translate-y-1.5 bg-white`}
             style={{ height: 480 }}>
             <div className='flex-shrink-0'>
                 <CoverImage src={src} alt='post cover' />

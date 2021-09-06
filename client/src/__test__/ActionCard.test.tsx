@@ -7,7 +7,8 @@ const renderActionCard = (props: Partial<ActionCardProps> = {}) => {
     const defaultProps: ActionCardProps = {
         src: 'https://ethereum.org/static/a44134e541c72364beb121234ab5864e/19ca5/infrastructure_transparent.png',
         title: 'Title',
-        description: 'This a description'
+        description: 'This a description',
+        completed: 10
     };
     return render(<ActionCard {...defaultProps} {...props} />);
 };
@@ -39,7 +40,9 @@ describe('<ActionCard />', () => {
 
     test('matches Progress card snapshot', () => {
         const tree = renderer
-            .create(<ActionCard src='' title='Title' description='This a description' />)
+            .create(
+                <ActionCard completed={10} src='' title='Title' description='This a description' />
+            )
             .toJSON();
         expect(tree).toMatchSnapshot();
     });

@@ -7,7 +7,7 @@ export interface EskeletonProps {
     className?: string;
 }
 
-export const CoverImage: React.FC<CoverImageProps> = ({ alt, src }) => {
+export const CoverImage: React.FC<CoverImageProps> = ({ src }) => {
     if (!src) return <CoverImageEskeleton />;
     return (
         <a
@@ -19,8 +19,9 @@ export const CoverImage: React.FC<CoverImageProps> = ({ alt, src }) => {
                 paddingBottom: '42%',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center'
-            }}
-        />
+            }}>
+            {null}
+        </a>
     );
 };
 

@@ -2,9 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useTokenStore } from '../modules/auth/useTokenStore';
 
-interface logoutProps {}
-
-export const Logout: React.FC<logoutProps> = ({}) => {
+export const Logout: React.FC = () => {
     const { push } = useRouter();
     const [hasTokens, setTokens] = useTokenStore((s) => [
         !!(s.accessToken && s.refreshToken),

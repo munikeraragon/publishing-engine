@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCreateContactMessageMutation } from '../../generated/apolloComponents';
 import { ContactCard } from '../../ui/ContactCard';
 
@@ -29,7 +29,7 @@ export const LandingContactPage = () => {
     const onSubmit = async () => {
         try {
             setSubmitting(true);
-            const response = await createContactMessage({
+            await createContactMessage({
                 variables: {
                     contactMessage: {
                         firstName,
@@ -42,10 +42,10 @@ export const LandingContactPage = () => {
                     }
                 }
             })
-                .then((value) => {
+                .then(() => {
                     clearForm();
                 })
-                .catch((err) => {
+                .catch(() => {
                     clearForm();
                 });
         } catch (error) {

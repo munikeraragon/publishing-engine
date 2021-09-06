@@ -17,7 +17,7 @@ const people = [
 
 export const Tags = () => {
     const [selected, setSelected] = useState(people[0]);
-    const [open, setOpen] = useState(false);
+    const [open] = useState(false);
     const { tagsString, setTagsString } = useFormStore((state) => state);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

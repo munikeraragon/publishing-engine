@@ -9,21 +9,21 @@ export interface SidebarProps {
     className?: string;
 }
 
-export const SidebarWrapper: React.FC<SidebarProps> = ({ open, setOpen, className = '' }) => {
+export const SidebarWrapper: React.FC<SidebarProps> = ({ open, setOpen }) => {
     const router = useRouter();
     const { loading, data } = useGetUserQuery();
-    const [tabs, setTabs] = useState(getPublicTabs(router));
+    const [tabs, setTabs] = useState(getPublicTabs());
 
     useEffect(() => {
         if (data?.getUser.userName === 'munikeraragon') {
-            setTabs([...getPublicTabs(router), ...getAdminTabs(router)]);
+            setTabs([...getPublicTabs(), ...getAdminTabs(router)]);
         }
     }, [loading, router]);
 
     return <Sidebar open={open} setOpen={setOpen} tabs={tabs} />;
 };
 
-const getPublicTabs = (router: NextRouter) => {
+const getPublicTabs = () => {
     return [
         {
             label: 'home',

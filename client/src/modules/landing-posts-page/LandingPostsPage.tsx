@@ -86,8 +86,9 @@ export const LandingPostsPage: React.FC = () => {
 
             <div className='flex justify-center items-center flex-wrap mb-8'>
                 {tagsData &&
-                    tagsData.getPopularTags.map((tag) => (
+                    tagsData.getPopularTags.map((tag, index) => (
                         <button
+                            key={index}
                             type='button'
                             className='text-indigo-700 bg-indigo-100 hover:bg-indigo-500 hover:text-white focus:border-indigo-300 px-2 py-1 text-sm  inline-flex items-center border border-transparent leading-6 font-medium rounded-md focus:outline-none  focus:ring focus:ring-indigo-300 focus:ring-opacity-50 transition ease-in-out duration-150 px-0 py-0 mt-2 mr-1'>
                             {tag}

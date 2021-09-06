@@ -67,7 +67,7 @@ const MainImage = () => {
                 src={mainImageUrl}
                 className='object-cover mr-8'
                 style={{ width: 250, height: 105 }}
-                alt='Post cover image'
+                alt='Post cover'
             />
 
             <div className='flex items-center'>

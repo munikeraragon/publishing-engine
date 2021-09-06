@@ -34,7 +34,7 @@ export const AdminPage: React.FC = () => {
         <div className='w-full mx-auto my-8'>
             <div className='flex flex-col  mx-8 h-full'>
                 <div className='grid grid-cols-4 gap-8'>
-                    <div
+                    <button
                         onClick={() => setSelected('users')}
                         className={`${selected === 'users' ? 'text-indigo-500' : ''}
                         flex flex-col py-6 shadow-md bg-white 
@@ -43,9 +43,9 @@ export const AdminPage: React.FC = () => {
                             {data?.getAdminInsight.userInsight.totalUsers}
                         </span>
                         Users
-                    </div>
+                    </button>
 
-                    <div
+                    <button
                         onClick={() => setSelected('messages')}
                         className={`${selected === 'messages' ? 'text-indigo-500' : ''}
                         flex flex-col py-6 shadow-md bg-white 
@@ -54,9 +54,9 @@ export const AdminPage: React.FC = () => {
                             {data?.getAdminInsight.contactMessageInsight.totalMessages}
                         </span>
                         Messages
-                    </div>
+                    </button>
 
-                    <div
+                    <button
                         onClick={() => setSelected('posts')}
                         className={`${selected === 'posts' ? 'text-indigo-500' : ''}
                         flex flex-col py-6 shadow-md bg-white 
@@ -65,14 +65,14 @@ export const AdminPage: React.FC = () => {
                             {data?.getAdminInsight.postInsight.totalPosts}
                         </span>
                         Posts
-                    </div>
+                    </button>
 
-                    <div
+                    <button
                         className='flex flex-col py-6 shadow-md bg-white
                     text-center rounded-md text-gray-500 ol-span-1'>
                         <span className='text-3xl font-semibold'> N/A</span>
                         Views
-                    </div>
+                    </button>
                 </div>
 
                 <div className='bg-white shadow-md mt-10  h-full'>

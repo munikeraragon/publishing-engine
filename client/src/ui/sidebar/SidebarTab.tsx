@@ -6,7 +6,7 @@ export interface SidebarTabProps {
     icon: React.ReactElement;
 }
 
-export const SidebarTab: React.FC<SidebarTabProps> = ({ path, icon, label }) => {
+export const SidebarTab: React.FC<SidebarTabProps> = ({ icon, label }) => {
     return (
         <Link href={`/dash/${label.replace(/\s+/g, '')}`}>
             <button

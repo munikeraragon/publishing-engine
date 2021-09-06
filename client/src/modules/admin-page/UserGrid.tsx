@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef, GridValueGetterParams } from '@material-ui/data-grid';
+import { DataGrid, GridColDef } from '@material-ui/data-grid';
 
 export interface UserGridProps {
     users: User[];
