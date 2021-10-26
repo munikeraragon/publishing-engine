@@ -7,7 +7,6 @@ export interface PostCardProps {
     userName: string;
     title: string;
     prettyTitle: string;
-    description: string;
     showEskeleton: boolean;
     creationDate: string;
     readingTime: number;
@@ -21,7 +20,6 @@ export const PostCardWrapper: React.FC<PostCardProps> = ({
     imageId,
     title,
     prettyTitle,
-    description,
     showEskeleton,
     creationDate,
     readingTime,
@@ -37,7 +35,6 @@ export const PostCardWrapper: React.FC<PostCardProps> = ({
                 <PostCard
                     src={showEskeleton ? undefined : downloadMetadata.imageUrl}
                     title={showEskeleton ? undefined : title}
-                    description={showEskeleton ? undefined : description}
                     userName={showEskeleton ? undefined : userName}
                     creationDate={showEskeleton ? undefined : creationDate}
                     readingTime={showEskeleton ? undefined : readingTime}

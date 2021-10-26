@@ -1,9 +1,7 @@
 import { DashboardLayout } from '../../layouts/dash-auth';
-import { ProfileCard } from '../../ui/LightProfileCard';
-import { NotificationCardWrapper } from '../../ui/wrappers/NotificationCardWrapper';
-import { useGetUserQuery, useSearchQuery } from '../../generated/apolloComponents';
+import { useSearchQuery } from '../../generated/apolloComponents';
 import { useEffect, useState } from 'react';
-import moment from 'moment';
+import { PostCardWrapper } from '../../ui/wrappers/PostCardWrapper';
 
 export interface Post {
     imageId: number;
@@ -20,8 +18,6 @@ export interface Post {
 
 export const HomePage: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
-
-    const user = useGetUserQuery().data?.getUser;
     const { error, data, loading } = useSearchQuery({
         variables: {
             searchInput: {
@@ -44,7 +40,7 @@ export const HomePage: React.FC = () => {
                         imageId: elem.mainImageId,
                         title: elem.title,
                         prettyTitle: elem.prettyTitle,
-                        creationDate: moment(Number(elem.creationDate)).format('MMMM Do YYYY'),
+                        creationDate: elem.creationDate,
                         readingTime: elem.readingTime,
                         userIcon: elem.userIcon,
                         comments: elem.comments,
@@ -58,15 +54,9 @@ export const HomePage: React.FC = () => {
 
     return (
         <div className='grid grid-cols-12 pt-4 flex-1'>
-            <div className='lg:col-span-8 col-span-12'>
-                <div className='flex mx-8 items-center'>
-                    <div>
-                        <h1 className='text-xl text-gray-900 tracking-tight font-semibold'>
-                            Posts
-                        </h1>
-                    </div>
-
-                    <div className='hidden md:flex ml-auto'>
+            <div className='col-span-12'>
+                <div className='flex mx-8 items-center mb-4'>
+                    <div className='hidden md:flex m-auto'>
                         <button
                             className={`flex justify-items-center hover:bg-gray-200
                             mb-2 mr-2 px-2 py-2 rounded-md hover:text-indigo-600
@@ -118,32 +108,26 @@ export const HomePage: React.FC = () => {
                     </div>
                 </div>
 
-                {posts.map((post, index) => (
-                    <NotificationCardWrapper
-                        key={index}
-                        title={post.title}
-                        prettyTitle={post.prettyTitle}
-                        imageId={post.imageId}
-                        userIcon={post.userIcon}
-                        showCoverImage={index === 0}
-                        readingTime={post.readingTime}
-                        creationDate={post.creationDate}
-                        comments={post.comments}
-                        reactions={post.reactions}
-                        userName={post.userName}
-                        tags={post.tags}
-                        className={'mx-2 md:mx-8 mb-4'}
-                    />
-                ))}
-            </div>
-            <div className='col-span-4 hidden lg:block mx-2'>
-                <ProfileCard
-                    userName={user?.userName}
-                    userIcon={user?.userIcon}
-                    creationDate={user?.creationDate}
-                    location={user?.locale}
-                    className='col-span-4 w-80 mx-auto mt-8'
-                />
+                <div
+                    data-aos='fade-up'
+                    className='max-w-7xl m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16'>
+                    {posts.map((post, index) => (
+                        <PostCardWrapper
+                            key={index}
+                            title={post.title}
+                            prettyTitle={post.prettyTitle}
+                            imageId={post.imageId}
+                            userIcon={post.userIcon}
+                            readingTime={post.readingTime}
+                            creationDate={post.creationDate}
+                            // comments={post.comments}
+                            // reactions={post.reactions}
+                            userName={post.userName}
+                            tags={post.tags}
+                            showEskeleton={false}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     );

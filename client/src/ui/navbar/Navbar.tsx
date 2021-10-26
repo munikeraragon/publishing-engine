@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, ReactElement } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import Link from 'next/link';
 import {
@@ -76,17 +76,19 @@ const resources = [
 ];
 
 export interface NavbarProps {
+    contentLeft?: ReactElement;
+    contentRight?: ReactElement;
     className?: string;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
+export const Navbar: React.FC<NavbarProps> = ({ className = '', contentLeft, contentRight }) => {
     return (
-        <Popover className={`${className} w-full bg-white z-50`}>
+        <Popover className={`${className} w-full bg-white`}>
             {({ open }) => (
                 <NavbarRoot>
                     <div>
                         <div
-                            className='flex justify-between items-center py-3.5 px-4 sm:px-6
+                            className='flex justify-between items-center py-2.5 px-4 sm:px-6
                             md:justify-start md:space-x-10'>
                             <div className='-mr-2 -my-2 md:hidden'>
                                 <Popover.Button
@@ -175,18 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                         </>
                                     )}
                                 </Popover> */}
-
-                                <Link href='/#posts'>
-                                    <span className='text-base font-medium text-gray-700 hover:text-indigo-500'>
-                                        Posts
-                                    </span>
-                                </Link>
-
-                                <Link href='/#contact'>
-                                    <span className='text-base font-medium text-gray-700 hover:text-indigo-500'>
-                                        Contact
-                                    </span>
-                                </Link>
+                                {contentLeft}
                                 {/*
                                 <Popover className='relative'>
                                     {({ open }) => (
@@ -279,14 +270,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                 </Popover> */}
                             </Popover.Group>
                             <div className='hidden md:flex items-center justify-end md:flex-1 lg:w-0'>
-                                <Link href='/login'>
-                                    <span
-                                        className='ml-8 whitespace-nowrap inline-flex items-center justify-center
-                                        px-4 py-1.5 border border-transparent rounded-md shadow-sm text-base
-                                        font-medium text-white bg-indigo-600 hover:bg-indigo-700'>
-                                        Log in
-                                    </span>
-                                </Link>
+                                {contentRight}
                             </div>
                         </div>
                     </div>
@@ -364,12 +348,12 @@ export const Navbar: React.FC<NavbarProps> = ({ className = '' }) => {
                                     </div>
                                     <div>
                                         <Link href='/login'>
-                                            <span
+                                            <p
                                                 className='w-full flex items-center justify-center px-4 py-1.5
                                                 border border-transparent rounded-md shadow-sm text-base font-medium
                                                 text-white bg-indigo-600 hover:bg-indigo-700'>
                                                 Log in
-                                            </span>
+                                            </p>
                                         </Link>
                                     </div>
                                 </div>

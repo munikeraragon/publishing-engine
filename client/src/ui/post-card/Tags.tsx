@@ -13,13 +13,6 @@ export interface EskeletonProps {
     className?: string;
 }
 
-const colors: any = {
-    0: 'bg-green-100',
-    1: 'bg-red-100',
-    2: 'bg-blue-100',
-    3: 'bg-indigo-100',
-    4: 'bg-gray-100'
-};
 const tagSize = {
     sm: 'text-xs',
     md: 'text-sm',
@@ -32,12 +25,10 @@ export const Tags: React.FC<TagsProps> = ({ tags, size = 'md', className = '' })
     return (
         <div className={`${className} flex`}>
             {tags.map((tag, index) => (
-                <span
-                    key={index}
-                    className={`${tagSize[size]} inline-flex mr-1 leading-4 ${colors[index]} px-2.5 py-0.5
-                    font-medium rounded-full text-gray-800 align-middle`}>
+                <p key={index} className={`${tagSize[size]} inline-flex mr-1 leading-4`}>
                     {tag}
-                </span>
+                    {index !== tags.length - 1 && ','}
+                </p>
             ))}
         </div>
     );

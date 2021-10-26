@@ -10,7 +10,11 @@ export interface EskeletonProps {
 export const Title: React.FC<TitleProps> = ({ title, className = '' }) => {
     if (!title) return <TitleEskeleton className={className} />;
 
-    return <p className={`${className} block text-gray-900`}>{title}</p>;
+    return (
+        <span className='block text-gray-900 hover:text-indigo-600'>
+            <h3 className='text-lg font-semibold leading-7  md:text-xl'>{title}</h3>
+        </span>
+    );
 };
 
 export const TitleEskeleton: React.FC<EskeletonProps> = ({ className = '' }) => {

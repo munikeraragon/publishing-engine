@@ -199,7 +199,6 @@ export class PostService {
                         words: postInput.words,
                         readingTime: postInput.readingTime,
                         publish: postInput.publish
-
                     });
             } catch (err) {
                 console.log(err);

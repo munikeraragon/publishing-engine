@@ -11,7 +11,7 @@ export const LandingImage: React.FC<LandingImageProps> = ({ className = '', ...p
                 className='m-auto object-cover'
                 src={props.src}
                 alt={props.alt}
-                style={{ maxHeight: '500px' }}
+                style={{ maxHeight: '400px' }}
             />
         </div>
     );

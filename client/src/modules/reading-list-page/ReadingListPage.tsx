@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { DashboardLayout } from '../../layouts/dash-auth';
 import { useGetUserSavedPostsQuery } from '../../generated/apolloComponents';
 import { PostCardWrapper } from '../../ui/wrappers/PostCardWrapper';
-import moment from 'moment';
 
 export interface SimplePost {
     userName: string;
@@ -31,7 +30,7 @@ export const ReadingListPage: React.FC = () => {
                         title: elem.title,
                         prettyTitle: elem.prettyTitle,
                         description: elem.description,
-                        creationDate: moment(Number(elem.creationDate)).format('MMMM Do YYYY'),
+                        creationDate: elem.creationDate,
                         readingTime: elem.readingTime,
                         userIcon: elem.userIcon,
                         tags: elem.tags
@@ -47,11 +46,13 @@ export const ReadingListPage: React.FC = () => {
 
     return (
         <div className='min-h-full mx-8 my-4 w-full'>
-            <div className='pb-2'>
-                <h1 className='text-xl text-gray-900 tracking-tight font-semibold'>Reading List</h1>
+            <div className='pb-6 text-center'>
+                <h1 className='text-lg text-indigo-600 tracking-tight font-medium'>Reading List</h1>
             </div>
 
-            <div className='m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            <div
+                data-aos='fade-up'
+                className='m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                 {posts.map((post, index) => (
                     <PostCardWrapper
                         key={index}
@@ -59,7 +60,6 @@ export const ReadingListPage: React.FC = () => {
                         userName={post.userName}
                         title={post.title}
                         prettyTitle={post.prettyTitle}
-                        description={post.description}
                         creationDate={post.creationDate}
                         readingTime={post.readingTime}
                         userIcon={post.userIcon}

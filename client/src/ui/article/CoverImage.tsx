@@ -12,13 +12,13 @@ export const CoverImage: React.FC<CoverImageProps> = ({ alt, src }) => {
     return (
         <img
             alt={alt}
-            className='object-cover w-full block bg-cover bg-no-repeat bg-center rounded-md'
+            className='object-cover w-full block bg-cover bg-no-repeat bg-center'
             src={src}
-            style={{ maxHeight: 360 }}
+            style={{ maxHeight: 565 }}
         />
     );
 };
 
 export const CoverImageEskeleton: React.FC = () => {
-    return <div className='bg-gray-300 animate-pulse rounded-md h-72' style={{ maxHeight: 360 }} />;
+    return <div className='bg-gray-300 animate-pulse rounded-md h-72' style={{ maxHeight: 565 }} />;
 };

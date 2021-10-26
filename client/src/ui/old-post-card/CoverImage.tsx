@@ -10,7 +10,7 @@ export interface EskeletonProps {
 export const CoverImage: React.FC<CoverImageProps> = ({ alt, src }) => {
     if (!src) return <CoverImageEskeleton />;
     return (
-        <div className='relative' style={{ paddingBottom: '56.25%', height: 220 }}>
+        <div className='relative' style={{ paddingBottom: '56.25%', maxHeight: 260 }}>
             <div className='absolute inset-0'>
                 <img className=' w-full h-full object-cover' src={src} alt={alt} />
             </div>

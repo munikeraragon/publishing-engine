@@ -3,16 +3,12 @@ import { SinglePublicLayout } from '../../layouts/single-public';
 import { useRouter } from 'next/router';
 import { useS3PostDownload } from '../s3-service/useS3PostDownload';
 import { Article } from '../../ui/article/Article';
-import { Sidebar } from '../../ui/article/Sidebar';
-import { Actions } from '../../ui/article/Actions';
 import { useS3ImageDownload } from '../s3-service/useS3ImageDownload';
-import { ProfileCard } from '../../ui/LightProfileCard';
 import {
     useGetUserQuery,
     useIsPostLikedLazyQuery,
     useIsPostSavedLazyQuery
 } from '../../generated/apolloComponents';
-import moment from 'moment';
 
 export interface ValidPageProps {
     userName: string;
@@ -40,21 +36,8 @@ export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
     }, [postMetadata]);
 
     return (
-        <div className='flex max-w-7xl m-auto'>
-            <div className='lg:flex hidden'>
-                <Sidebar>
-                    <Actions
-                        postId={postMetadata.data?.id}
-                        likes={showSkeleton ? undefined : postMetadata.data?.likes}
-                        comments={showSkeleton ? undefined : postMetadata.data?.comments}
-                        saved={showSkeleton ? undefined : postMetadata.data?.saved}
-                        isSaved={showSkeleton ? undefined : savedStatus?.isPostSaved}
-                        isLiked={showSkeleton ? undefined : likedStatus?.isPostLiked}
-                    />
-                </Sidebar>
-            </div>
-
-            <div className='grid grid-cols-12 gap-4 flex-1 mx-4 lg:mx-0'>
+        <div className='flex'>
+            <div className='flex gap-4 flex-1'>
                 <Article
                     coverImage={showSkeleton ? null : imageMetadata.imageUrl}
                     postId={Number(postMetadata.data?.id)}
@@ -67,28 +50,19 @@ export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
                     wordsNumber={showSkeleton ? undefined : postMetadata.data?.wordsNumber}
                     articleBody={showSkeleton ? undefined : postMetadata.data?.mainBody}
                     tags={showSkeleton ? undefined : postMetadata.data?.tags}
+                    likes={showSkeleton ? undefined : postMetadata.data?.likes}
+                    comments={showSkeleton ? undefined : postMetadata.data?.comments}
+                    saved={showSkeleton ? undefined : postMetadata.data?.saved}
+                    isSaved={showSkeleton ? undefined : savedStatus?.isPostSaved}
+                    isLiked={showSkeleton ? undefined : likedStatus?.isPostLiked}
                     isOwner={
                         postMetadata.data?.userName &&
                         userData?.getUser.userName &&
                         postMetadata.data?.userName === userData?.getUser.userName
                     }
-                    className='w-full col-span-12 lg:col-span-8 max-w-3xl mt-8 mx-auto'
+                    showSidebar={true}
+                    className='w-full'
                 />
-                <div className='col-span-4 hidden lg:block'>
-                    <ProfileCard
-                        userName={showSkeleton ? undefined : postMetadata.data?.userName}
-                        userIcon={showSkeleton ? undefined : postMetadata.data?.userIcon}
-                        creationDate={
-                            showSkeleton
-                                ? undefined
-                                : moment(Number(postMetadata.data?.userCreationDate)).format(
-                                      'MMMM Do YYYY'
-                                  )
-                        }
-                        location={showSkeleton ? undefined : postMetadata.data?.userLocale}
-                        className='col-span-4 w-72 mx-auto mt-12'
-                    />
-                </div>
             </div>
         </div>
     );

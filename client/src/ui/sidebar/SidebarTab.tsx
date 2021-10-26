@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Router from 'next/router';
 
 export interface SidebarTabProps {
     path: string;
@@ -6,15 +7,18 @@ export interface SidebarTabProps {
     icon: React.ReactElement;
 }
 
-export const SidebarTab: React.FC<SidebarTabProps> = ({ icon, label }) => {
+export const SidebarTab: React.FC<SidebarTabProps> = ({ path, icon, label }) => {
     return (
-        <Link href={`/dash/${label.replace(/\s+/g, '')}`}>
+        <Link href={path}>
             <button
-                className={`w-full px-3 py-2 rounded-lg mb-2 last:mb-0 hover:bg-gray-200 text-gray-600 hover:text-indigo-600`}>
-                <div className={`block transition duration-150`}>
+                className={`my-3 w-full p-3 rounded-lg mb-0.5 last:mb-0 hover:bg-gray-100 text-gray-600  ${
+                    path === Router.pathname ? 'bg-gray-100' : ''
+                }`}>
+                <div className={`block `}>
                     <div className='flex flex-grow items-center'>
                         {icon}
-                        <span className='text-sm font-medium'>{label}</span>
+
+                        <span className='whitespace-nowrap'>{label}</span>
                     </div>
                 </div>
             </button>

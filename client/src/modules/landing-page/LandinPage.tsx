@@ -1,7 +1,5 @@
-import { useScreenType } from '../../hooks/useScreenType';
 import { LandingCard } from '../../ui/LandingCard';
 import { LandingImage } from '../../ui/LandingImage';
-import { ReactParticles } from '../../ui/Particles';
 
 export interface LandingCardProps {
     className?: string;
@@ -13,19 +11,15 @@ export interface LandingCardProps {
 }
 
 export const LandingPage: React.FC = () => {
-    const screenType = useScreenType();
-
     return (
-        <div className='h-full'>
+        <div className='bg-gray-800 py-20'>
             <div className='h-full max-w-7xl m-auto grid grid-cols-1 lg:grid-cols-2 gap-4 pt-16 pb-8'>
                 <LandingCard
                     primaryHeader='Welcome to Codegrow!'
-                    secondaryHeader='Start your coding journey'
-                    description={`The ultimate resource to learn about tech.\nFind Opensource pojects and join their community.`}
-                    linkLabel1='See Projects'
+                    description={`The ultimate resource to learn about tech`}
+                    linkLabel1='Read Posts'
                     linkHref1='#posts'
-                    linkLabel2='Read Posts'
-                    linkHref2='#posts'
+                    className='text-white'
                 />
 
                 <LandingImage
@@ -33,7 +27,6 @@ export const LandingPage: React.FC = () => {
                     alt='Image of a spaceship'
                 />
             </div>
-            {screenType !== 'xs' && <ReactParticles />}
         </div>
     );
 };

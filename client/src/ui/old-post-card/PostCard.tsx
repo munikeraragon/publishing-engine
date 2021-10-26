@@ -1,4 +1,5 @@
-import { Tags } from './Tags';
+import { Description } from './Description';
+import { Tags } from '../post-card/Tags';
 import { Title } from './Title';
 import { Metadata } from './Metadata';
 import { CoverImage } from './CoverImage';
@@ -6,6 +7,7 @@ import { CoverImage } from './CoverImage';
 export interface PostCardProps {
     src: string | undefined | null;
     title: string | undefined;
+    description: string | undefined;
     userName: string | undefined;
     userIcon: string | undefined;
     creationDate: string | undefined;
@@ -17,6 +19,7 @@ export interface PostCardProps {
 export const PostCard: React.FC<PostCardProps> = ({
     src,
     title,
+    description,
     userIcon,
     userName,
     creationDate,
@@ -26,28 +29,26 @@ export const PostCard: React.FC<PostCardProps> = ({
 }) => {
     return (
         <div
-            style={{ border: '1px solid #f0f8ff', minHeight: 420 }}
-            className={`${className} flex flex-col overflow-hidden rounded-lg shadow-bottom hover:shadow-2xl
-            transition transform hover:-translate-y-1.5 bg-white`}>
+            className={`${className} flex flex-col overflow-hidden rounded-lg
+            transition transform hover:-translate-y-1.5 bg-white`}
+            style={{ height: 480 }}>
             <div className='flex-shrink-0'>
                 <CoverImage src={src} alt='post cover' />
             </div>
 
-            <div className='flex flex-col justify-between flex-1 p-6 pt-5 bg-white'>
+            <div className='flex flex-col justify-between flex-1 p-6 bg-white'>
                 <div className='flex flex-col flex-1'>
-                    <Tags
-                        tags={tags}
-                        size='md'
-                        className='text-indigo-600 font-semibold mt-2 mb-4'
-                    />
-                    <Title title={title} className='text-xl font-semibold' />
+                    <Title title={title} />
+                    <Description description={description} />
+                    <div className='mt-auto'>
+                        <Tags tags={tags} size='sm' />
+                    </div>
                 </div>
                 <Metadata
                     userIcon={userIcon}
                     userName={userName}
                     creationDate={creationDate}
                     readingTime={readingTime}
-                    className='text-sm font-base text-gray-700'
                 />
             </div>
         </div>

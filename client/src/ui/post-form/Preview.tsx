@@ -22,6 +22,12 @@ export const Preview = () => {
                 readingTime={Math.round(mainBody.split(' ').length / 250)}
                 wordsNumber={mainBody.split(' ').length}
                 articleBody={mainBody}
+                likes={0}
+                comments={0}
+                saved={0}
+                isSaved={false}
+                isLiked={false}
+                showSidebar={false}
             />
         </div>
     );

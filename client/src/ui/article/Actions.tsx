@@ -133,7 +133,7 @@ export const Actions: React.FC<EditProps> = ({
         <div className={`${className} flex flex-col text-sm`}>
             <button
                 onClick={state.isLiked ? onUnlike : onLike}
-                className='flex flex-col mb-6 items-center'>
+                className='flex flex-col mb-6 items-center text-gray-500'>
                 <span
                     className={`${
                         state.isLiked ? 'bg-red-50 text-red-500' : ''
@@ -157,7 +157,7 @@ export const Actions: React.FC<EditProps> = ({
 
             <button
                 onClick={state.saved ? onUnsave : onSave}
-                className='flex flex-col mb-6 items-center'>
+                className='flex flex-col mb-6 items-center text-gray-500'>
                 <span
                     className={`${
                         state.isSaved ? 'bg-teal-50 text-teal-400' : ''
@@ -179,7 +179,7 @@ export const Actions: React.FC<EditProps> = ({
                 <span className={`${state.isSaved ? 'text-teal-400' : ''}`}>{state.saved}</span>
             </button>
 
-            <button className='flex flex-col mb-6 items-center'>
+            <button className='flex flex-col mb-6 items-center text-gray-500'>
                 <span className='p-2 hover:bg-indigo-50 hover:text-indigo-500 rounded-full'>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
@@ -198,7 +198,7 @@ export const Actions: React.FC<EditProps> = ({
                 <span>{state.comments}</span>
             </button>
 
-            <button className='flex flex-col mb-6 p-2 items-center hover:bg-gray-100 rounded-full'>
+            <button className='flex flex-col mb-6 p-2 items-center hover:bg-gray-100 rounded-full text-gray-500'>
                 <svg
                     className='h-6 w-6'
                     xmlns='http://www.w3.org/2000/svg'

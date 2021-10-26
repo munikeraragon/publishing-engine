@@ -8,7 +8,7 @@ import { useGetUserQuery } from '../../generated/apolloComponents';
 import moment from 'moment';
 
 export const PostForm: React.FC = () => {
-    const { previewShowing, description, title, mainImageUrl, tagsString, mainBody } = useFormStore(
+    const { previewShowing, title, mainImageUrl, tagsString, mainBody } = useFormStore(
         (state) => state
     );
     const user = useGetUserQuery().data?.getUser;
@@ -32,7 +32,6 @@ export const PostForm: React.FC = () => {
                             className='w-96 mx-4 border border-gray-200'
                             src={mainImageUrl}
                             title={title}
-                            description={description}
                             userName={user?.userName}
                             userIcon={user?.userIcon}
                             tags={tagsString

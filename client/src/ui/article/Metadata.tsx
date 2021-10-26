@@ -43,19 +43,12 @@ export const Metadata: React.FC<MetaDataProps> = ({
         );
 
     return (
-        <div className={`${className}`}>
-            <div className='flex items-center justify-start'>
-                <img className='inline-block h-10 w-10 rounded-full' src={userIcon} alt='' />
-                <div className='flex flex-col ml-3 text-sm font-medium leading-5'>
-                    <p className='text-gray-700'>{userName}</p>
-                    <p className='text-gray-500 '>
-                        {creationDate}
-                        <span className='hidden mx-2 sm:inline'>·</span>
-                        <span className='block sm:inline'>{readingTime} min read</span>
-                    </p>
-                </div>
-                {isOwner && <Edit postId={postId} prettyTitle={prettyTitle} userName={userName} />}
-            </div>
+        <div className={`${className} flex text-gray-500`}>
+            <p>{userName}</p>
+            <span className='hidden mx-2 sm:inline'>·</span>
+            <p>{creationDate}</p>
+            <span className='hidden mx-2 sm:inline'>·</span>
+            <p>{readingTime} min read</p>
         </div>
     );
 };

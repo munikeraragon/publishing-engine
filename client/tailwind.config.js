@@ -17,7 +17,11 @@ module.exports = {
             },
             height: (theme) => ({
                 'screen/2': 'calc(100% - 64)'
-            })
+            }),
+            lineHeight: {
+                'extra-loose': '2.5',
+                12: '3rem'
+            }
         },
         boxShadow: {
             sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
@@ -30,7 +34,8 @@ module.exports = {
             inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
             none: 'none',
             primary: 'rgb(10, 10, 10) 4px 4px 0px 0px',
-            magical: '0 .125rem .625rem rgba(90,97,105,.12)'
+            magical: '0 .125rem .625rem rgba(90,97,105,.12)',
+            bottom: 'rgba(0, 0, 0, 0.08) 0px 10px 10px -3px, rgba(0, 0, 0, 0) 0px 0px 0px 0px'
         }
     },
     variants: {

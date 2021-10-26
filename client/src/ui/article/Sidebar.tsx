@@ -5,7 +5,7 @@ export interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ className, children }) => {
     return (
         <div className={`${className} flex w-20 justify-center mt-12 ml-2 mr-6 text-gray-600`}>
-            <div className='fixed'>{children}</div>
+            <div className=''>{children}</div>
         </div>
     );
 };

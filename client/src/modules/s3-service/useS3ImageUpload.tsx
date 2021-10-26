@@ -43,6 +43,9 @@ export const useS3ImageUpload = () => {
 
     async function uploadImage(image: any, label: string) {
         const imageMetadata = await generateImage(label, createImage);
+        // console.log(imageMetadata.presignedUrl)
+        // const url = imageMetadata.presignedUrl.replace('minio_storage', '');
+        // console.log(url)
         fetch(imageMetadata.presignedUrl, {
             method: 'PUT',
             body: image

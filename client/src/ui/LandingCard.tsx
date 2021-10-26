@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Typist from 'react-typist';
 
 export interface LandingCardProps {
     className?: string;
@@ -16,40 +17,35 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
     return (
         <div className={`flex flex-col justify-center mx-4 ${className}`}>
             <div className='sm:text-center lg:text-left'>
-                <h1
-                    data-aos='fade-right'
-                    className='text-4xl tracking-tight font-bold text-gray-700'>
-                    {props.primaryHeader}
-                </h1>
+                <p className='text-4xl tracking-tight font-bold'>{props.primaryHeader}</p>
 
                 {props.secondaryHeader && (
-                    <h1 data-aos='fade-right' className='text-4xl font-bold text-indigo-600'>
-                        {props.secondaryHeader}
-                    </h1>
+                    <h1 className='text-4xl font-bold text-indigo-600'>{props.secondaryHeader}</h1>
                 )}
 
                 {props.description && (
-                    <p
-                        data-aos='fade-right'
-                        className='mt-3 whitespace-pre-wrap text-gray-500 sm:mt-5
+                    <Typist
+                        cursor={{ blink: true }}
+                        className='mt-3 whitespace-pre-wrap sm:mt-5 text-indigo-300
                         sm:text-6xl sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
-                        {props.description}
-                    </p>
+                        {props.description} 🚀
+                    </Typist>
                 )}
-                <div className='mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start'>
+
+                <div className='mt-10 sm:flex sm:justify-center lg:justify-start'>
                     {props.linkLabel1 && (
-                        <div data-aos='fade-right' className='z-10 rounded-md shadow'>
-                            <Link href={props.linkHref1 || ''}>
-                                <a className='w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
+                        <div className='z-10 mt-3 sm:mt-0'>
+                            <Link href={props.linkHref1 || 'link-2'}>
+                                <a className=' w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-small rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 hover:bg-blue-200 md:py-1.5 md:text-lg md:px-6'>
                                     {props.linkLabel1}
                                 </a>
                             </Link>
                         </div>
                     )}
                     {props.linkLabel2 && (
-                        <div data-aos='fade-right' className='z-10 mt-3 sm:mt-0 sm:ml-3'>
-                            <Link href={props.linkHref2 || 'link-2'}>
-                                <a className=' w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 hover:bg-blue-200 md:py-2 md:text-lg md:px-10'>
+                        <div className='z-10 rounded-md shadow'>
+                            <Link href={props.linkHref2 || ''}>
+                                <a className='w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
                                     {props.linkLabel2}
                                 </a>
                             </Link>

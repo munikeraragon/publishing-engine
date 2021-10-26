@@ -85,6 +85,8 @@ SET role = 'ADMIN'
 WHERE userName = 'munikeraragon';
 ```
 
+mysqldump -uroot -pSuperSecretPassword --databases publishing_engine_prod  > /var/lib/mysql/dump.sql
+
 Rollback migration
 ``` bash
 docker exec server npx knex migrate:rollback

@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 export interface MetaDataProps {
     userIcon: string | undefined;
     userName: string | undefined;
@@ -24,9 +22,17 @@ export const Metadata: React.FC<MetaDataProps> = ({
 
     return (
         <div className={`${className} flex items-center mt-6`}>
-            <p>{moment(Number(creationDate)).fromNow()}</p>
-            <span className='hidden mx-2 sm:inline scale-150'>·</span>
-            <p>{readingTime} min read</p>
+            <div className='flex-shrink-0'>
+                <img alt='' src={userIcon} className='inline-block h-10 w-10 rounded-full' />
+            </div>
+            <div className='flex flex-col ml-3 text-sm font-medium leading-5'>
+                <p className='text-gray-700'>{userName}</p>
+                <p className='text-gray-500'>
+                    {creationDate}
+                    <span className='hidden mx-2 sm:inline'>·</span>
+                    <span className='block sm:inline'>{readingTime} min read</span>
+                </p>
+            </div>
         </div>
     );
 };
