@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useGetUserQuery } from '../../generated/apolloComponents';
-import { Sidebar } from '../Sidebar/Sidebar';
+import { Sidebar } from '../sidebar/Sidebar';
 
 export interface SidebarProps {
     open: boolean;
