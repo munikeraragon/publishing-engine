@@ -13,14 +13,9 @@ import { readFileSync } from 'fs';
 import buildSchema from './graphql';
 import authRoutes from './routes/auth-routes';
 
-import { listBuckets } from './s3-dal/list_buckets';
-
 export const server = async () => {
     const port = process.env.PORT || 4000;
     const schema = await buildSchema();
-
-    const data = await listBuckets();
-    console.log(data);
 
     const app = express();
     const apolloServer = new ApolloServer({
