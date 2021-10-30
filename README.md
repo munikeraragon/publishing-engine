@@ -38,7 +38,28 @@ DISCORD_CLIENT_ID=
 DISCORD_CLIENT_SECRET=
 
 JWT_SERVER_SECRET=TypeGraphQL
-``
+
+# If using S3
+S3_ACCESS_KEY=EnterYourAccessKey
+S3_SECRET_KEY=EnterYourSecretKey
+S3_IMAGE_BUCKET=aws-image-uploads
+S3_POST_BUCKET=aws-post-uploads
+
+
+# If using Minio in Development
+MINIO_END_POINT=EnterYourIP
+MINIO_PORT=9000
+MINIO_USE_SSL=false
+MINIO_ACCESS_KEY=EnterYourAccessKey
+MINIO_SECRET_KEY=EnterYourSecretKey
+
+# If using Minio in Production
+MINIO_END_POINT=codegrow.org
+MINIO_PORT=9000
+MINIO_USE_SSL=true
+MINIO_ACCESS_KEY=EnterYourAccessKey
+MINIO_SECRET_KEY=EnterYourSecretKey
+```
 
 3) Run Docker environmnet
 ``` bash
