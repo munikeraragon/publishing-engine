@@ -1,0 +1,19 @@
+version: '3'
+services:
+  jenkins:
+    build:
+      context: ./docker
+      dockerfile: jenkins.Dockerfile
+    privileged: true
+    user: root
+    ports:
+      - 8083:8080
+      - 5003:5000
+    container_name: jenkins_codegrow
+    volumes:
+      - ./jenkins_data:/var/jenkins_home
+      - ./:/codegrow
+      - /var/run/docker.sock:/var/run/docker.sock
+      
+networks:
+  jenkins-net:
