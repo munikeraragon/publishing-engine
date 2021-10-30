@@ -4,7 +4,12 @@ export async function up(knex: Knex): Promise<void> {
     return knex.schema
         .createTable('Post', (t) => {
             t.increments('id').primary().unsigned();
-            t.integer('userId').unsigned().references('id').inTable('User');
+            t.integer('userId')
+                .unsigned()
+                .references('id')
+                .inTable('User')
+                .onUpdate('CASCADE')
+                .onDelete('CASCADE');
             t.integer('mainImageId').unsigned().references('id').inTable('Image');
             t.string('objectKey', 1000).unique();
             t.string('title', 255);
