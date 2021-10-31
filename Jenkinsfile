@@ -10,12 +10,12 @@ pipeline {
             steps {
                 dir('./server') {
                     sh 'npm install'
-                    sh 'npm build'
+                    sh 'npm run build'
                 }
 
                 dir('./client') {
                     sh 'npm install'
-                    sh 'npm build'
+                    sh 'npm run build'
                 }
             }
         }
