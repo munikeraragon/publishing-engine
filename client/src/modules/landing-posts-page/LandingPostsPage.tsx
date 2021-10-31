@@ -6,7 +6,6 @@ import {
     useSearchQuery
 } from '../../generated/apolloComponents';
 import { SearchInput } from '../../ui/SearchInput';
-import { PostCard } from '../../ui/post-card/PostCard';
 
 export interface Post {
     imageId: number;
@@ -104,72 +103,6 @@ export const LandingPostsPage: React.FC = () => {
                         showEskeleton={false}
                     />
                 ))}
-
-                <PostCard
-                    src='https://images.unsplash.com/photo-1611328857214-a5aae689f21a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDV8fGVib29rfGVufDB8fHx8MTYzNDgyNTY4MA&ixlib=rb-1.2.1&q=80&w=2000'
-                    title={'A Very Quick Guide to SaaS'}
-                    userName={'Muniker'}
-                    creationDate={'Jul 12, 2021'}
-                    readingTime={5}
-                    userIcon={''}
-                    tags={['ebooks', 'golang']}
-                    className={''}
-                />
-
-                <PostCard
-                    src='https://images.unsplash.com/photo-1632633173874-ac62ae290fdd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDE4fHxpcGhvbmUlMjAxM3xlbnwwfHx8fDE2MzM5OTUxNDY&ixlib=rb-1.2.1&q=80&w=2000'
-                    title={'A Very Quick Guide to SaaS'}
-                    userName={'Muniker'}
-                    creationDate={'Jul 12, 2021'}
-                    readingTime={5}
-                    userIcon={''}
-                    tags={['docker', 'kubernetes']}
-                    className={''}
-                />
-
-                <PostCard
-                    src='https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDd8fHNvZnR3YXJlfGVufDB8fHx8MTYyNjEzMzk4NA&ixlib=rb-1.2.1&q=80&w=2000'
-                    title={'A Very Quick Guide to SaaS'}
-                    userName={'Muniker'}
-                    creationDate={'Jul 12, 2021'}
-                    readingTime={5}
-                    userIcon={''}
-                    tags={['code', 'dev']}
-                    className={''}
-                />
-
-                <PostCard
-                    src='https://blog.helloguru.io/content/images/size/w600/2021/09/Slide-16_9---9--5-.png'
-                    title={'A Very Quick Guide to SaaS'}
-                    userName={'Muniker'}
-                    creationDate={'Jul 12, 2021'}
-                    readingTime={5}
-                    userIcon={''}
-                    tags={['code', 'dev']}
-                    className={''}
-                />
-
-                <PostCard
-                    src='https://blog.helloguru.io/content/images/size/w600/2021/09/Blog.png'
-                    title={'A Very Quick Guide to SaaS'}
-                    userName={'Muniker'}
-                    creationDate={'Jul 12, 2021'}
-                    readingTime={5}
-                    userIcon={''}
-                    tags={['code', 'dev']}
-                    className={''}
-                />
-
-                <PostCard
-                    src='https://blog.helloguru.io/content/images/size/w600/2021/09/Slide-16_9---3.png'
-                    title={'A Very Quick Guide to SaaS'}
-                    userName={'Muniker'}
-                    creationDate={'Jul 12, 2021'}
-                    readingTime={5}
-                    userIcon={''}
-                    tags={['code', 'dev']}
-                    className={''}
-                />
             </div>
         </div>
     );

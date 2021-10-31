@@ -1,46 +1,22 @@
-import { Edit } from './Edit';
-
 export interface MetaDataProps {
-    postId: number | undefined;
-    prettyTitle: string | undefined;
-    userIcon: string | undefined;
     userName: string | undefined;
     creationDate: string | undefined;
     readingTime: number | undefined;
-    wordsNumber: number | undefined;
-    isOwner: boolean | undefined;
     className?: string;
 }
 
 export interface EskeletonProps {
     className?: string;
-    postId: number | undefined;
-    prettyTitle: string | undefined;
-    userName: string | undefined;
-    isOwner: boolean | undefined;
 }
 
 export const Metadata: React.FC<MetaDataProps> = ({
-    postId,
-    prettyTitle,
-    userIcon,
     userName,
     creationDate,
     readingTime,
-    wordsNumber,
-    isOwner,
     className = ''
 }) => {
-    if (!userIcon && !userName && !creationDate && !readingTime && !wordsNumber)
-        return (
-            <MetadataEskeleton
-                className={className}
-                isOwner={isOwner}
-                postId={postId}
-                prettyTitle={prettyTitle}
-                userName={userName}
-            />
-        );
+    if (userName === undefined || creationDate === undefined || readingTime === undefined)
+        return <MetadataEskeleton className={className} />;
 
     return (
         <div className={`${className} flex text-gray-500`}>
@@ -53,6 +29,19 @@ export const Metadata: React.FC<MetaDataProps> = ({
     );
 };
 
+export const MetadataEskeleton: React.FC<EskeletonProps> = ({ className = '' }) => {
+    return (
+        <div className={`${className} flex items-center`}>
+            <span className='inline-block h-3 w-24 rounded bg-gray-300 animate-pulse' />
+            <span className='hidden mx-2 sm:inline animate-pulse text-gray-400'>·</span>
+            <span className='inline-block h-3 w-24 rounded-full bg-gray-300 animate-pulse' />
+            <span className='hidden mx-2 sm:inline animate-pulse text-gray-400'>·</span>
+            <span className='inline-block h-3 w-24 rounded-full bg-gray-300 animate-pulse' />
+        </div>
+    );
+};
+
+/*
 export const MetadataEskeleton: React.FC<EskeletonProps> = ({
     isOwner,
     postId,
@@ -76,3 +65,4 @@ export const MetadataEskeleton: React.FC<EskeletonProps> = ({
         </div>
     );
 };
+*/

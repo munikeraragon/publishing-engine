@@ -1,6 +1,5 @@
 import { minioClient } from './utils';
 
-
 export class S3PostService {
     static async createUploadUrl(postKey: string) {
         return minioClient.presignedPutObject(process.env.S3_POST_BUCKET, postKey, 100);

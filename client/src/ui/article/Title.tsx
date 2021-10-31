@@ -20,5 +20,5 @@ export const Title: React.FC<TitleProps> = ({ title, className = '' }) => {
 };
 
 export const TitleEskeleton: React.FC<EskeletonProps> = ({ className = '' }) => {
-    return <div className={`${className} h-12 bg-gray-300 animate-pulse rounded-md`}></div>;
+    return <div className={`${className} h-12 bg-gray-300 animate-pulse rounded-md`} />;
 };

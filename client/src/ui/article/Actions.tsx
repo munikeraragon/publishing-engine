@@ -7,6 +7,7 @@ import {
     useUnsavePostMutation
 } from '../../generated/apolloComponents';
 import { useTokenStore } from '../../modules/auth/useTokenStore';
+import { Edit } from './Edit';
 
 export interface EditProps {
     postId: number | undefined;
@@ -15,11 +16,18 @@ export interface EditProps {
     saved: number;
     isSaved: boolean | undefined;
     isLiked: boolean | undefined;
+    isOwner: boolean | undefined;
+    prettyTitle: string | undefined;
+    userName: string | undefined;
     className?: string;
 }
 
 export interface EskeletonProps {
+    postId: number | undefined;
+    prettyTitle: string | undefined;
+    userName: string | undefined;
     className?: string;
+    isOwner: boolean | undefined;
 }
 
 export const Actions: React.FC<EditProps> = ({
@@ -29,6 +37,9 @@ export const Actions: React.FC<EditProps> = ({
     saved,
     isSaved,
     isLiked,
+    isOwner,
+    prettyTitle,
+    userName,
     className = ''
 }) => {
     const [likePost, { data: likedStatus }] = useLikePostMutation();
@@ -126,7 +137,14 @@ export const Actions: React.FC<EditProps> = ({
     };
 
     if (likes === undefined || comments === undefined || saved === undefined) {
-        return <ActionsEskeleton />;
+        return (
+            <ActionsEskeleton
+                isOwner={isOwner}
+                postId={postId}
+                prettyTitle={prettyTitle}
+                userName={userName}
+            />
+        );
     }
 
     return (
@@ -198,6 +216,8 @@ export const Actions: React.FC<EditProps> = ({
                 <span>{state.comments}</span>
             </button>
 
+            {isOwner && <Edit postId={postId} prettyTitle={prettyTitle} userName={userName} />}
+
             <button className='flex flex-col mb-6 p-2 items-center hover:bg-gray-100 rounded-full text-gray-500'>
                 <svg
                     className='h-6 w-6'
@@ -217,12 +237,20 @@ export const Actions: React.FC<EditProps> = ({
     );
 };
 
-export const ActionsEskeleton: React.FC<EskeletonProps> = ({ className = '' }) => {
+export const ActionsEskeleton: React.FC<EskeletonProps> = ({
+    className = '',
+    isOwner,
+    postId,
+    prettyTitle,
+    userName
+}) => {
     return (
         <div className={`${className} flex flex-col text-sm`}>
             <button className='flex flex-col mb-10 items-center rounded-full h-10 w-10 bg-gray-200' />
             <button className='flex flex-col mb-10 items-center rounded-full h-10 w-10 bg-gray-200' />
             <button className='flex flex-col mb-10 items-center rounded-full h-10 w-10 bg-gray-200' />
+
+            {isOwner && <Edit postId={postId} prettyTitle={prettyTitle} userName={userName} />}
         </div>
     );
 };

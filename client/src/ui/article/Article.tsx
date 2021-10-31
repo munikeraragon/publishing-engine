@@ -2,7 +2,7 @@ import { Body } from './Body';
 import { CoverImage } from './CoverImage';
 import { Metadata } from './Metadata';
 import { Title } from './Title';
-import { Tags } from '../post-card/Tags';
+import { Tags } from './Tags';
 import { Sidebar } from './Sidebar';
 import { Actions } from './Actions';
 
@@ -32,12 +32,10 @@ export const Article: React.FC<ArticleProps> = ({
     postId,
     title,
     prettyTitle,
-    userIcon,
     coverImage,
     userName,
     creationDate,
     readingTime,
-    wordsNumber,
     articleBody,
     tags,
     likes,
@@ -54,7 +52,7 @@ export const Article: React.FC<ArticleProps> = ({
             <CoverImage alt='' src={coverImage} />
             <div className='relative'>
                 {showSidebar && (
-                    <div className='flex flex-col absolute top-0 bottom-0 right-8'>
+                    <div className='hidden sm:flex flex-col absolute top-0 bottom-0 right-8'>
                         <Sidebar className='top-10 sticky'>
                             <Actions
                                 postId={postId}
@@ -63,6 +61,9 @@ export const Article: React.FC<ArticleProps> = ({
                                 saved={saved}
                                 isSaved={isSaved}
                                 isLiked={isLiked}
+                                isOwner={isOwner}
+                                prettyTitle={prettyTitle}
+                                userName={userName}
                             />
                         </Sidebar>
                     </div>
@@ -72,17 +73,12 @@ export const Article: React.FC<ArticleProps> = ({
                     <Title title={title} className='font-bold text-4xl text-center text-gray-800' />
                     <Metadata
                         className='mt-4 justify-center '
-                        postId={postId}
-                        prettyTitle={prettyTitle}
-                        userIcon={userIcon}
                         userName={userName}
                         creationDate={creationDate}
                         readingTime={readingTime}
-                        wordsNumber={wordsNumber}
-                        isOwner={isOwner}
                     />
                     <Tags
-                        className='mt-2 mb-10 justify-center text-indigo-600 font-semibold'
+                        className='mt-2 mb-10 text-indigo-600 font-semibold'
                         tags={tags}
                         size='lg'
                     />

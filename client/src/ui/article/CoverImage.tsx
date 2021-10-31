@@ -20,5 +20,5 @@ export const CoverImage: React.FC<CoverImageProps> = ({ alt, src }) => {
 };
 
 export const CoverImageEskeleton: React.FC = () => {
-    return <div className='bg-gray-300 animate-pulse rounded-md h-72' style={{ maxHeight: 565 }} />;
+    return <div className='bg-gray-300 animate-pulse rounded-md' style={{ height: 565 }} />;
 };

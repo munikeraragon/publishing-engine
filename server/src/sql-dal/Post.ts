@@ -3,7 +3,7 @@ import { PostInput } from '../graphql/entities/Post';
 import { getKnex } from './utils';
 import { TagService } from './Tag';
 import { SearchInput } from '../graphql/entities/Search';
-import { S3PostService } from '../s3-dal/Post';
+import { S3PostService } from '../minio-dal/Post';
 import _ from 'lodash';
 
 const knex: Knex = getKnex();

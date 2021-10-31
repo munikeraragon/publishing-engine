@@ -22,10 +22,7 @@ export const LandingPage: React.FC = () => {
                     className='text-white'
                 />
 
-                <LandingImage
-                    src='https://ethereum.org/static/5d3af9eb308978e7a078bf51022d8a5c/0dadc/merge.png'
-                    alt='Image of a spaceship'
-                />
+                <LandingImage src='/landing.png' alt='Image of a spaceship' />
             </div>
         </div>
     );
