@@ -22,13 +22,13 @@ pipeline {
         stage('Deploy') {
             steps {
                 dir('./server') {
-                    sh "chmod --reference=/codegrow/server/dist /var/jenkins_home/workspace/codegrow/server/dist"
+                    sh "chown --reference=/codegrow/server/dist /var/jenkins_home/workspace/codegrow/server/dist"
                     sh "rm -rf /codegrow/server/dist"
                     sh "cp -r /var/jenkins_home/workspace/codegrow/server/dist /codegrow/server/dist"
                 }
 
                 dir('./client') {
-                    sh "chmod --reference=/codegrow/client/.next /var/jenkins_home/workspace/codegrow/client/.next"
+                    sh "chown --reference=/codegrow/client/.next /var/jenkins_home/workspace/codegrow/client/.next"
                     sh "rm -rf /codegrow/client/.next"
                     sh "cp -r /var/jenkins_home/workspace/codegrow/client/.next /codegrow/client/.next"
                 }
