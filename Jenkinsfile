@@ -1,8 +1,7 @@
 pipeline {
     agent {
-        docker {
-            image 'node:16'
-            args '-p 7000:7000'
+        node {
+            label 'nodeagent'
         }
     }
     stages {
@@ -23,10 +22,12 @@ pipeline {
             steps {
                 dir('./server') {
                     sh "docker exec -it server npm run build"
+                    sh "docker restart client"
                 }
 
                 dir('./client') {
                     sh "docker exec -it client npm run build"
+                    sh "docker restart server"
                 }
             }
         }
