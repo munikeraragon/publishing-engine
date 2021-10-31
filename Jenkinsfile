@@ -22,15 +22,11 @@ pipeline {
         stage('Deploy') {
             steps {
                 dir('./server') {
-                    sh "chown -R --reference=/codegrow/server/dist /var/jenkins_home/workspace/codegrow/server/dist"
-                    sh "rm -rf /codegrow/server/dist"
-                    sh "cp -rp /var/jenkins_home/workspace/codegrow/server/dist /codegrow/server/dist"
+                    sh "docker exec -it server npm run build"
                 }
 
                 dir('./client') {
-                    sh "chown -R --reference=/codegrow/client/.next /var/jenkins_home/workspace/codegrow/client/.next"
-                    sh "rm -rf /codegrow/client/.next"
-                    sh "cp -rp /var/jenkins_home/workspace/codegrow/client/.next /codegrow/client/.next"
+                    sh "docker exec -it client npm run build"
                 }
             }
         }
