@@ -14,9 +14,9 @@ export const CoverImage: React.FC<CoverImageProps> = ({ alt, src }) => {
     return (
         <div className='relative' style={{ paddingBottom: '56.25%', height: 220 }}>
             <div className='absolute inset-0'>
-                {/*<img className='w-full h-full object-cover' src={src} alt={alt} />*/}
+                <img className='w-full h-full object-cover' src={src} alt={alt} />
 
-                <div className='w-full h-full relative'>
+                {/*<div className='w-full h-full relative'>
                     <Image
                         placeholder='blur'
                         src={src || ''}
@@ -24,7 +24,7 @@ export const CoverImage: React.FC<CoverImageProps> = ({ alt, src }) => {
                         layout='fill'
                         objectFit='contain'
                     />
-                </div>
+    </div>*/}
             </div>
         </div>
     );
