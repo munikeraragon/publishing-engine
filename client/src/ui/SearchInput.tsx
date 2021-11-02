@@ -62,7 +62,7 @@ export const SearchInput: React.FC<SearchInputProps> = ({
                         name='filter'
                         placeholder={leftPlaceholder}
                         data-testid='filter'
-                        className=' pl-10  block w-full py-2 border border-gray-500
+                        className='pl-10 block w-full py-3 border border-gray-500
                         rounded-md shadow-sm appearance-none
                         focus:outline-none focus:ring-indigo-500
                         focus:border-indigo-500 sm:text-sm'

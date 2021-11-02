@@ -41,7 +41,7 @@ export const Edit: React.FC<EditProps> = ({ postId, prettyTitle, userName, class
                     query: { userName: userName, prettyTitle: prettyTitle }
                 }}>
                 <button className='flex flex-col mb-6 items-center text-gray-500'>
-                    <span className='p-2 hover:bg-indigo-50 hover:text-indigo-500 rounded-full'>
+                    <span className='p-2 hover:bg-green-50 hover:text-green-500 rounded-full'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             className='h-6 w-6'
@@ -62,7 +62,7 @@ export const Edit: React.FC<EditProps> = ({ postId, prettyTitle, userName, class
             <button
                 onClick={handleDelete}
                 className='flex flex-col mb-6 items-center text-gray-500'>
-                <span className='p-2 hover:bg-indigo-50 hover:text-indigo-500 rounded-full'>
+                <span className='p-2 hover:bg-yellow-50 hover:text-yellow-500 rounded-full'>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         className='h-6 w-6'

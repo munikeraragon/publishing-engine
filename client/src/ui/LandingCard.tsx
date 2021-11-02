@@ -17,7 +17,9 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
     return (
         <div className={`flex flex-col justify-center mx-4 ${className}`}>
             <div className='sm:text-center lg:text-left'>
-                <p className='text-4xl tracking-tight font-bold'>{props.primaryHeader}</p>
+                <p className='text-3xl md:text-4xl tracking-tight font-bold text-white'>
+                    {props.primaryHeader}
+                </p>
 
                 {props.secondaryHeader && (
                     <h1 className='text-4xl font-bold text-indigo-600'>{props.secondaryHeader}</h1>
@@ -26,8 +28,8 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
                 {props.description && (
                     <Typist
                         cursor={{ blink: true }}
-                        className='mt-3 whitespace-pre-wrap sm:mt-5 text-indigo-300
-                        sm:text-6xl sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0'>
+                        className='mt-3 whitespace-pre-wrap sm:mt-5 text-indigo-200 
+                        sm:max-w-xl sm:mx-auto md:mt-5 text:lg md:text-xl lg:mx-0'>
                         {props.description} 🚀
                     </Typist>
                 )}
@@ -36,7 +38,11 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
                     {props.linkLabel1 && (
                         <div className='z-10 mt-3 sm:mt-0'>
                             <Link href={props.linkHref1 || 'link-2'}>
-                                <a className=' w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-small rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 hover:bg-blue-200 md:py-1.5 md:text-lg md:px-6'>
+                                <a
+                                    className='w-full flex items-center justify-center px-8 py-3
+                                    border border-transparent font-semibold rounded-md text-white
+                                    bg-indigo-500 hover:bg-indigo-600 hover:bg-blue-200
+                                    md:py-1.5 md:text-md md:px-6'>
                                     {props.linkLabel1}
                                 </a>
                             </Link>
@@ -45,7 +51,10 @@ export const LandingCard: React.FC<LandingCardProps> = ({ className = '', ...pro
                     {props.linkLabel2 && (
                         <div className='z-10 rounded-md shadow'>
                             <Link href={props.linkHref2 || ''}>
-                                <a className='w-full flex items-center justify-center px-8 py-2 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
+                                <a
+                                    className='w-full flex items-center justify-center px-8 py-2 border
+                                    border-transparent text-base font-medium rounded-md text-white
+                                    bg-indigo-600 hover:bg-indigo-700  md:py-2 md:text-lg md:px-10'>
                                     {props.linkLabel2}
                                 </a>
                             </Link>

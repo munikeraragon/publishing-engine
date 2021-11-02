@@ -53,7 +53,7 @@ export const HomePage: React.FC = () => {
     }, [loading, error]);
 
     return (
-        <div className='grid grid-cols-12 pt-4 flex-1'>
+        <div className='grid grid-cols-12 pt-4 flex-1 mx-8'>
             <div className='col-span-12'>
                 <div className='flex mx-8 items-center mb-4'>
                     <div className='hidden md:flex m-auto'>
@@ -110,7 +110,7 @@ export const HomePage: React.FC = () => {
 
                 <div
                     data-aos='fade-up'
-                    className='max-w-7xl m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16'>
+                    className='m-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                     {posts.map((post, index) => (
                         <PostCardWrapper
                             key={index}
@@ -120,8 +120,6 @@ export const HomePage: React.FC = () => {
                             userIcon={post.userIcon}
                             readingTime={post.readingTime}
                             creationDate={post.creationDate}
-                            // comments={post.comments}
-                            // reactions={post.reactions}
                             userName={post.userName}
                             tags={post.tags}
                             showEskeleton={false}

@@ -14,7 +14,7 @@ export interface Tab {
 }
 export const Sidebar: React.FC<SidebarProps> = ({ open, setOpen, tabs }) => {
     return (
-        <div className='w-16 z-50 shadow'>
+        <div className='z-50 shadow'>
             {/* Sidebar backdrop (mobile only) */}
             <div
                 className={`fixed inset-0 bg-opacity-30 lg:hidden lg:z-auto transition-opacity duration-200 ${

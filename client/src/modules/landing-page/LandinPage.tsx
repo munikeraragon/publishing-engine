@@ -13,11 +13,11 @@ export interface LandingCardProps {
 export const LandingPage: React.FC = () => {
     return (
         <div className='bg-gray-800 py-20'>
-            <div className='h-full max-w-7xl m-auto grid grid-cols-1 lg:grid-cols-2 gap-4 pt-16 pb-8'>
+            <div className='h-full max-w-6xl m-auto grid grid-cols-1 lg:grid-cols-2 gap-4 pt-16 pb-8'>
                 <LandingCard
                     primaryHeader='Welcome to Codegrow!'
                     description={`The ultimate resource to learn about tech`}
-                    linkLabel1='Read Posts'
+                    linkLabel1='Explore Posts'
                     linkHref1='#posts'
                     className='text-white'
                 />

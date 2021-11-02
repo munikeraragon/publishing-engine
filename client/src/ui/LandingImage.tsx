@@ -1,18 +1,17 @@
+import Image from 'next/image';
+
 export interface LandingImageProps {
     className?: string;
     src?: string;
     alt?: string;
 }
 
-export const LandingImage: React.FC<LandingImageProps> = ({ className = '', ...props }) => {
+export const LandingImage: React.FC<LandingImageProps> = ({ className = '', src, alt }) => {
     return (
-        <div className={`flex flex-col justify-center ${className}`}>
-            <img
-                className='m-auto object-cover'
-                src={props.src}
-                alt={props.alt}
-                style={{ maxHeight: '400px' }}
-            />
+        <div
+            className={`flex flex-col justify-center ${className}`}
+            style={{ position: 'relative', height: '400px' }}>
+            <Image placeholder='blur' src={src || ''} alt={alt} layout='fill' objectFit='contain' />
         </div>
     );
 };

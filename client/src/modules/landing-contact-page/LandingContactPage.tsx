@@ -2,6 +2,20 @@ import { useState } from 'react';
 import { useCreateContactMessageMutation } from '../../generated/apolloComponents';
 import { ContactCard } from '../../ui/ContactCard';
 
+import {
+    DockerIcon,
+    FirebaseIcon,
+    GolangIcon,
+    HtmlIcon,
+    JavaIcon,
+    JavascriptIcon,
+    KubernetsIcon,
+    PythonIcon,
+    ReactIcon,
+    RubyIcon,
+    TypescriptIcon
+} from '../../modules/SVGIcons';
+
 export const LandingContactPage = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -54,7 +68,7 @@ export const LandingContactPage = () => {
     };
 
     return (
-        <div id='contact' className='pt-16 pb-10'>
+        <div id='contact' className='pb-10' style={{ background: 'rgb(247, 248, 253)' }}>
             <div className='max-w-7xl m-auto grid grid-cols-1 lg:grid-cols-2 gap-8'>
                 <div className='pt-10 mx-2'>
                     <div className='pb-8'>
@@ -62,7 +76,54 @@ export const LandingContactPage = () => {
                             Join the comunity
                         </h1>
                     </div>
-                    <div className='flex text-lg md:text-xl text-indigo-600 py-4'>
+
+                    <div className='grid grid-cols-5 gap-x-0 gap-y-6 mt-12'>
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <ReactIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <DockerIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <PythonIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <JavascriptIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <JavaIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <HtmlIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <FirebaseIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <TypescriptIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <RubyIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center bg-white rounded'>
+                            <KubernetsIcon />
+                        </div>
+
+                        <div className='flex shadow h-20 w-20 items-center justify-center p-2 col-start-3 bg-white rounded'>
+                            <GolangIcon />
+                        </div>
+                    </div>
+
+                    <div className='flex text-lg  text-indigo-500 py-4 mt-12'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='28'
@@ -73,7 +134,7 @@ export const LandingContactPage = () => {
                         </svg>
                         <span className='ml-4 text-gray-800'>Contribute to the project</span>
                     </div>
-                    <div className='flex text-lg md:text-xl text-indigo-600 py-4'>
+                    <div className='flex text-lg text-indigo-500 py-4'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='28'
@@ -112,7 +173,7 @@ export const LandingContactPage = () => {
                         </svg>
                         <span className='ml-4 text-gray-800'>Report a bug</span>
                     </div>
-                    <div className='flex text-lg md:text-xl text-indigo-600 py-4'>
+                    <div className='flex text-lg text-indigo-500 py-4'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
                             width='28'
@@ -129,7 +190,6 @@ export const LandingContactPage = () => {
                         </svg>
                         <span className='ml-4 text-gray-800 '>Email us at codegrow@gmail.com</span>
                     </div>
-                    Share your knowledge in any of these areas:
                 </div>
 
                 <ContactCard
@@ -149,6 +209,7 @@ export const LandingContactPage = () => {
                     setMessage={setMessage}
                     onSubmit={onSubmit}
                     submitting={submitting}
+                    className='bg-white mt-12 rounded'
                 />
             </div>
         </div>

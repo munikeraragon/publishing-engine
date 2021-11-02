@@ -19,6 +19,7 @@ export interface ContactCardProps {
     setCompany: (value: string) => void;
     setMessage: (value: string) => void;
     onSubmit: () => void;
+    className?: string;
 }
 
 export const ContactCard: React.FC<ContactCardProps> = ({
@@ -37,10 +38,11 @@ export const ContactCard: React.FC<ContactCardProps> = ({
     setPhone,
     setCompany,
     setMessage,
-    onSubmit
+    onSubmit,
+    className = ''
 }) => {
     return (
-        <div className='shadow-2xl grid grid-cols-2 gap-4 p-8'>
+        <div className={`${className} shadow-2xl grid grid-cols-2 gap-4 p-8`}>
             <div className='col-span-2 sm:col-span-1'>
                 <TextInput
                     label='First name'
@@ -154,10 +156,10 @@ export const ContactCard: React.FC<ContactCardProps> = ({
                     onClick={onSubmit}
                     className={`${
                         submitting ? 'opacity-60' : ''
-                    } w-full flex items-center justify-center px-8
-                            py-2 border border-transparent text-base font-medium
-                            rounded-md text-white bg-indigo-600 hover:bg-indigo-700
-                            md:text-lg md:px-10`}>
+                    } 'w-full flex items-center justify-center px-8 py-3
+                    border border-transparent font-semibold rounded-md text-white
+                    bg-indigo-500 hover:bg-indigo-600 hover:bg-blue-200
+                    md:py-1.5 md:text-md md:px-6`}>
                     {submitting ? 'Submiting...' : 'Submit'}
                 </button>
             </div>

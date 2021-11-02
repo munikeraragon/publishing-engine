@@ -133,14 +133,14 @@ export const EditorActions: React.FC<EditorActionsProps> = ({ className = '' }) 
                     <button
                         onClick={handlePublish}
                         className={`${loading ? 'opacity-60' : ''}
-                        bg-indigo-600 hover:bg-indigo-700 text-white
+                        bg-indigo-500 hover:bg-indigo-600 text-white
                         font-medium py-2 px-4 rounded-md mr-2`}>
                         {loading ? 'Publishing...' : 'Publish'}
                     </button>
                     <button
                         onClick={handleSaveDraft}
-                        className={`${loading ? 'opacity-60' : ''} bg-gray-300
-                        hover:bg-gray-400 text-gray-800 font-medium  rounded-md
+                        className={`${loading ? 'opacity-60' : ''} bg-gray-200
+                        hover:bg-gray-300 text-gray-800 font-medium  rounded-md
                         py-2 px-4`}>
                         {loading ? 'Saving Draft...' : 'Save Draft'}
                     </button>
@@ -151,14 +151,14 @@ export const EditorActions: React.FC<EditorActionsProps> = ({ className = '' }) 
                     <button
                         onClick={() => handleUpdate(true)}
                         className={`${loading ? 'opacity-60' : ''}
-                        bg-indigo-600 hover:bg-indigo-700 text-white
+                        bg-indigo-500 hover:bg-indigo-600 text-white
                         font-medium py-2 px-4 rounded-md mr-2`}>
                         {loading ? 'Publishing...' : 'Publish'}
                     </button>
                     <button
                         onClick={() => handleUpdate(false)}
-                        className={`${loading ? 'opacity-60' : ''} bg-gray-300
-                        hover:bg-gray-400 text-gray-800 font-medium  rounded-md
+                        className={`${loading ? 'opacity-60' : ''} bg-gray-200
+                        hover:bg-gray-300 text-gray-800 font-medium  rounded-md
                         py-2 px-4`}>
                         {loading ? 'Saving Draft...' : 'Save Draft'}
                     </button>

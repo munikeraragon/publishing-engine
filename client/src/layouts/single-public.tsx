@@ -14,7 +14,7 @@ export const SinglePublicLayout: React.FC = ({ children }) => {
                 <span
                     className='ml-8 whitespace-nowrap inline-flex items-center justify-center
                     px-4 py-2 border border-transparent rounded-md shadow-sm text-sm
-                    font-medium text-white bg-indigo-600 hover:bg-indigo-700 mr-4'>
+                    font-medium text-white bg-indigo-500 hover:bg-indigo-600 mr-4'>
                     Create New
                 </span>
             </Link>
@@ -26,23 +26,20 @@ export const SinglePublicLayout: React.FC = ({ children }) => {
     const contentLeft = (
         <>
             <Link href='/#posts'>
-                <p className='text-lg text-gray-700 hover:text-indigo-500'>Posts</p>
+                <p className='text-md text-gray-800 hover:text-indigo-500 font-semibold'>Posts</p>
             </Link>
 
             <Link href='/#contact'>
-                <p className='text-lg text-gray-700 hover:text-indigo-500'>Contact</p>
+                <p className='text-md text-gray-800 hover:text-indigo-500 font-semibold'>Contact</p>
             </Link>
         </>
     );
 
     const contentRight = (
         <Link href='/login'>
-            <span
-                className='ml-8 whitespace-nowrap inline-flex items-center justify-center
-                    px-4 py-2 border border-transparent rounded-md shadow-sm text-sm
-                    font-medium text-white bg-indigo-600 hover:bg-indigo-700'>
+            <p className='text-md text-gray-800 hover:text-indigo-500 font-semibold py-2 px-4'>
                 Log in
-            </span>
+            </p>
         </Link>
     );
 

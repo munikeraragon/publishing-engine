@@ -10,6 +10,8 @@ node_modules
 
 # mysqldb
 mysqldb 
+mysql 
+sqldb 
 
 # testing
 coverage
