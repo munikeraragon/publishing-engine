@@ -1,6 +1,6 @@
 # Publishing Engine
 A publishing engine similar to [Medium](https://medium.com/) and [DEV](https://dev.to/) built using
-Typescript, React.js, and Graphql.
+Typescript, React.js, and Graphql. See here https://codegrow.org/.
 
 ## Branches 
 - main -> pr this branch for everything
@@ -114,6 +114,5 @@ docker exec server npx knex migrate:rollback
 ```
 
 Todo:
-- Make Landing Image container a default size
 - implement refresh token correctly
 
