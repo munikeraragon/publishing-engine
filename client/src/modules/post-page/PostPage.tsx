@@ -36,34 +36,32 @@ export const ValidPost: React.FC<ValidPageProps> = ({ userName, title }) => {
     }, [postMetadata]);
 
     return (
-        <div className='flex'>
-            <div className='flex gap-4 flex-1'>
-                <Article
-                    coverImage={showSkeleton ? null : imageMetadata.imageUrl}
-                    postId={Number(postMetadata.data?.id)}
-                    title={showSkeleton ? undefined : postMetadata.data?.title}
-                    prettyTitle={showSkeleton ? undefined : postMetadata.data?.prettyTitle}
-                    userIcon={showSkeleton ? null : postMetadata.data?.userIcon}
-                    userName={showSkeleton ? undefined : postMetadata.data?.userName}
-                    creationDate={showSkeleton ? undefined : postMetadata.data?.creationDate}
-                    readingTime={showSkeleton ? undefined : postMetadata.data?.readingTime}
-                    wordsNumber={showSkeleton ? undefined : postMetadata.data?.wordsNumber}
-                    articleBody={showSkeleton ? undefined : postMetadata.data?.mainBody}
-                    tags={showSkeleton ? undefined : postMetadata.data?.tags}
-                    likes={showSkeleton ? undefined : postMetadata.data?.likes}
-                    comments={showSkeleton ? undefined : postMetadata.data?.comments}
-                    saved={showSkeleton ? undefined : postMetadata.data?.saved}
-                    isSaved={showSkeleton ? undefined : savedStatus?.isPostSaved}
-                    isLiked={showSkeleton ? undefined : likedStatus?.isPostLiked}
-                    isOwner={
-                        postMetadata.data?.userName &&
-                        userData?.getUser.userName &&
-                        postMetadata.data?.userName === userData?.getUser.userName
-                    }
-                    showSidebar={true}
-                    className='w-full'
-                />
-            </div>
+        <div className='flex gap-4 flex-1'>
+            <Article
+                coverImage={showSkeleton ? null : imageMetadata.imageUrl}
+                postId={Number(postMetadata.data?.id)}
+                title={showSkeleton ? undefined : postMetadata.data?.title}
+                prettyTitle={showSkeleton ? undefined : postMetadata.data?.prettyTitle}
+                userIcon={showSkeleton ? null : postMetadata.data?.userIcon}
+                userName={showSkeleton ? undefined : postMetadata.data?.userName}
+                creationDate={showSkeleton ? undefined : postMetadata.data?.creationDate}
+                readingTime={showSkeleton ? undefined : postMetadata.data?.readingTime}
+                wordsNumber={showSkeleton ? undefined : postMetadata.data?.wordsNumber}
+                articleBody={showSkeleton ? undefined : postMetadata.data?.mainBody}
+                tags={showSkeleton ? undefined : postMetadata.data?.tags}
+                likes={showSkeleton ? undefined : postMetadata.data?.likes}
+                comments={showSkeleton ? undefined : postMetadata.data?.comments}
+                saved={showSkeleton ? undefined : postMetadata.data?.saved}
+                isSaved={showSkeleton ? undefined : savedStatus?.isPostSaved}
+                isLiked={showSkeleton ? undefined : likedStatus?.isPostLiked}
+                isOwner={
+                    postMetadata.data?.userName &&
+                    userData?.getUser.userName &&
+                    postMetadata.data?.userName === userData?.getUser.userName
+                }
+                showSidebar={true}
+                className='w-full'
+            />
         </div>
     );
 };

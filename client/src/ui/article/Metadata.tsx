@@ -21,10 +21,10 @@ export const Metadata: React.FC<MetaDataProps> = ({
     return (
         <div className={`${className} flex text-gray-500`}>
             <p>{userName}</p>
-            <span className='hidden mx-2 sm:inline'>·</span>
+            <span className='mx-2 inline'>·</span>
             <p>{creationDate}</p>
-            <span className='hidden mx-2 sm:inline'>·</span>
-            <p>{readingTime} min read</p>
+            <span className='hidden mx-2 md:inline'>·</span>
+            <p className='hidden md:inline'>{readingTime} min read</p>
         </div>
     );
 };

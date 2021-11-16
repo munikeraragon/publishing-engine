@@ -52,7 +52,7 @@ export const Article: React.FC<ArticleProps> = ({
             <CoverImage alt='' src={coverImage} />
             <div className='relative'>
                 {showSidebar && (
-                    <div className='hidden sm:flex flex-col absolute top-0 bottom-0 right-8'>
+                    <div className='hidden lg:flex flex-col absolute top-0 bottom-0 right-8'>
                         <Sidebar className='top-10 sticky'>
                             <Actions
                                 postId={postId}
@@ -70,7 +70,10 @@ export const Article: React.FC<ArticleProps> = ({
                 )}
 
                 <div className={'max-w-4xl mx-auto mt-16 px-2'}>
-                    <Title title={title} className='font-bold text-4xl text-center text-gray-800' />
+                    <Title
+                        title={title}
+                        className='font-bold text-2xl md:text-3xl md:text-4xl text-center text-gray-800'
+                    />
                     <Metadata
                         className='mt-4 justify-center '
                         userName={userName}
